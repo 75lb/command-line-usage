@@ -1,0 +1,26 @@
+{
+  "name": "command-line-usage",
+  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "version": "0.0.0",
+  "description": "command-line-usage",
+  "repository": "https://github.com/75lb/command-line-usage.git",
+  "license": "MIT",
+  "main": "./lib/command-line-usage.js",
+  "bin": {
+    "command-line-usage": "bin/cli.js"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo",
+    "lint": "jshint lib/*.js bin/*.js test/*.js; echo",
+    "test": "tape test/*.js"
+  },
+  "dependencies": {
+    "column-layout": "^1.0.0",
+    "object-tools": "^1.6.7",
+    "transform-tools": "^0.1.1"
+  }
+}
