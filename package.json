@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "ansi-escape-sequences": "^2.1.0",
+    "array-tools": "^1.8.6",
     "column-layout": "^1.0.0",
     "object-tools": "^1.6.7"
   }
