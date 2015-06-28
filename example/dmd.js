@@ -1,6 +1,6 @@
 module.exports = {
     options: {
-        title: "\u001b[4mdmd\u001b[0m",
+        title: "dmd",
         header: "Generate markdown API documentation",
         forms: [
             "$ cat jsdoc-parse-output.json | dmd [<options>]"

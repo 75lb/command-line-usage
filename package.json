@@ -2,14 +2,19 @@
   "name": "command-line-usage",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "0.0.0",
-  "description": "command-line-usage",
+  "description": "Generates command-line usage information",
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
   "main": "./lib/command-line-usage.js",
   "bin": {
     "command-line-usage": "bin/cli.js"
   },
-  "keywords": [],
+  "keywords": [
+    "terminal",
+    "command line",
+    "usage",
+    "generator"
+  ],
   "engines": {
     "node": ">=0.10.0"
   },
@@ -19,8 +24,8 @@
     "test": "tape test/*.js"
   },
   "dependencies": {
+    "ansi-escape-sequences": "^2.1.0",
     "column-layout": "^1.0.0",
-    "object-tools": "^1.6.7",
-    "transform-tools": "^0.1.1"
+    "object-tools": "^1.6.7"
   }
 }
