@@ -11,7 +11,7 @@ Where `example/dmd.js` looks like this
 module.exports = {
     options: {
         title: "dmd",
-        header: "Generate markdown API documentation",
+        description: "Generate markdown API documentation",
         forms: [
             "$ cat jsdoc-parse-output.json | dmd [<options>]"
         ],
