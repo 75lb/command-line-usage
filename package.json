@@ -1,7 +1,7 @@
 {
   "name": "command-line-usage",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "1.0.0-0",
+  "version": "1.0.0-1",
   "description": "Generates command-line usage information",
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
