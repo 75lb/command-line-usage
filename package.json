@@ -31,6 +31,7 @@
     "typical": "^2.2.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^1.1.1"
+    "jsdoc-to-markdown": "^1.1.1",
+    "tape": "^4.0.0"
   }
 }

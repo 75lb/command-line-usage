@@ -1,6 +1,9 @@
 var test = require("tape");
-var lib = require("../");
+var usage = require("../");
+var cliOptions = require("../example/my-app");
 
-test("first", function(t){
-    
+test("basic", function(t){
+    var result = usage(cliOptions);
+    t.ok(/my-app/.test(result));
+    t.end();
 });
