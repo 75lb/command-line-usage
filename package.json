@@ -25,9 +25,12 @@
   },
   "dependencies": {
     "ansi-escape-sequences": "^2.1.0",
-    "array-tools": "^2.0.0-0",
+    "array-tools": "^2",
     "column-layout": "^1.0.0",
     "object-tools": "^2",
     "typical": "^2.2.0"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^1.1.1"
   }
 }
