@@ -81,6 +81,12 @@ Outputs this:
 | --- | --- | --- |
 | cliOptions | <code>Array.&lt;cliOption&gt;</code> | the CLI options |
 | options | <code>object</code> | Options |
+| [options.title] | <code>string</code> |  |
+| [options.description] | <code>string</code> |  |
+| [options.forms] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
+| [options.groups] | <code>object</code> |  |
+| [options.footer] | <code>string</code> |  |
+| [options.hide] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
 
 
 * * *

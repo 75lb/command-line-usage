@@ -13,7 +13,8 @@ module.exports = {
             },
             misc: "Miscellaneous"
         },
-        footer: "Project home: https://github.com/me/my-app"
+        footer: "Project home: https://github.com/me/my-app",
+        hide: [ "five" ]
     },
     data: [
         { name: "one", alias: "a", type: String, group: "main",
@@ -27,6 +28,9 @@ module.exports = {
         },
         { name: "four", type: Number, alias: "d", group: "misc",
           description: "The fourth option"
+        },
+        { name: "five", type: Number, alias: "e", group: "misc",
+          description: "The fifth option"
         }
     ]
 };
