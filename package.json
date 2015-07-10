@@ -20,7 +20,6 @@
   },
   "scripts": {
     "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo",
-    "lint": "jshint lib/*.js bin/*.js test/*.js; echo",
     "test": "tape test/*.js"
   },
   "dependencies": {

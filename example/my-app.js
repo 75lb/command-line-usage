@@ -11,7 +11,8 @@ module.exports = {
                 title: "Main options",
                 description: "This group contains the most important options."
             },
-            misc: "Miscellaneous"
+            misc: "Miscellaneous",
+            general: "General"
         },
         footer: "Project home: https://github.com/me/my-app",
         hide: [ "five" ]
@@ -26,10 +27,10 @@ module.exports = {
         { name: "three", alias: "c", type: String, group: "misc",
           description: "The third option"
         },
-        { name: "four", type: Number, alias: "d", group: "misc",
+        { name: "four", type: Number, alias: "d", group: ["misc", "general"],
           description: "The fourth option"
         },
-        { name: "five", type: Number, alias: "e", group: "misc",
+        { name: "five", type: Number, alias: "e",
           description: "The fifth option"
         }
     ]
