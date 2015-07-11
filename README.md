@@ -1,6 +1,6 @@
 [![view on npm](http://img.shields.io/npm/v/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
 [![npm module downloads per month](http://img.shields.io/npm/dm/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
-[![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=rewrite)](https://travis-ci.org/75lb/command-line-usage)
+[![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://david-dm.org/75lb/command-line-usage.svg)](https://david-dm.org/75lb/command-line-usage)
 
 # command-line-usage
@@ -84,7 +84,7 @@ Outputs this:
 | [options.title] | <code>string</code> |  |
 | [options.description] | <code>string</code> |  |
 | [options.forms] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
-| [options.groups] | <code>object</code> |  |
+| [options.groups] | <code>object</code> | if you have groups, only names specified here will appear in the output |
 | [options.footer] | <code>string</code> |  |
 | [options.hide] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
 
