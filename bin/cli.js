@@ -1,12 +1,24 @@
 #!/usr/bin/env node
 "use strict";
 var usage = require("../");
+var os = require("os");
+var fs = require("fs");
 var path = require("path");
+var ansi = require("ansi-escape-sequences");
 
-process.argv.splice(0, 2);
-var file = process.argv.shift();
-var cliOptions = require(path.resolve(file));
+var tmpPath = path.join(os.tmpDir(), Date.now() + "-clu.js");
 
-console.log(usage(cliOptions, { 
-    viewWidth: process.stdout.columns
-}));
+process.stdin
+    .pipe(fs.createWriteStream(tmpPath))
+    .on("close", getUsage);
+    
+function getUsage(){
+    var cliOptions = require(tmpPath);
+    fs.unlinkSync(tmpPath);
+    console.log(usage(cliOptions));
+}
+
+function halt(msg){
+    console.error(ansi.format(msg, "red"));
+    process.exit(1);
+}
