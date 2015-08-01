@@ -24,9 +24,10 @@
   },
   "dependencies": {
     "ansi-escape-sequences": "^2.1.0",
-    "array-tools": "^2",
+    "array-back": "^1.0.2",
     "column-layout": "^1.0.0",
     "object-tools": "^2",
+    "array-tools": "^2",
     "typical": "^2.2.0"
   },
   "devDependencies": {

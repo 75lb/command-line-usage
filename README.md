@@ -71,6 +71,13 @@ Outputs this:
   
 ```
 
+## Modules
+<dl>
+<dt><a href="#module_command-line-usage">command-line-usage</a></dt>
+<dd></dd>
+<dt><a href="#module_usage-options">usage-options</a></dt>
+<dd></dd>
+</dl>
 <a name="module_command-line-usage"></a>
 ## command-line-usage
 <a name="exp_module_command-line-usage--usage"></a>
@@ -80,14 +87,43 @@ Outputs this:
 | Param | Type | Description |
 | --- | --- | --- |
 | cliOptions | <code>Array.&lt;cliOption&gt;</code> | the CLI options |
-| options | <code>object</code> | Options |
-| [options.title] | <code>string</code> |  |
-| [options.description] | <code>string</code> |  |
-| [options.forms] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
-| [options.groups] | <code>object</code> | if you have groups, only names specified here will appear in the output |
-| [options.footer] | <code>string</code> |  |
-| [options.hide] | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  |
+| options | <code>[usage-options](#module_usage-options)</code> | Options |
 
+<a name="module_usage-options"></a>
+## usage-options
+
+* [usage-options](#module_usage-options)
+  * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
+    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
+    * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
+    * [.forms](#module_usage-options--UsageOptions+forms) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
+    * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
+    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+
+<a name="exp_module_usage-options--UsageOptions"></a>
+### UsageOptions ⏏
+**Kind**: Exported class  
+<a name="module_usage-options--UsageOptions+title"></a>
+#### usageOptions.title : <code>string</code>
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions+description"></a>
+#### usageOptions.description : <code>string</code>
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions+forms"></a>
+#### usageOptions.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions+groups"></a>
+#### usageOptions.groups : <code>object</code>
+if you have groups, only names specified here will appear in the output
+
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions+footer"></a>
+#### usageOptions.footer : <code>string</code>
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions+hide"></a>
+#### usageOptions.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 
 * * *
 
