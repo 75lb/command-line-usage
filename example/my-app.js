@@ -2,10 +2,12 @@ module.exports = {
     options: {
         title: "my-app",
         description: "Generates something useful",
-        forms: [
-            "$ cat input.json | my-app [<options>]",
-            "$ my-app <files>"
-        ],
+        usage: {
+            forms: [
+                "$ cat input.json | my-app [<options>]",
+                "$ my-app <files>"
+            ]
+        },
         groups: {
             main: { 
                 title: "Main options",
