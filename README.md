@@ -7,48 +7,17 @@
 ## command-line-usage
 Generates [column-layout](http://github.com/75lb/column-layout) usage information for a command-line parser (e.g. [command-line-args](http://github.com/75lb/command-line-args)).
 
-<a name="exp_module_command-line-usage--usage"></a>
-### usage(definitions, options) ⇒ <code>string</code> ⏏
+<a name="exp_module_command-line-usage--getUsage"></a>
+### getUsage(definitions, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | definitions | <code>Array.&lt;optionDefinition&gt;</code> | the option definitions |
-| options | <code>UsageOptions</code> | Options |
+| options | <code>[usage-options](#module_usage-options)</code> | Options |
 
 **Example**  
-```js
-var getUsage = require("command-line-usage");
-
-var optionDefinitions = [
-    { name: "help", alias: "h", type: Boolean, description: "Display this usage guide.", group: "main" },
-    { name: "files", alias: "f", type: String, multiple: true, defaultOption: true, description: "The input files to process", group: "main" },
-    { name: "timeout", alias: "t", type: Number, description: "Timeout value in ms", group: "main" },
-    { name: "custom", type: Custom, description: "A custom class instance"}
-];
-
-var options = {
-    title: "%bold{a typical app}",
-    description: "Generates something %yellow bg-black{wild and crazy}",
-    forms: [
-        "$ cat input.json | my-app [<options>]",
-        "$ my-app <files>"
-    ],
-    groups: {
-        main: { 
-            title: "Main options",
-            description: "This group contains the most important options."
-        },
-        _none: "No group"
-    },
-    footer: "Project home: https://github.com/me/my-app",
-    hide: [ "files" ]
-};
-
-var usage = getUsage(optionDefinitions, options);
-```
-
-`usage` looks like this:
+To get `usage` looking like this:
 ```
 
   my-app
@@ -69,7 +38,39 @@ var usage = getUsage(optionDefinitions, options);
   -d, --four <number>    The fourth option
 
   Project home: https://github.com/me/my-app
-  
+
+```
+
+some example code:
+```js
+var getUsage = require("command-line-usage");
+
+var optionDefinitions = [
+    { name: "help", alias: "h", type: Boolean, description: "Display this usage guide.", group: "main" },
+    { name: "files", alias: "f", type: String, multiple: true, defaultOption: true, description: "The input files to process", group: "main" },
+    { name: "timeout", alias: "t", type: Number, description: "Timeout value in ms", group: "main" },
+    { name: "custom", type: Custom, description: "A custom class instance"}
+];
+
+var options = {
+    title: "%bold{a typical app}",
+    description: "Generates something %yellow bg-black{wild and crazy}",
+    forms: [
+        "$ cat input.json | my-app [<options>]",
+        "$ my-app <files>"
+    ],
+    groups: {
+        main: {
+            title: "Main options",
+            description: "This group contains the most important options."
+        },
+        _none: "No group"
+    },
+    footer: "Project home: https://github.com/me/my-app",
+    hide: [ "files" ]
+};
+
+var usage = getUsage(optionDefinitions, options);
 ```
 
 
@@ -85,7 +86,7 @@ var usage = getUsage(optionDefinitions, options);
   * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 
 <a name="module_usage-options--UsageOptions+title"></a>
-### usageOptions.title : <code>string</code> &#124; <code>object</code>
+### options.title : <code>string</code> &#124; <code>object</code>
 The title line at the top of the usage, typically the name of the app. Alternatively supply an object containing `title` and `style`.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -99,12 +100,12 @@ The title line at the top of the usage, typically the name of the app. Alternati
 }
 ```
 <a name="module_usage-options--UsageOptions+description"></a>
-### usageOptions.description : <code>string</code>
+### options.description : <code>string</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+forms"></a>
-### usageOptions.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+### options.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -116,7 +117,7 @@ An array of strings highlighting the main usage forms of the app.
 ]
 ```
 <a name="module_usage-options--UsageOptions+groups"></a>
-### usageOptions.groups : <code>object</code> &#124; <code>string</code>
+### options.groups : <code>object</code> &#124; <code>string</code>
 Specify which groups to display in the output. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -131,12 +132,12 @@ Specify which groups to display in the output. If the value is a string it is us
 }
 ```
 <a name="module_usage-options--UsageOptions+footer"></a>
-### usageOptions.footer : <code>string</code>
+### options.footer : <code>string</code>
 Displayed at the foot of the usage output.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+hide"></a>
-### usageOptions.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+### options.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 If you want to hide certain options from the output, specify their names here.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
