@@ -7,47 +7,45 @@
 Generates [column-layout](http://github.com/75lb/column-layout) usage information for a command-line parser (e.g. [command-line-args](http://github.com/75lb/command-line-args)).
 
 ## Synopsis
-Where `example/my-app.js` looks like this
+With these option definitions
 ```js
-module.exports = {
-    options: {
-        title: "my-app",
-        description: "Generates something useful",
-        forms: [
-            "$ cat input.json | my-app [<options>]",
-            "$ my-app <files>"
-        ],
-        groups: {
-            main: { 
-                title: "Main options",
-                description: "This group contains the most important options."
-            },
-            misc: "Miscellaneous"
-        },
-        footer: "Project home: https://github.com/me/my-app"
+[
+    { name: "one", alias: "a", type: String, group: "main",
+      description: "The first option"
     },
-    data: [
-        { name: "one", alias: "a", type: String, group: "main",
-          description: "The first option"
-        },
-        { name: "two", type: Number, alias: "b", group: "main",
-          description: "The second option"
-        },
-        { name: "three", alias: "c", type: String, group: "misc",
-          description: "The third option"
-        },
-        { name: "four", type: Number, alias: "d", group: "misc",
-          description: "The fourth option"
-        }
-    ]
-};
-```
-This command:
-```sh
-$ command-line-usage example/my-app.js
+    { name: "two", type: Number, alias: "b", group: "main",
+      description: "The second option"
+    },
+    { name: "three", alias: "c", type: String, group: "misc",
+      description: "The third option"
+    },
+    { name: "four", type: Number, alias: "d", group: "misc",
+      description: "The fourth option"
+    }
+]
 ```
 
-Outputs this:
+and these usage options
+```js
+{
+    title: "my-app",
+    description: "Generates something useful",
+    forms: [
+        "$ cat input.json | my-app [<options>]",
+        "$ my-app <files>"
+    ],
+    groups: {
+        main: { 
+            title: "Main options",
+            description: "This group contains the most important options."
+        },
+        misc: "Miscellaneous"
+    },
+    footer: "Project home: https://github.com/me/my-app"
+}
+```
+
+The usage output looks like this:
 ```
 
   my-app
@@ -106,18 +104,41 @@ Outputs this:
 **Kind**: Exported class  
 <a name="module_usage-options--UsageOptions+title"></a>
 #### usageOptions.title : <code>string</code>
+The title line at the top of the usage, typically the name of the app.
+
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+description"></a>
 #### usageOptions.description : <code>string</code>
+A description to go underneath the title. For example, some words about what the app is for.
+
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+forms"></a>
 #### usageOptions.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+groups"></a>
-#### usageOptions.groups : <code>object</code>
-if you have groups, only names specified here will appear in the output
+An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Example**  
+```js
+[
+        "$ my-app <options> <files>",
+        "$ my-app [-cvh]"
+    ]
+```
+<a name="module_usage-options--UsageOptions+groups"></a>
+#### usageOptions.groups : <code>object</code>
+Specify a property per group to be displayed.
+
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Example**  
+```js
+{
+        main: { 
+            title: "Main options",
+            description: "This group contains the most important options."
+        },
+        misc: "Miscellaneous"
+    }
+```
 <a name="module_usage-options--UsageOptions+footer"></a>
 #### usageOptions.footer : <code>string</code>
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
