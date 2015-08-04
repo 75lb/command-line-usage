@@ -3,33 +3,33 @@
 [![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://david-dm.org/75lb/command-line-usage.svg)](https://david-dm.org/75lb/command-line-usage)
 
-# command-line-usage
+<a name="module_command-line-usage"></a>
+## command-line-usage
 Generates [column-layout](http://github.com/75lb/column-layout) usage information for a command-line parser (e.g. [command-line-args](http://github.com/75lb/command-line-args)).
 
-## Synopsis
-With these option definitions
-```js
-[
-    { name: "one", alias: "a", type: String, group: "main",
-      description: "The first option"
-    },
-    { name: "two", type: Number, alias: "b", group: "main",
-      description: "The second option"
-    },
-    { name: "three", alias: "c", type: String, group: "misc",
-      description: "The third option"
-    },
-    { name: "four", type: Number, alias: "d", group: "misc",
-      description: "The fourth option"
-    }
-]
-```
+<a name="exp_module_command-line-usage--usage"></a>
+### usage(definitions, options) ⇒ <code>string</code> ⏏
+**Kind**: Exported function  
 
-and these usage options
+| Param | Type | Description |
+| --- | --- | --- |
+| definitions | <code>Array.&lt;optionDefinition&gt;</code> | the option definitions |
+| options | <code>UsageOptions</code> | Options |
+
+**Example**  
 ```js
-{
-    title: "my-app",
-    description: "Generates something useful",
+var getUsage = require("command-line-usage");
+
+var optionDefinitions = [
+    { name: "help", alias: "h", type: Boolean, description: "Display this usage guide.", group: "main" },
+    { name: "files", alias: "f", type: String, multiple: true, defaultOption: true, description: "The input files to process", group: "main" },
+    { name: "timeout", alias: "t", type: Number, description: "Timeout value in ms", group: "main" },
+    { name: "custom", type: Custom, description: "A custom class instance"}
+];
+
+var options = {
+    title: "%bold{a typical app}",
+    description: "Generates something %yellow bg-black{wild and crazy}",
     forms: [
         "$ cat input.json | my-app [<options>]",
         "$ my-app <files>"
@@ -39,13 +39,16 @@ and these usage options
             title: "Main options",
             description: "This group contains the most important options."
         },
-        misc: "Miscellaneous"
+        _none: "No group"
     },
-    footer: "Project home: https://github.com/me/my-app"
-}
+    footer: "Project home: https://github.com/me/my-app",
+    hide: [ "files" ]
+};
+
+var usage = getUsage(optionDefinitions, options);
 ```
 
-The usage output looks like this:
+`usage` looks like this:
 ```
 
   my-app
@@ -69,82 +72,75 @@ The usage output looks like this:
   
 ```
 
-## Modules
-<dl>
-<dt><a href="#module_command-line-usage">command-line-usage</a></dt>
-<dd></dd>
-<dt><a href="#module_usage-options">usage-options</a></dt>
-<dd></dd>
-</dl>
-<a name="module_command-line-usage"></a>
-## command-line-usage
-<a name="exp_module_command-line-usage--usage"></a>
-### usage(cliOptions, options) ⇒ <code>string</code> ⏏
-**Kind**: Exported function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cliOptions | <code>Array.&lt;cliOption&gt;</code> | the CLI options |
-| options | <code>[usage-options](#module_usage-options)</code> | Options |
-
-<a name="module_usage-options"></a>
-## usage-options
-
-* [usage-options](#module_usage-options)
-  * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
-    * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
-    * [.forms](#module_usage-options--UsageOptions+forms) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
-    * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
-    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 
 <a name="exp_module_usage-options--UsageOptions"></a>
-### UsageOptions ⏏
+## UsageOptions ⏏
 **Kind**: Exported class  
+* [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
+  * [.title](#module_usage-options--UsageOptions+title) : <code>string</code> &#124; <code>object</code>
+  * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
+  * [.forms](#module_usage-options--UsageOptions+forms) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+  * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code> &#124; <code>string</code>
+  * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
+  * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+
 <a name="module_usage-options--UsageOptions+title"></a>
-#### usageOptions.title : <code>string</code>
-The title line at the top of the usage, typically the name of the app.
+### usageOptions.title : <code>string</code> &#124; <code>object</code>
+The title line at the top of the usage, typically the name of the app. Alternatively supply an object containing `title` and `style`.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Example**  
+```js
+{
+    title: {
+       text: "my-app",
+       format: [ "bold", "underline" ]
+    }
+}
+```
 <a name="module_usage-options--UsageOptions+description"></a>
-#### usageOptions.description : <code>string</code>
+### usageOptions.description : <code>string</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+forms"></a>
-#### usageOptions.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+### usageOptions.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
 ```js
 [
-        "$ my-app <options> <files>",
-        "$ my-app [-cvh]"
-    ]
+    "$ my-app <options> <files>",
+    "$ my-app [-cvh]"
+]
 ```
 <a name="module_usage-options--UsageOptions+groups"></a>
-#### usageOptions.groups : <code>object</code>
-Specify a property per group to be displayed.
+### usageOptions.groups : <code>object</code> &#124; <code>string</code>
+Specify which groups to display in the output. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
 ```js
 {
-        main: { 
-            title: "Main options",
-            description: "This group contains the most important options."
-        },
-        misc: "Miscellaneous"
-    }
+    main: { 
+        title: "Main options",
+        description: "This group contains the most important options."
+    },
+    misc: "Miscellaneous"
+}
 ```
 <a name="module_usage-options--UsageOptions+footer"></a>
-#### usageOptions.footer : <code>string</code>
+### usageOptions.footer : <code>string</code>
+Displayed at the foot of the usage output.
+
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+hide"></a>
-#### usageOptions.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+### usageOptions.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+If you want to hide certain options from the output, specify their names here.
+
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+
 
 * * *
 

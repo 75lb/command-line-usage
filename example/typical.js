@@ -1,7 +1,7 @@
 module.exports = {
     options: {
         title: "%bold{a typical app}",
-        description: "Generates something %{yellow bg-black}",
+        description: "Generates something %yellow bg-black{wild and crazy}",
         forms: [
             "$ cat input.json | my-app [<options>]",
             "$ my-app <files>"
@@ -14,7 +14,7 @@ module.exports = {
             _none: "No group"
         },
         footer: "Project home: https://github.com/me/my-app",
-        hide: [ "five" ]
+        hide: [ "files" ]
     },
     data: [
         { name: "help", alias: "h", type: Boolean, description: "Display this usage guide.", group: "main" },
