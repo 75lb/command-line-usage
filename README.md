@@ -17,7 +17,7 @@ Generates [column-layout](http://github.com/75lb/column-layout) usage informatio
 | options | <code>[usage-options](#module_usage-options)</code> | Options |
 
 **Example**  
-To get `usage` looking like this:
+Some example usage output: 
 ```
 
   my-app
@@ -41,7 +41,7 @@ To get `usage` looking like this:
 
 ```
 
-some example code:
+..and the code to create it:
 ```js
 var getUsage = require("command-line-usage");
 
@@ -76,18 +76,23 @@ var usage = getUsage(optionDefinitions, options);
 
 <a name="exp_module_usage-options--UsageOptions"></a>
 ## UsageOptions ⏏
+The class describes all valid options for the `getUsage` function. Inline formatting can be used within any text string supplied using valid [ansi-escape-sequences formatting syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-  * [.title](#module_usage-options--UsageOptions+title) : <code>string</code> &#124; <code>object</code>
-  * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
-  * [.forms](#module_usage-options--UsageOptions+forms) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-  * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code> &#124; <code>string</code>
-  * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
-  * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+  * _instance_
+    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+    * [.description](#module_usage-options--UsageOptions+description) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+    * [.usage](#module_usage-options--UsageOptions+usage) : <code>object</code>
+    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
+    * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+  * _inner_
+    * [~textObject](#module_usage-options--UsageOptions..textObject)
 
 <a name="module_usage-options--UsageOptions+title"></a>
-### options.title : <code>string</code> &#124; <code>object</code>
-The title line at the top of the usage, typically the name of the app. Alternatively supply an object containing `title` and `style`.
+### options.title : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [textObject](#module_usage-options--UsageOptions..textObject).
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
@@ -100,25 +105,37 @@ The title line at the top of the usage, typically the name of the app. Alternati
 }
 ```
 <a name="module_usage-options--UsageOptions+description"></a>
-### options.description : <code>string</code>
+### options.description : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+forms"></a>
-### options.forms : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+<a name="module_usage-options--UsageOptions+usage"></a>
+### options.usage : <code>object</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Properties**
+
+| Name | Type | Default |
+| --- | --- | --- |
+| title | <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code> | <code>&quot;Usage&quot;</code> | 
+| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  | 
+
 **Example**  
 ```js
-[
-    "$ my-app <options> <files>",
-    "$ my-app [-cvh]"
-]
+{
+    usage: {
+        title: "Synopsis",
+        forms: [
+            "$ my-app <options> <files>",
+            "$ my-app [-cvh]"
+        ]
+    }
+}
 ```
 <a name="module_usage-options--UsageOptions+groups"></a>
-### options.groups : <code>object</code> &#124; <code>string</code>
-Specify which groups to display in the output. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
+### options.groups : <code>object</code>
+Specify which groups to display in the output by supplying an object of key/value pairs, where the key is the name of the group to include and the value is a string or textObject. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
@@ -132,7 +149,7 @@ Specify which groups to display in the output. If the value is a string it is us
 }
 ```
 <a name="module_usage-options--UsageOptions+footer"></a>
-### options.footer : <code>string</code>
+### options.footer : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
 Displayed at the foot of the usage output.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -141,6 +158,18 @@ Displayed at the foot of the usage output.
 If you want to hide certain options from the output, specify their names here.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+<a name="module_usage-options--UsageOptions..textObject"></a>
+### options~textObject
+Contains text and formatting information.
+
+**Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| text | <code>string</code> | 
+| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | 
+
 
 
 * * *
