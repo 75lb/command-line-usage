@@ -13,7 +13,7 @@ Generates [column-layout](http://github.com/75lb/column-layout) usage informatio
 
 | Param | Type | Description |
 | --- | --- | --- |
-| definitions | <code>Array.&lt;optionDefinition&gt;</code> | the option definitions |
+| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--Definition) objects. |
 | options | <code>[usage-options](#module_usage-options)</code> | Options |
 
 **Example**  
@@ -165,10 +165,10 @@ Contains text and formatting information.
 **Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| text | <code>string</code> | 
-| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| text | <code>string</code> |  |
+| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style). |
 
 
 
