@@ -5,7 +5,7 @@
 
 <a name="module_command-line-usage"></a>
 ## command-line-usage
-Generates [column-layout](http://github.com/75lb/column-layout) usage information for a command-line parser (e.g. [command-line-args](http://github.com/75lb/command-line-args)).
+Exports a single function to generate a usage guide using [column-layout](http://github.com/75lb/column-layout).
 
 <a name="exp_module_command-line-usage--getUsage"></a>
 ### getUsage(definitions, options) ⇒ <code>string</code> ⏏
@@ -13,8 +13,8 @@ Generates [column-layout](http://github.com/75lb/column-layout) usage informatio
 
 | Param | Type | Description |
 | --- | --- | --- |
-| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--Definition) objects. |
-| options | <code>[usage-options](#module_usage-options)</code> | Options |
+| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--OptionDefinition) objects. |
+| options | <code>[usage-options](#module_usage-options)</code> | see [UsageOptions](#exp_module_usage-options--UsageOptions). |
 
 **Example**  
 Some example usage output: 
@@ -98,6 +98,12 @@ The title line at the top of the usage, typically the name of the app. By defaul
 **Example**  
 ```js
 {
+    title: "my-app"
+}
+```
+**Example**  
+```js
+{
     title: {
        text: "my-app",
        format: [ "bold", "underline" ]
@@ -116,10 +122,10 @@ An array of strings highlighting the main usage forms of the app.
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Properties**
 
-| Name | Type | Default |
-| --- | --- | --- |
-| title | <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code> | <code>&quot;Usage&quot;</code> | 
-| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  | 
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| title | <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code> | <code>&quot;Usage&quot;</code> | The title text for this section |
+| forms | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  | An array of lines describing the various usage forms. |
 
 **Example**  
 ```js
@@ -153,11 +159,23 @@ Specify which groups to display in the output by supplying an object of key/valu
 Displayed at the foot of the usage output.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Example**  
+```js
+{
+    footer: "Project home: [underline]{https://github.com/me/my-app}"
+}
+```
 <a name="module_usage-options--UsageOptions+hide"></a>
 ### options.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-If you want to hide certain options from the output, specify their names here.
+If you want to hide certain options from the output, specify their names here. This is sometimes used to hide the `defaultOption`.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
+**Example**  
+```js
+{
+    hide: "files"
+}
+```
 <a name="module_usage-options--UsageOptions..textObject"></a>
 ### options~textObject
 Contains text and formatting information.
@@ -167,7 +185,7 @@ Contains text and formatting information.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| text | <code>string</code> |  |
+| text | <code>string</code> | the text to display |
 | format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style). |
 
 
