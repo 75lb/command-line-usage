@@ -19,7 +19,6 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 **Example**  
 Some example usage output: 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/typical.png)
-```
 
 
 <a name="exp_module_usage-options--UsageOptions"></a>
