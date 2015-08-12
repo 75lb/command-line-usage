@@ -18,59 +18,7 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 
 **Example**  
 Some example usage output: 
-```
-
-  my-app
-  Generates something useful
-
-  Usage
-  $ cat input.json | my-app [<options>]
-  $ my-app <files>
-
-  Main options
-  This group contains the most important options.
-
-  -a, --one <string>     The first option
-  -b, --two <number>     The second option
-
-  Miscellaneous
-  -c, --three <string>   The third option
-  -d, --four <number>    The fourth option
-
-  Project home: https://github.com/me/my-app
-
-```
-
-..and the code to create it:
-```js
-var getUsage = require("command-line-usage");
-
-var optionDefinitions = [
-    { name: "help", alias: "h", type: Boolean, description: "Display this usage guide.", group: "main" },
-    { name: "files", alias: "f", type: String, multiple: true, defaultOption: true, description: "The input files to process", group: "main" },
-    { name: "timeout", alias: "t", type: Number, description: "Timeout value in ms", group: "main" },
-    { name: "custom", type: Custom, description: "A custom class instance"}
-];
-
-var options = {
-    title: "%bold{a typical app}",
-    description: "Generates something %yellow bg-black{wild and crazy}",
-    forms: [
-        "$ cat input.json | my-app [<options>]",
-        "$ my-app <files>"
-    ],
-    groups: {
-        main: {
-            title: "Main options",
-            description: "This group contains the most important options."
-        },
-        _none: "No group"
-    },
-    footer: "Project home: https://github.com/me/my-app",
-    hide: [ "files" ]
-};
-
-var usage = getUsage(optionDefinitions, options);
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/typical.png)
 ```
 
 
@@ -189,6 +137,17 @@ Contains text and formatting information.
 | format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style). |
 
 
+
+## More examples
+You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install: 
+```
+$ npm install -g command-line-usage
+```
+
+Usage: 
+```
+$ cat example/typical-formatted.js | command-line-usage
+```
 
 * * *
 
