@@ -19,7 +19,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo",
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs --no-gfm lib/*.js > README.md; echo",
     "test": "tape test/*.js"
   },
   "dependencies": {

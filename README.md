@@ -10,11 +10,25 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 <a name="exp_module_command-line-usage--getUsage"></a>
 ### getUsage(definitions, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--OptionDefinition) objects. Each definition should also contain a `description` and optionally a `typeLabel` (both strings). |
-| options | <code>[usage-options](#module_usage-options)</code> | see [UsageOptions](#exp_module_usage-options--UsageOptions). |
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+<ul>
+<li><code>description</code> - a string describing the option.</li>
+<li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
+</ul>
+</td>
+    </tr><tr>
+    <td>options</td><td><code><a href="#module_usage-options">usage-options</a></code></td><td><p>see <a href="#exp_module_usage-options--UsageOptions">UsageOptions</a>.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 Some example usage output: 
@@ -70,10 +84,19 @@ An array of strings highlighting the main usage forms of the app.
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Properties**
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| title | <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code> | <code>&quot;Usage&quot;</code> | The title text for this section |
-| forms | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  | An array of lines describing the various usage forms. |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>title</td><td><code>string</code> | <code>[textObject](#module_usage-options--UsageOptions..textObject)</code></td><td><code>&quot;Usage&quot;</code></td><td>The title text for this section</td>
+    </tr><tr>
+    <td>forms</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td></td><td>An array of lines describing the various usage forms.</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```js
@@ -131,10 +154,19 @@ Contains text and formatting information.
 **Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Properties**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| text | <code>string</code> | the text to display |
-| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style). |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>text</td><td><code>string</code></td><td>the text to display</td>
+    </tr><tr>
+    <td>format</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td>one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style).</td>
+    </tr>  </tbody>
+</table>
 
 
 
