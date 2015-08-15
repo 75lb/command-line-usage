@@ -13,7 +13,7 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 
 | Param | Type | Description |
 | --- | --- | --- |
-| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--OptionDefinition) objects. |
+| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args/tree/rewrite#exp_module_definition--OptionDefinition) objects. Each definition should also contain a `description` and optionally a `typeLabel` (both strings). |
 | options | <code>[usage-options](#module_usage-options)</code> | see [UsageOptions](#exp_module_usage-options--UsageOptions). |
 
 **Example**  
