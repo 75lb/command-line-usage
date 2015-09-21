@@ -5,8 +5,17 @@ module.exports = {
         footer: "Project home: [underline]{https://github.com/me/example}"
     },
     definitions: [
-        { name: "help", alias: "h", type: Boolean, description: "Display this usage guide." },
-        { name: "src", type: String, multiple: true, defaultOption: true, description: "The input files to process" },
-        { name: "timeout", alias: "t", type: Number, description: "Timeout value in ms" }
+        {
+            name: "help", description: "Display this usage guide.",
+            alias: "h", type: Boolean
+        },
+        {
+            name: "src", description: "The input files to process",
+            type: String, multiple: true, defaultOption: true
+        },
+        {
+            name: "timeout", description: "Timeout value in ms",
+            alias: "t", type: Number
+        }
     ]
 };

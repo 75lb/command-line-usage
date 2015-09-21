@@ -3,10 +3,102 @@
 [![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://david-dm.org/75lb/command-line-usage.svg)](https://david-dm.org/75lb/command-line-usage)
 
+# command-line-usage
+A library to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use. Use the built-in template or create something from scratch marking where generated content (e.g. the option definitions) should be placed using tokens.
+
+## Usage
+This module exports a single function: .getUsage().
+
+### Simple example
+
+```js
+[
+    {
+        name: "help", description: "Display this usage guide.",
+        alias: "h", type: Boolean
+    },
+    {
+        name: "src", description: "The input files to process",
+        type: String, multiple: true, defaultOption: true
+    },
+    {
+        name: "timeout", description: "Timeout value in ms",
+        alias: "t", type: Number
+    }
+]
+```
+
+```js
+{
+    title: "a typical app",
+    description: "Generates something very important.",
+    footer: "Project home: [underline]{https://github.com/me/example}"
+}
+```
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
+
+### Medium example
+
+```js
+[
+    {
+        name: "help", description: "Display this usage guide.",
+        alias: "h", type: Boolean
+    },
+    {
+        name: "src", description: "The input files to process",
+        type: String, multiple: true, defaultOption: true, typeLabel: "[underline]{file} ..."
+    },
+    {
+        name: "timeout", description: "Timeout value in ms",
+        alias: "t", type: Number, typeLabel: "[underline]{ms}"
+    }
+]
+```
+
+```js
+{
+    title: "a typical app",
+    description: "Generates something very important.",
+    forms: [
+        "$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...",
+        "$ example [bold]{--help}"
+    ],
+    examples: [
+        { 
+            desc: "1. A concise example. ", 
+            example: "$ example -t 100 lib/*.js" 
+        },
+        { 
+            desc: "2. A long example. ", 
+            example: "$ example --timeout 100 --src lib/*.js" 
+        },
+        { 
+            desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ", 
+            example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts" 
+        }
+    ],
+    footer: "Project home: [underline]{https://github.com/me/example}"
+}
+```
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/medium.png)
+
+## More examples
+You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install: 
+```
+$ npm install -g command-line-usage
+```
+
+Usage: 
+```
+$ cat example/typical-formatted.js | command-line-usage
+```
+
+# API Reference
 <a name="module_command-line-usage"></a>
 ## command-line-usage
-Exports a single function to generate a usage guide using [column-layout](http://github.com/75lb/column-layout).
-
 <a name="exp_module_command-line-usage--getUsage"></a>
 ### getUsage(definitions, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
@@ -31,11 +123,6 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 </table>
 
 **Example**  
-Some example usage output: 
-
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
-
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/medium.png)
 
 
 <a name="exp_module_usage-options--UsageOptions"></a>
@@ -125,17 +212,6 @@ If you want to hide certain options from the output, specify their names here. T
 }
 ```
 
-
-## More examples
-You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install: 
-```
-$ npm install -g command-line-usage
-```
-
-Usage: 
-```
-$ cat example/typical-formatted.js | command-line-usage
-```
 
 * * *
 
