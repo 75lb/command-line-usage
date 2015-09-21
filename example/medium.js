@@ -4,7 +4,7 @@ module.exports = {
     options: {
         title: "a typical app",
         description: "Generates something very important.",
-        forms: [
+        synopsis: [
             "$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...",
             "$ example [bold]{--help}"
         ],

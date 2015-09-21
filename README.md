@@ -6,81 +6,84 @@
 # command-line-usage
 A library to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use. Use the built-in template or create something from scratch marking where generated content (e.g. the option definitions) should be placed using tokens.
 
-## Usage
-This module exports a single function: .getUsage().
-
-### Simple example
-
 ```js
-[
-    {
-        name: "help", description: "Display this usage guide.",
-        alias: "h", type: Boolean
-    },
-    {
-        name: "src", description: "The input files to process",
-        type: String, multiple: true, defaultOption: true
-    },
-    {
-        name: "timeout", description: "Timeout value in ms",
-        alias: "t", type: Number
-    }
-]
+var getUsage = require("command-line-usage");
 ```
 
+## Usage
+
+### Simple example
+A `description` is added to each option definition, an app `title`, `description` and simple `footer`.
+
 ```js
-{
-    title: "a typical app",
-    description: "Generates something very important.",
-    footer: "Project home: [underline]{https://github.com/me/example}"
-}
+var usage = getUsage(
+  [
+      {
+          name: "help", description: "Display this usage guide.",
+          alias: "h", type: Boolean
+      },
+      {
+          name: "src", description: "The input files to process",
+          type: String, multiple: true, defaultOption: true
+      },
+      {
+          name: "timeout", description: "Timeout value in ms",
+          alias: "t", type: Number
+      }
+  ],
+  {
+      title: "a typical app",
+      description: "Generates something very important.",
+      footer: "Project home: [underline]{https://github.com/me/example}"
+  }  
+);
 ```
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
 ### Medium example
+A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format)) `typeLabel` is given to each option definition. This ansi formatting syntax can be used anywhere in the template. A `synopsis` and list of `examples` is added. 
 
 ```js
-[
-    {
-        name: "help", description: "Display this usage guide.",
-        alias: "h", type: Boolean
-    },
-    {
-        name: "src", description: "The input files to process",
-        type: String, multiple: true, defaultOption: true, typeLabel: "[underline]{file} ..."
-    },
-    {
-        name: "timeout", description: "Timeout value in ms",
-        alias: "t", type: Number, typeLabel: "[underline]{ms}"
-    }
-]
-```
-
-```js
-{
-    title: "a typical app",
-    description: "Generates something very important.",
-    forms: [
-        "$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...",
-        "$ example [bold]{--help}"
-    ],
-    examples: [
-        { 
-            desc: "1. A concise example. ", 
-            example: "$ example -t 100 lib/*.js" 
-        },
-        { 
-            desc: "2. A long example. ", 
-            example: "$ example --timeout 100 --src lib/*.js" 
-        },
-        { 
-            desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ", 
-            example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts" 
-        }
-    ],
-    footer: "Project home: [underline]{https://github.com/me/example}"
-}
+var usage = getUsage(
+  [
+      {
+          name: "help", description: "Display this usage guide.",
+          alias: "h", type: Boolean
+      },
+      {
+          name: "src", description: "The input files to process",
+          type: String, multiple: true, defaultOption: true, typeLabel: "[underline]{file} ..."
+      },
+      {
+          name: "timeout", description: "Timeout value in ms",
+          alias: "t", type: Number, typeLabel: "[underline]{ms}"
+      }
+  ],
+  {
+      title: "a typical app",
+      description: "Generates something very important.",
+      synopsis: [
+          "$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...",
+          "$ example [bold]{--help}"
+      ],
+      examples: [
+          { 
+              desc: "1. A concise example. ", 
+              example: "$ example -t 100 lib/*.js" 
+          },
+          { 
+              desc: "2. A long example. ", 
+              example: "$ example --timeout 100 --src lib/*.js" 
+          },
+          { 
+              desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ", 
+              example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts" 
+          }
+      ],
+      footer: "Project home: [underline]{https://github.com/me/example}"
+  }
+);
 ```
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/medium.png)
@@ -121,8 +124,6 @@ $ cat example/typical-formatted.js | command-line-usage
 </td>
     </tr>  </tbody>
 </table>
-
-**Example**  
 
 
 <a name="exp_module_usage-options--UsageOptions"></a>
