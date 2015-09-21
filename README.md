@@ -30,19 +30,17 @@ The class describes all valid options for the `getUsage` function. Inline format
 
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-  * _instance_
-    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
-    * [.description](#module_usage-options--UsageOptions+description) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
-    * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>Array.&lt;string&gt;</code>
-    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
-    * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
-    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-  * _inner_
-    * [~textObject](#module_usage-options--UsageOptions..textObject)
+  * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
+  * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
+  * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>Array.&lt;string&gt;</code>
+  * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
+  * [.examples](#module_usage-options--UsageOptions+examples) : <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code>
+  * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
+  * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 
 <a name="module_usage-options--UsageOptions+title"></a>
-### options.title : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
-The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [textObject](#module_usage-options--UsageOptions..textObject).
+### options.title : <code>string</code>
+The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [module:usage-options~textObject](module:usage-options~textObject).
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
@@ -61,7 +59,7 @@ The title line at the top of the usage, typically the name of the app. By defaul
 }
 ```
 <a name="module_usage-options--UsageOptions+description"></a>
-### options.description : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+### options.description : <code>string</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -85,8 +83,13 @@ Specify which groups to display in the output by supplying an object of key/valu
     misc: "Miscellaneous"
 }
 ```
+<a name="module_usage-options--UsageOptions+examples"></a>
+### options.examples : <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code>
+Examples
+
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+footer"></a>
-### options.footer : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
+### options.footer : <code>string</code>
 Displayed at the foot of the usage output.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -107,18 +110,6 @@ If you want to hide certain options from the output, specify their names here. T
     hide: "files"
 }
 ```
-<a name="module_usage-options--UsageOptions..textObject"></a>
-### options~textObject
-Contains text and formatting information.
-
-**Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| text | <code>string</code> | the text to display |
-| format | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | one or more ansi style names from [this list](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.style). |
-
 
 
 ## More examples
