@@ -33,11 +33,10 @@ The class describes all valid options for the `getUsage` function. Inline format
   * _instance_
     * [.title](#module_usage-options--UsageOptions+title) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
     * [.description](#module_usage-options--UsageOptions+description) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
-    * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>object</code>
+    * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>Array.&lt;string&gt;</code>
     * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
     * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code>
     * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-    * [.optionNameStyles](#module_usage-options--UsageOptions+optionNameStyles) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
   * _inner_
     * [~textObject](#module_usage-options--UsageOptions..textObject)
 
@@ -67,29 +66,10 @@ A description to go underneath the title. For example, some words about what the
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+synopsis"></a>
-### options.synopsis : <code>object</code>
+### options.synopsis : <code>Array.&lt;string&gt;</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Properties**
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| title | <code>string</code> &#124; <code>[textObject](#module_usage-options--UsageOptions..textObject)</code> | <code>&quot;Usage&quot;</code> | The title text for this section |
-| forms | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> |  | An array of lines describing the various usage forms. |
-
-**Example**  
-```js
-{
-    usage: {
-        title: "Synopsis",
-        forms: [
-            "$ my-app <options> <files>",
-            "$ my-app [-cvh]"
-        ]
-    }
-}
-```
 <a name="module_usage-options--UsageOptions+groups"></a>
 ### options.groups : <code>object</code>
 Specify which groups to display in the output by supplying an object of key/value pairs, where the key is the name of the group to include and the value is a string or textObject. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
@@ -125,17 +105,6 @@ If you want to hide certain options from the output, specify their names here. T
 ```js
 {
     hide: "files"
-}
-```
-<a name="module_usage-options--UsageOptions+optionNameStyles"></a>
-### options.optionNameStyles : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-Optional styles to apply to the names in the option list.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Example**  
-```js
-{
-    optionNameStyles: "bold"
 }
 ```
 <a name="module_usage-options--UsageOptions..textObject"></a>

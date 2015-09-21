@@ -15,7 +15,7 @@ process.stdin
 function getUsage(){
     var cliOptions = require(tmpPath);
     fs.unlinkSync(tmpPath);
-    console.log(usage(cliOptions));
+    console.log(usage(cliOptions.definitions, cliOptions.options));
 }
 
 function halt(msg){
