@@ -10,11 +10,25 @@ Exports a single function to generate a usage guide using [column-layout](http:/
 <a name="exp_module_command-line-usage--getUsage"></a>
 ### getUsage(definitions, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| definitions | <code>Array.&lt;optionDefinition&gt;</code> | an array of [option definition](https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition) objects. In addition to the regular definition properties, command-line-usage will look for: - `description` - a string describing the option. - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc. |
-| options | <code>[usage-options](#module_usage-options)</code> | see [UsageOptions](#exp_module_usage-options--UsageOptions). |
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+<ul>
+<li><code>description</code> - a string describing the option.</li>
+<li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
+</ul>
+</td>
+    </tr><tr>
+    <td>options</td><td><code><a href="#module_usage-options">usage-options</a></code></td><td><p>see <a href="#exp_module_usage-options--UsageOptions">UsageOptions</a>.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 Some example usage output: 
