@@ -1,5 +1,5 @@
 [![view on npm](http://img.shields.io/npm/v/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
-[![npm module downloads per month](http://img.shields.io/npm/dm/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
+[![npm module downloads](http://img.shields.io/npm/dt/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
 [![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://david-dm.org/75lb/command-line-usage.svg)](https://david-dm.org/75lb/command-line-usage)
 
@@ -35,14 +35,14 @@ var usage = getUsage(
       title: "a typical app",
       description: "Generates something very important.",
       footer: "Project home: [underline]{https://github.com/me/example}"
-  }  
+  }
 );
 ```
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
 ### Medium example
-A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format)) `typeLabel` is given to each option definition. This ansi formatting syntax can be used anywhere in the template. A `synopsis` and list of `examples` is added. 
+A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format)) `typeLabel` is given to each option definition. This ansi formatting syntax can be used anywhere in the template. A `synopsis` and list of `examples` is added.
 
 ```js
 var usage = getUsage(
@@ -68,17 +68,17 @@ var usage = getUsage(
           "$ example [bold]{--help}"
       ],
       examples: [
-          { 
-              desc: "1. A concise example. ", 
-              example: "$ example -t 100 lib/*.js" 
+          {
+              desc: "1. A concise example. ",
+              example: "$ example -t 100 lib/*.js"
           },
-          { 
-              desc: "2. A long example. ", 
-              example: "$ example --timeout 100 --src lib/*.js" 
+          {
+              desc: "2. A long example. ",
+              example: "$ example --timeout 100 --src lib/*.js"
           },
-          { 
-              desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ", 
-              example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts" 
+          {
+              desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ",
+              example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts"
           }
       ],
       footer: "Project home: [underline]{https://github.com/me/example}"
@@ -89,12 +89,12 @@ var usage = getUsage(
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/medium.png)
 
 ## More examples
-You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install: 
+You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install:
 ```
 $ npm install -g command-line-usage
 ```
 
-Usage: 
+Usage:
 ```
 $ cat example/typical-formatted.js | command-line-usage
 ```
