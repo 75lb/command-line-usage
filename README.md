@@ -2,6 +2,7 @@
 [![npm module downloads](http://img.shields.io/npm/dt/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
 [![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://david-dm.org/75lb/command-line-usage.svg)](https://david-dm.org/75lb/command-line-usage)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
 A library to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use. Use the built-in template or create something from scratch marking where generated content (e.g. the option definitions) should be placed using tokens.
