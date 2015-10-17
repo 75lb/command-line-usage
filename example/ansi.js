@@ -14,8 +14,17 @@ module.exports = {
     ].concat(wales.split('\n'))
   },
   definitions: [
-    { name: 'help', alias: 'h', type: Boolean, description: 'Display this usage guide.' },
-    { name: 'src', type: String, multiple: true, defaultOption: true, description: 'The input files to process', typeLabel: '[underline]{file} ...' },
-    { name: 'timeout', alias: 't', type: Number, description: 'Timeout value in ms', typeLabel: '[underline]{ms}' }
+    {
+      name: 'help', description: 'Display this usage guide.',
+      alias: 'h', type: Boolean
+    },
+    {
+      name: 'src', description: 'The input files to process',
+      type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+    },
+    {
+      name: 'timeout', description: 'Timeout value in ms',
+      alias: 't', type: Number, typeLabel: '[underline]{ms}'
+    }
   ]
 }

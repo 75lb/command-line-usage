@@ -1,18 +1,13 @@
 #!/usr/bin/env node
 'use strict'
 var usage = require('../')
-var os = require('os')
-var fs = require('fs')
 var path = require('path')
 
-var tmpPath = path.join(os.tmpDir(), Date.now() + '-clu.js')
-
-process.stdin
-  .pipe(fs.createWriteStream(tmpPath))
-  .on('close', getUsage)
-
-function getUsage () {
-  var cliOptions = require(tmpPath)
-  fs.unlinkSync(tmpPath)
-  console.log(usage(cliOptions.definitions, cliOptions.options))
+var filePath = process.argv[2]
+if (!filePath) {
+  console.error('$ command-line-usage <file>')
+  process.exit(1)
 }
+
+var cliOptions = require(path.resolve(filePath))
+console.log(usage(cliOptions.definitions, cliOptions.options))
