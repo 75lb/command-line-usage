@@ -9,6 +9,7 @@ A simple template to create a usage guide. It was extracted from  [command-line-
 
 ```js
 var clu = require("command-line-usage");
+var usage = clu.getUsage(definitions, options)
 ```
 
 ## Usage
@@ -101,11 +102,14 @@ $ cat example/typical-formatted.js | command-line-usage
 ```
 
 # API Reference
-<a name="module_command-line-usage"></a>
-## command-line-usage
-<a name="module_command-line-usage..getUsage"></a>
-### command-line-usage~getUsage(definitions, options) ⇒ <code>string</code>
-**Kind**: inner method of <code>[command-line-usage](#module_command-line-usage)</code>  
+
+* [command-line-usage](#module_command-line-usage)
+  * [.getUsage(definitions, options)](#module_command-line-usage.getUsage) ⇒ <code>string</code>
+  * [.getOptionList(definitions, [group])](#module_command-line-usage.getOptionList) ⇒ <code>Array.&lt;string&gt;</code>
+
+<a name="module_command-line-usage.getUsage"></a>
+### clu.getUsage(definitions, options) ⇒ <code>string</code>
+**Kind**: static method of <code>[command-line-usage](#module_command-line-usage)</code>  
 <table>
   <thead>
     <tr>
@@ -126,11 +130,11 @@ $ cat example/typical-formatted.js | command-line-usage
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage..getOptionList"></a>
-### command-line-usage~getOptionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
+<a name="module_command-line-usage.getOptionList"></a>
+### clu.getOptionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
 A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
 
-**Kind**: inner method of <code>[command-line-usage](#module_command-line-usage)</code>  
+**Kind**: static method of <code>[command-line-usage](#module_command-line-usage)</code>  
 <table>
   <thead>
     <tr>

@@ -9,6 +9,7 @@ A simple template to create a usage guide. It was extracted from  [command-line-
 
 ```js
 var clu = require("command-line-usage");
+var usage = clu.getUsage(definitions, options)
 ```
 
 ## Usage
@@ -102,8 +103,8 @@ $ cat example/typical-formatted.js | command-line-usage
 
 # API Reference
 {{#module name="command-line-usage"}}
-{{>header}}
 {{>body}}
+{{>member-index}}
 {{>members}}
 {{/module}}
 
