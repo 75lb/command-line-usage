@@ -20,7 +20,8 @@
   },
   "scripts": {
     "docs": "jsdoc2md -t jsdoc2md/README.hbs --no-gfm lib/*.js > README.md; echo",
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "es5": "babel --no-comments lib --out-dir es5"
   },
   "dependencies": {
     "ansi-escape-sequences": "^2.2.0",
