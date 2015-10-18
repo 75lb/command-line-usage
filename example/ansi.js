@@ -1,4 +1,4 @@
-var wales = require('/Users/lloyd/Documents/75lb/command-line-usage/example/wales')
+var wales = require('./wales')
 
 module.exports = {
   options: {
@@ -10,7 +10,7 @@ module.exports = {
     ],
     footer: [
       '[italic]{This app was tested by dragons in Wales.}',
-      null
+      ''
     ].concat(wales.split('\n'))
   },
   definitions: [

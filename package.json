@@ -26,6 +26,7 @@
     "ansi-escape-sequences": "^2.2.0",
     "array-back": "^1.0.2",
     "column-layout": "^1.0.0",
+    "feature-detect-es6": "^1.0.0",
     "object-tools": "^2",
     "typical": "^2.3.1"
   },
