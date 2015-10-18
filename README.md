@@ -5,10 +5,10 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
-A library to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use. Use the built-in template or create something from scratch marking where generated content (e.g. the option definitions) should be placed using tokens.
+A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use.
 
 ```js
-var getUsage = require("command-line-usage");
+var clu = require("command-line-usage");
 ```
 
 ## Usage
@@ -103,9 +103,9 @@ $ cat example/typical-formatted.js | command-line-usage
 # API Reference
 <a name="module_command-line-usage"></a>
 ## command-line-usage
-<a name="exp_module_command-line-usage--getUsage"></a>
-### getUsage(definitions, options) ⇒ <code>string</code> ⏏
-**Kind**: Exported function  
+<a name="module_command-line-usage..getUsage"></a>
+### command-line-usage~getUsage(definitions, options) ⇒ <code>string</code>
+**Kind**: inner method of <code>[command-line-usage](#module_command-line-usage)</code>  
 <table>
   <thead>
     <tr>
@@ -122,6 +122,27 @@ $ cat example/typical-formatted.js | command-line-usage
 </td>
     </tr><tr>
     <td>options</td><td><code><a href="#module_usage-options">usage-options</a></code></td><td><p>see <a href="#exp_module_usage-options--UsageOptions">UsageOptions</a>.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+<a name="module_command-line-usage..getOptionList"></a>
+### command-line-usage~getOptionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
+A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
+
+**Kind**: inner method of <code>[command-line-usage](#module_command-line-usage)</code>  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>the definitions to Display</p>
+</td>
+    </tr><tr>
+    <td>[group]</td><td><code>string</code></td><td><p>if specified, will output the options in this group. The special group <code>&#39;_none&#39;</code> will return options without a group specified.</p>
 </td>
     </tr>  </tbody>
 </table>

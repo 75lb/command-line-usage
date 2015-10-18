@@ -33,7 +33,7 @@ test('.getOptionList()', function (t) {
     { name: 'two', description: 'two', group: 'one' },
     { name: 'three', description: 'three' }
   ]
-  var result = clu.getOptionList(definitions)
+
   t.deepEqual(clu.getOptionList(definitions), [
     '  \x1b[1m--one\x1b[0m      one   ',
     '  \x1b[1m--two\x1b[0m      two   ',
