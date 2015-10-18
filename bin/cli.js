@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict'
-var usage = require('../')
+var usage = require('../').getUsage
 var path = require('path')
 
 var filePath = process.argv[2]
