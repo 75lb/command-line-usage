@@ -16,7 +16,8 @@ var t = require('typical');
 var UsageOptions = require('./usage-options');
 var arrayify = require('array-back');
 
-module.exports = getUsage;
+exports.getUsage = getUsage;
+exports.getOptionList = getOptionList;
 
 var Lines = (function (_Array) {
   _inherits(Lines, _Array);
@@ -83,17 +84,8 @@ function getUsage(definitions, options) {
 
         output.add(renderSection(title, description));
 
-        if (group === '_none') {
-          var optionList = getOptionList(definitions.filter(function (def) {
-            return !t.isDefined(def.group);
-          }));
-          output.add(renderSection(null, optionList, true));
-        } else {
-          var optionList = getOptionList(definitions.filter(function (def) {
-            return arrayify(def.group).indexOf(group) > -1;
-          }));
-          output.add(renderSection(null, optionList, true));
-        }
+        var optionList = getOptionList(definitions, group);
+        output.add(renderSection(null, optionList, true));
       });
     } else {
       output.add(renderSection('Options', getOptionList(definitions), true));
@@ -175,14 +167,26 @@ function formatRow(row) {
   return row;
 }
 
-function getOptionList(definitions) {
+function getOptionList(definitions, group) {
   var columns = [];
+
+  if (group === '_none') {
+    definitions = definitions.filter(function (def) {
+      return !t.isDefined(def.group);
+    });
+  } else if (group) {
+    definitions = definitions.filter(function (def) {
+      return arrayify(def.group).indexOf(group) > -1;
+    });
+  }
+
   definitions.forEach(function (def) {
     columns.push({
       option: getOptionNames(def, 'bold'),
       description: def.description
     });
   });
+
   return columnLayout.lines(columns, {
     padding: { left: '  ', right: ' ' },
     columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
