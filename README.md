@@ -158,6 +158,7 @@ The class describes all valid options for the `getUsage` function. Inline format
 
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
+  * [.header](#module_usage-options--UsageOptions+header) : <code>string</code>
   * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
   * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
   * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>Array.&lt;string&gt;</code>
@@ -166,6 +167,11 @@ The class describes all valid options for the `getUsage` function. Inline format
   * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
   * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 
+<a name="module_usage-options--UsageOptions+header"></a>
+### options.header : <code>string</code>
+Use this field to display a banner or header above the main body.
+
+**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+title"></a>
 ### options.title : <code>string</code>
 The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [module:usage-options~textObject](module:usage-options~textObject).

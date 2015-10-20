@@ -60,6 +60,10 @@ function getUsage(definitions, options) {
     });
   }
 
+  if (options.header) {
+    output.add(renderSection('', options.header));
+  }
+
   if (options.title || options.description) {
     output.add(renderSection(options.title, options.description));
   }

@@ -6,6 +6,8 @@ module.exports = UsageOptions;
 function UsageOptions(options) {
   options = options || {};
 
+  this.header = options.header;
+
   this.title = options.title;
 
   this.description = options.description;

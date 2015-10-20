@@ -1,17 +1,12 @@
-var wales = require('./assets/ansi-wales')
+var header = require('./assets/ansi-header')
 
 module.exports = {
   options: {
-    title: 'a typical app',
-    description: 'Generates something very important.',
+    header: header,
     synopsis: [
       '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
       '$ example [bold]{--help}'
-    ],
-    footer: [
-      '[italic]{This app was tested by dragons in Wales.}',
-      ''
-    ].concat(wales.split('\n'))
+    ]
   },
   definitions: [
     {
@@ -23,7 +18,7 @@ module.exports = {
       type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
     },
     {
-      name: 'timeout', description: 'Timeout value in ms',
+      name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
       alias: 't', type: Number, typeLabel: '[underline]{ms}'
     }
   ]
