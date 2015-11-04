@@ -16,8 +16,7 @@ var t = require('typical');
 var UsageOptions = require('./usage-options');
 var arrayify = require('array-back');
 
-exports.getUsage = getUsage;
-exports.getOptionList = getOptionList;
+module.exports = getUsage;
 
 var Lines = (function (_Array) {
   _inherits(Lines, _Array);
@@ -88,11 +87,11 @@ function getUsage(definitions, options) {
 
         output.add(renderSection(title, description));
 
-        var optionList = getOptionList(definitions, group);
+        var optionList = getUsage.optionList(definitions, group);
         output.add(renderSection(null, optionList, true));
       });
     } else {
-      output.add(renderSection('Options', getOptionList(definitions), true));
+      output.add(renderSection('Options', getUsage.optionList(definitions), true));
     }
   }
 
@@ -171,9 +170,9 @@ function formatRow(row) {
   return row;
 }
 
-function getOptionList(definitions, group) {
+getUsage.optionList = function (definitions, group) {
   if (!definitions || definitions && !definitions.length) {
-    throw new Error('you must pass option definitions to .getOptionList()');
+    throw new Error('you must pass option definitions to getUsage.optionList()');
   }
   var columns = [];
 
@@ -198,4 +197,4 @@ function getOptionList(definitions, group) {
     padding: { left: '  ', right: ' ' },
     columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
   });
-}
+};
