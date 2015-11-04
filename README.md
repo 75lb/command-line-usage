@@ -12,94 +12,45 @@ var clu = require("command-line-usage");
 var usage = clu.getUsage(definitions, options)
 ```
 
-## Usage
+## Examples
 
-### Simple example
+### Simple
 A `description` is added to each option definition, an app `title`, `description` and simple `footer`.
-
-```js
-var usage = getUsage(
-  [
-      {
-          name: "help", description: "Display this usage guide.",
-          alias: "h", type: Boolean
-      },
-      {
-          name: "src", description: "The input files to process",
-          type: String, multiple: true, defaultOption: true
-      },
-      {
-          name: "timeout", description: "Timeout value in ms",
-          alias: "t", type: Number
-      }
-  ],
-  {
-      title: "a typical app",
-      description: "Generates something very important.",
-      footer: "Project home: [underline]{https://github.com/me/example}"
-  }
-);
-```
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
-### Medium example
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+
+### Groups
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
+
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+
+### Header
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
+
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+
+### Footer
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
+
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+
+### Examples (column layout)
 A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format)) `typeLabel` is given to each option definition. This ansi formatting syntax can be used anywhere in the template. A `synopsis` and list of `examples` is added.
 
-```js
-var usage = getUsage(
-  [
-      {
-          name: "help", description: "Display this usage guide.",
-          alias: "h", type: Boolean
-      },
-      {
-          name: "src", description: "The input files to process",
-          type: String, multiple: true, defaultOption: true, typeLabel: "[underline]{file} ..."
-      },
-      {
-          name: "timeout", description: "Timeout value in ms",
-          alias: "t", type: Number, typeLabel: "[underline]{ms}"
-      }
-  ],
-  {
-      title: "a typical app",
-      description: "Generates something very important.",
-      synopsis: [
-          "$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...",
-          "$ example [bold]{--help}"
-      ],
-      examples: [
-          {
-              desc: "1. A concise example. ",
-              example: "$ example -t 100 lib/*.js"
-          },
-          {
-              desc: "2. A long example. ",
-              example: "$ example --timeout 100 --src lib/*.js"
-          },
-          {
-              desc: "3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ",
-              example: "$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts"
-          }
-      ],
-      footer: "Project home: [underline]{https://github.com/me/example}"
-  }
-);
-```
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-olumns.png)
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/medium.png)
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
 
-## More examples
-You can see output from the examples in the [examples](https://github.com/75lb/command-line-usage/tree/master/example) folder using the test harness. To install:
-```
-$ npm install -g command-line-usage
-```
+### Description (column layout)
 
-Usage:
-```
-$ cat example/typical-formatted.js | command-line-usage
-```
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
+
+[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
 
 # API Reference
 

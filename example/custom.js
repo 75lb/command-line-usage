@@ -19,8 +19,9 @@ const optionList = clu.getOptionList([
 console.log(`
 Name:         typical-app
 
-Description:  If you like, write your own usage template. If you would still like a
-              generated option list, use .getOptionList().
+Description:  If you like, write your own usage template.
+              If you would still like a generated option
+              list, use .getOptionList().
 
 Usage:
 

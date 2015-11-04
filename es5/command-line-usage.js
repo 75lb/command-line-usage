@@ -172,6 +172,9 @@ function formatRow(row) {
 }
 
 function getOptionList(definitions, group) {
+  if (!definitions || definitions && !definitions.length) {
+    throw new Error('you must pass option definitions to .getOptionList()');
+  }
   var columns = [];
 
   if (group === '_none') {
