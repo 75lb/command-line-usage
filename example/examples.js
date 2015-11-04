@@ -1,5 +1,4 @@
-const getUsage = require('../').getUsage
-const ussr = require('./assets/ascii-ussr')
+const getUsage = require('../')
 
 const optionDefinitions = [
   {

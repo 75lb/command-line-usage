@@ -1,4 +1,4 @@
-const getUsage = require('../').getUsage
+const getUsage = require('../')
 const header = require('./assets/ansi-header')
 const ansi = require('ansi-escape-sequences')
 

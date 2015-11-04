@@ -6,9 +6,6 @@
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
   "main": "index",
-  "bin": {
-    "command-line-usage": "bin/cli.js"
-  },
   "keywords": [
     "terminal",
     "command line",

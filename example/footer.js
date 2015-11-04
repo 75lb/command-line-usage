@@ -1,4 +1,4 @@
-const getUsage = require('../').getUsage
+const getUsage = require('../')
 const wales = require('./assets/ansi-wales').split('\n')
 
 const optionDefinitions = [

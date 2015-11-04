@@ -15,7 +15,6 @@ const optionList = clu.getOptionList([
   }
 ]).join('\n')
 
-
 console.log(`
 Name:         typical-app
 

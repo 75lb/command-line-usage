@@ -1,4 +1,4 @@
-const getUsage = require('../').getUsage
+const getUsage = require('../')
 
 const optionDefinitions = [
   {
