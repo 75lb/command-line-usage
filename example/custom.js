@@ -1,6 +1,6 @@
 const clu = require('../')
 
-const definitions = [
+const optionList = clu.getOptionList([
   {
     name: 'help', description: 'Display this usage guide.',
     alias: 'h', type: Boolean
@@ -13,10 +13,10 @@ const definitions = [
     name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
     alias: 't', type: Number, typeLabel: '[underline]{ms}'
   }
-]
+]).join('\n')
 
-const usage =
-`
+
+console.log(`
 Name:         typical-app
 
 Description:  If you like, write your own usage template. If you would still like a
@@ -24,8 +24,5 @@ Description:  If you like, write your own usage template. If you would still lik
 
 Usage:
 
-${clu.getOptionList(definitions).join('\n')}
-
-`
-
-console.log(usage)
+${optionList}
+`)
