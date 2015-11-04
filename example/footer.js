@@ -1,4 +1,5 @@
 const getUsage = require('../')
+const wales = require('./assets/ansi-wales').split('\n')
 
 const optionDefinitions = [
   {
@@ -7,18 +8,25 @@ const optionDefinitions = [
   },
   {
     name: 'src', description: 'The input files to process',
-    type: String, multiple: true, defaultOption: true
+    type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
   },
   {
     name: 'timeout', description: 'Timeout value in ms',
-    alias: 't', type: Number
+    alias: 't', type: Number, typeLabel: '[underline]{ms}'
   }
 ]
 
 const options = {
   title: 'a typical app',
   description: 'Generates something very important.',
-  footer: 'Project home: [underline]{https://github.com/me/example}'
+  synopsis: [
+    '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
+    '$ example [bold]{--help}'
+  ],
+  footer: [
+    '[italic]{This app was tested by dragons in Wales.}',
+    ''
+  ].concat(wales)
 }
 
 console.log(getUsage(optionDefinitions, options))
