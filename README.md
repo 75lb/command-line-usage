@@ -8,59 +8,58 @@
 A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use.
 
 ```js
-var clu = require("command-line-usage");
-var usage = clu.getUsage(definitions, options)
+var getUsage = require("command-line-usage");
+var usage = getUsage(definitions, options)
 ```
+
+Inline ansi formatting can be used anywhere within the usage template using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
 ## Examples
 
 ### Simple
-A `description` is added to each option definition, an app `title`, `description` and simple `footer`.
+A `description` field is added to each option definition. A `title`, `description` and simple `footer` are set in the getUsage options. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
-
 ### Groups
+Demonstrates breaking the options up into groups. This example also sets a `typeLabel` on each option definition (e.g. a `typeLabel` value of `files` is more meaningful than the default `string[]`). [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
 
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
-
 ### Header
+Here, the `title` is replaced with a `header` banner. This example also adds a `synopsis` list. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
 
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
-
 ### Footer
+The footer is displayed at the end of the template. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
 
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
-
 ### Examples (column layout)
-A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format)) `typeLabel` is given to each option definition. This ansi formatting syntax can be used anywhere in the template. A `synopsis` and list of `examples` is added.
+A list of `examples` is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [column-layout](https://github.com/75lb/column-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-olumns.png)
-
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Description (column layout)
+Demonstrates usage of custom column layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` disabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
-[code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+### Custom
+Demonstrates a custom template. The `getUsage.optionList()` method exists for users that want the option list and nothing else. [Code](https://github.com/75lb/command-line-usage/blob/master/example/custom.js).
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/custom.png)
 
 # API Reference
 
 * [command-line-usage](#module_command-line-usage)
-  * [.getUsage(definitions, options)](#module_command-line-usage.getUsage) ⇒ <code>string</code>
-  * [.getOptionList(definitions, [group])](#module_command-line-usage.getOptionList) ⇒ <code>Array.&lt;string&gt;</code>
+  * [getUsage(definitions, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
+    * [.optionList(definitions, [group])](#module_command-line-usage--getUsage.optionList) ⇒ <code>Array.&lt;string&gt;</code>
 
-<a name="module_command-line-usage.getUsage"></a>
-### clu.getUsage(definitions, options) ⇒ <code>string</code>
-**Kind**: static method of <code>[command-line-usage](#module_command-line-usage)</code>  
+<a name="exp_module_command-line-usage--getUsage"></a>
+### getUsage(definitions, options) ⇒ <code>string</code> ⏏
+**Kind**: Exported function  
 <table>
   <thead>
     <tr>
@@ -81,11 +80,11 @@ A more meaningful, formatted ([syntax](https://github.com/75lb/ansi-escape-seque
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage.getOptionList"></a>
-### clu.getOptionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
+<a name="module_command-line-usage--getUsage.optionList"></a>
+#### getUsage.optionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
 A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
 
-**Kind**: static method of <code>[command-line-usage](#module_command-line-usage)</code>  
+**Kind**: static method of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
 <table>
   <thead>
     <tr>

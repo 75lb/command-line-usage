@@ -1,6 +1,6 @@
-const clu = require('../')
+const getUsage = require('../')
 
-const optionList = clu.getOptionList([
+const optionList = getUsage.optionList([
   {
     name: 'help', description: 'Display this usage guide.',
     alias: 'h', type: Boolean
@@ -20,7 +20,7 @@ Name:         typical-app
 
 Description:  If you like, write your own usage template.
               If you would still like a generated option
-              list, use .getOptionList().
+              list, use getUsage.optionList().
 
 Usage:
 
