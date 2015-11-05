@@ -42,7 +42,7 @@ A list of `examples` is added. In this case the example list is defined as an ar
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Description (column layout)
-Demonstrates usage of custom column layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` disabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
+Demonstrates usage of custom column layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
@@ -104,21 +104,24 @@ A helper for getting a column-format list of options and descriptions. Useful fo
 
 <a name="exp_module_usage-options--UsageOptions"></a>
 ## UsageOptions ⏏
-The class describes all valid options for the `getUsage` function. Inline formatting can be used within any text string supplied using valid [ansi-escape-sequences formatting syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+The class describes all valid options for the `getUsage` function. Inline formatting can be used within any  * text string supplied using valid [ansi-escape-sequences formatting  * syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-  * [.header](#module_usage-options--UsageOptions+header) : <code>string</code>
-  * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
-  * [.description](#module_usage-options--UsageOptions+description) : <code>string</code>
-  * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>Array.&lt;string&gt;</code>
-  * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
-  * [.examples](#module_usage-options--UsageOptions+examples) : <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code>
-  * [.footer](#module_usage-options--UsageOptions+footer) : <code>string</code>
-  * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+  * _instance_
+    * [.header](#module_usage-options--UsageOptions+header) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
+    * [.description](#module_usage-options--UsageOptions+description) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+    * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
+    * [.examples](#module_usage-options--UsageOptions+examples) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+    * [.footer](#module_usage-options--UsageOptions+footer) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+  * _inner_
+    * [~textBlock](#module_usage-options--UsageOptions..textBlock) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
 
 <a name="module_usage-options--UsageOptions+header"></a>
-### options.header : <code>string</code>
+### options.header : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Use this field to display a banner or header above the main body.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -129,26 +132,15 @@ The title line at the top of the usage, typically the name of the app. By defaul
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
 ```js
-{
-    title: "my-app"
-}
-```
-**Example**  
-```js
-{
-    title: {
-       text: "my-app",
-       format: [ "bold", "underline" ]
-    }
-}
+{ title: "my-app" }
 ```
 <a name="module_usage-options--UsageOptions+description"></a>
-### options.description : <code>string</code>
+### options.description : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+synopsis"></a>
-### options.synopsis : <code>Array.&lt;string&gt;</code>
+### options.synopsis : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -168,12 +160,12 @@ Specify which groups to display in the output by supplying an object of key/valu
 }
 ```
 <a name="module_usage-options--UsageOptions+examples"></a>
-### options.examples : <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code>
+### options.examples : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Examples
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+footer"></a>
-### options.footer : <code>string</code>
+### options.footer : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Displayed at the foot of the usage output.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
@@ -194,6 +186,51 @@ If you want to hide certain options from the output, specify their names here. T
     hide: "files"
 }
 ```
+<a name="module_usage-options--UsageOptions..textBlock"></a>
+### options~textBlock : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
+A text block can be a string:
+
+```js
+{
+  description: 'This is a single-line description.'
+}
+```
+.. or multiple strings:
+```js
+{
+  description: [
+    'This is a multi-line description.',
+    'A new string in the array represents a new line.'
+  ]
+}
+```
+.. or an array of objects. In which case, it will be formatted by [column-layout](https://github.com/75lb/column-layout):
+```js
+{
+  description: {
+    column1: 'This will go in column 1.',
+    column2: 'Second column text.'
+  }
+}
+```
+If you want set specific column-layout options, pass an object with two properties: `options` and `data`.
+```js
+{
+  description: {
+    options: {
+      columns: [
+        { name: 'two', width: 40, nowrap: true }
+      ]
+    },
+    data: {
+      column1: 'This will go in column 1.',
+      column2: 'Second column text.'
+    }
+  }
+}
+```
+
+**Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 
 
 * * *
