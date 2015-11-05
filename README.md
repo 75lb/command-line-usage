@@ -104,7 +104,7 @@ A helper for getting a column-format list of options and descriptions. Useful fo
 
 <a name="exp_module_usage-options--UsageOptions"></a>
 ## UsageOptions ⏏
-The class describes all valid options for the `getUsage` function. Inline formatting can be used within any  * text string supplied using valid [ansi-escape-sequences formatting  * syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+The class describes all valid options for the `getUsage` function. Inline formatting can be used within any text string supplied using valid [ansi-escape-sequences formatting syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
