@@ -1,4 +1,5 @@
 'use strict';
+
 var arrayify = require('array-back');
 
 module.exports = UsageOptions;
