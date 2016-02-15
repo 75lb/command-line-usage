@@ -4,10 +4,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var columnLayout = require('column-layout');
 var o = require('object-tools');
 var ansi = require('ansi-escape-sequences');
@@ -18,33 +14,31 @@ var arrayify = require('array-back');
 
 module.exports = getUsage;
 
-var Lines = function (_Array) {
-  _inherits(Lines, _Array);
-
+var Lines = function () {
   function Lines() {
     _classCallCheck(this, Lines);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Lines).apply(this, arguments));
+    this.list = [];
   }
 
   _createClass(Lines, [{
     key: 'add',
     value: function add(content) {
-      var _this2 = this;
+      var _this = this;
 
       arrayify(content).forEach(function (line) {
-        return _this2.push(ansi.format(line));
+        return _this.list.push(ansi.format(line));
       });
     }
   }, {
     key: 'emptyLine',
     value: function emptyLine() {
-      this.push('');
+      this.list.push('');
     }
   }]);
 
   return Lines;
-}(Array);
+}();
 
 function getUsage(definitions, options) {
   options = new UsageOptions(options);
@@ -103,7 +97,7 @@ function getUsage(definitions, options) {
     output.add(renderSection('', options.footer));
   }
 
-  return output.join(os.EOL);
+  return output.list.join(os.EOL);
 }
 
 function getOptionNames(definition, optionNameStyles) {
@@ -127,7 +121,7 @@ function renderSection(title, content, skipIndent) {
   }
 
   if (!content) {
-    return lines;
+    return lines.list;
   } else {
     if (t.isString(content)) {
       lines.add(indentString(content));
@@ -153,7 +147,7 @@ function renderSection(title, content, skipIndent) {
     }
 
     lines.emptyLine();
-    return lines;
+    return lines.list;
   }
 }
 

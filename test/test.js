@@ -24,6 +24,8 @@ test('getUsage(definitions, options)', function (t) {
 
   var result = getUsage(definitions, options)
   t.ok(/a typical app/.test(result))
+  t.ok(/Generates something very important/.test(result))
+  t.ok(/Display this usage guide/.test(result))
   t.end()
 })
 
