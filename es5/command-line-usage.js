@@ -5,7 +5,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var columnLayout = require('column-layout');
-var o = require('object-tools');
 var ansi = require('ansi-escape-sequences');
 var os = require('os');
 var t = require('typical');
@@ -67,7 +66,8 @@ function getUsage(definitions, options) {
 
   if (definitions.length) {
     if (options.groups) {
-      o.each(options.groups, function (val, group) {
+      for (var group in options.groups) {
+        var val = options.groups[group];
         var title = void 0;
         var description = void 0;
         if (t.isObject(val)) {
@@ -83,7 +83,7 @@ function getUsage(definitions, options) {
 
         var optionList = getUsage.optionList(definitions, group);
         output.add(renderSection(null, optionList, true));
-      });
+      }
     } else {
       output.add(renderSection('Options', getUsage.optionList(definitions), true));
     }
@@ -135,9 +135,7 @@ function renderSection(title, content, skipIndent) {
       if (!content.options || !content.data) {
         throw new Error('must have an "options" or "data" property\n' + JSON.stringify(content));
       }
-      content.options = o.extend({
-        padding: { left: '  ', right: ' ' }
-      }, content.options);
+      Object.assign({ padding: { left: '  ', right: ' ' } }, content.options);
       lines.add(columnLayout.lines(content.data.map(function (row) {
         return formatRow(row);
       }), content.options));
@@ -158,9 +156,9 @@ function indentArray(array) {
   return array.map(indentString);
 }
 function formatRow(row) {
-  o.each(row, function (val, key) {
-    row[key] = ansi.format(val);
-  });
+  for (var key in row) {
+    row[key] = ansi.format(row[key]);
+  }
   return row;
 }
 
