@@ -68,8 +68,8 @@ function getUsage(definitions, options) {
   if (definitions.length) {
     if (options.groups) {
       o.each(options.groups, function (val, group) {
-        var title;
-        var description;
+        var title = void 0;
+        var description = void 0;
         if (t.isObject(val)) {
           title = val.title;
           description = val.description;

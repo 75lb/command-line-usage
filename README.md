@@ -5,7 +5,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
-A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to faciliate arbitrary use.
+A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to facilitate arbitrary use.
 
 ```js
 var getUsage = require("command-line-usage");
@@ -54,10 +54,11 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
 # API Reference
 
 * [command-line-usage](#module_command-line-usage)
-  * [getUsage(definitions, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-    * [.optionList(definitions, [group])](#module_command-line-usage--getUsage.optionList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [getUsage(definitions, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
+        * [.optionList(definitions, [group])](#module_command-line-usage--getUsage.optionList) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="exp_module_command-line-usage--getUsage"></a>
+
 ### getUsage(definitions, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
 <table>
@@ -81,6 +82,7 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
 </table>
 
 <a name="module_command-line-usage--getUsage.optionList"></a>
+
 #### getUsage.optionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
 A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
 
@@ -103,29 +105,32 @@ A helper for getting a column-format list of options and descriptions. Useful fo
 
 
 <a name="exp_module_usage-options--UsageOptions"></a>
+
 ## UsageOptions ⏏
 The class describes all valid options for the `getUsage` function. Inline formatting can be used within any text string supplied using valid [ansi-escape-sequences formatting syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
 **Kind**: Exported class  
 * [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-  * _instance_
-    * [.header](#module_usage-options--UsageOptions+header) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-    * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
-    * [.description](#module_usage-options--UsageOptions+description) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-    * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-    * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
-    * [.examples](#module_usage-options--UsageOptions+examples) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-    * [.footer](#module_usage-options--UsageOptions+footer) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-    * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-  * _inner_
-    * [~textBlock](#module_usage-options--UsageOptions..textBlock) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
+    * _instance_
+        * [.header](#module_usage-options--UsageOptions+header) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+        * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
+        * [.description](#module_usage-options--UsageOptions+description) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+        * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+        * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
+        * [.examples](#module_usage-options--UsageOptions+examples) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+        * [.footer](#module_usage-options--UsageOptions+footer) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
+        * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
+    * _inner_
+        * [~textBlock](#module_usage-options--UsageOptions..textBlock) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
 
 <a name="module_usage-options--UsageOptions+header"></a>
+
 ### options.header : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Use this field to display a banner or header above the main body.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+title"></a>
+
 ### options.title : <code>string</code>
 The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [module:usage-options~textObject](module:usage-options~textObject).
 
@@ -135,16 +140,19 @@ The title line at the top of the usage, typically the name of the app. By defaul
 { title: "my-app" }
 ```
 <a name="module_usage-options--UsageOptions+description"></a>
+
 ### options.description : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 A description to go underneath the title. For example, some words about what the app is for.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+synopsis"></a>
+
 ### options.synopsis : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 An array of strings highlighting the main usage forms of the app.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+groups"></a>
+
 ### options.groups : <code>object</code>
 Specify which groups to display in the output by supplying an object of key/value pairs, where the key is the name of the group to include and the value is a string or textObject. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
 
@@ -160,11 +168,13 @@ Specify which groups to display in the output by supplying an object of key/valu
 }
 ```
 <a name="module_usage-options--UsageOptions+examples"></a>
+
 ### options.examples : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Examples
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 <a name="module_usage-options--UsageOptions+footer"></a>
+
 ### options.footer : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
 Displayed at the foot of the usage output.
 
@@ -176,6 +186,7 @@ Displayed at the foot of the usage output.
 }
 ```
 <a name="module_usage-options--UsageOptions+hide"></a>
+
 ### options.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
 If you want to hide certain options from the output, specify their names here. This is sometimes used to hide the `defaultOption`.
 
@@ -187,6 +198,7 @@ If you want to hide certain options from the output, specify their names here. T
 }
 ```
 <a name="module_usage-options--UsageOptions..textBlock"></a>
+
 ### options~textBlock : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
 A text block can be a string:
 
