@@ -8,7 +8,7 @@
 A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to facilitate arbitrary use.
 
 ```js
-var getUsage = require("command-line-usage");
+var getUsage = require('command-line-usage');
 var usage = getUsage(definitions, options)
 ```
 
