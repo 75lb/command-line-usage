@@ -10,6 +10,7 @@ var os = require('os');
 var t = require('typical');
 var UsageOptions = require('./usage-options');
 var arrayify = require('array-back');
+var wrap = require('wordwrapjs');
 
 module.exports = getUsage;
 
@@ -57,7 +58,7 @@ function getUsage(definitions, options) {
   }
 
   if (options.title || options.description) {
-    output.add(renderSection(options.title, options.description));
+    output.add(renderSection(options.title, t.isString(options.description) ? wrap.lines(options.description, { width: 80 }) : options.description));
   }
 
   if (options.synopsis) {

@@ -17,7 +17,7 @@ const optionDefinitions = [
 
 const options = {
   title: 'a typical app',
-  description: 'Generates something very important.',
+  description: 'Generates something very important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ',
   footer: 'Project home: [underline]{https://github.com/me/example}'
 }
 
