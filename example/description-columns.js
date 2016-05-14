@@ -16,26 +16,35 @@ const optionDefinitions = [
   }
 ]
 
-const options = {
-  title: 'brezhnev',
-  description: {
-    options: {
-      columns: [
-        { name: 'one', maxWidth: 40 },
-        { name: 'two', width: 40, nowrap: true }
+const sections = [
+  {
+    header: 'Brezhnev',
+    content: {
+      options: {
+        columns: [
+          { name: 'one', maxWidth: 40 },
+          { name: 'two', width: 40, nowrap: true }
+        ]
+      },
+      data: [
+        {
+          one: 'On his 70th birthday he was awarded the rank of Marshal of the Soviet Union – the highest military honour in the Soviet Union. After being awarded the medal, he attended an 18th Army Veterans meeting, dressed in a long coat and saying; "Attention, Marshal\'s coming!" He also conferred upon himself the rare [bold]{Order of Victory} in 1978 — the only time the decoration was ever awarded outside of World War II. (This medal was posthumously revoked in 1989 for not meeting the criteria for citation.) \n\nBrezhnev\'s weakness for undeserved medals was proven by his poorly written memoirs recalling his military service during World War II, which treated the little-known and minor Battle of Novorossiysk as the decisive military theatre.',
+          two: ussr
+        }
       ]
-    },
-    data: [
-      {
-        one: 'On his 70th birthday he was awarded the rank of Marshal of the Soviet Union – the highest military honour in the Soviet Union. After being awarded the medal, he attended an 18th Army Veterans meeting, dressed in a long coat and saying; "Attention, Marshal\'s coming!" He also conferred upon himself the rare [bold]{Order of Victory} in 1978 — the only time the decoration was ever awarded outside of World War II. (This medal was posthumously revoked in 1989 for not meeting the criteria for citation.) \n\nBrezhnev\'s weakness for undeserved medals was proven by his poorly written memoirs recalling his military service during World War II, which treated the little-known and minor Battle of Novorossiysk as the decisive military theatre.',
-        two: ussr
-      }
+    }
+  },
+  {
+    header: 'Synopsis',
+    content: [
+      '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
+      '$ example [bold]{--help}'
     ]
   },
-  synopsis: [
-    '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
-    '$ example [bold]{--help}'
-  ]
-}
+  {
+    header: 'Options',
+    optionList: optionDefinitions
+  }
+]
 
-console.log(getUsage(optionDefinitions, options))
+console.log(getUsage(sections))

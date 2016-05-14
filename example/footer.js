@@ -1,5 +1,5 @@
 const getUsage = require('../')
-const wales = require('./assets/ansi-wales').split('\n')
+const wales = require('./assets/ansi-wales')
 
 const optionDefinitions = [
   {
@@ -16,17 +16,29 @@ const optionDefinitions = [
   }
 ]
 
-const options = {
-  title: 'a typical app',
-  description: 'Generates something very important.',
-  synopsis: [
-    '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
-    '$ example [bold]{--help}'
-  ],
-  footer: [
-    '[italic]{This app was tested by dragons in Wales.}',
-    ''
-  ].concat(wales)
-}
+const sections = [
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
+  },
+  {
+    header: 'Synopsis',
+    content: [
+      '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
+      '$ example [bold]{--help}'
+    ]
+  },
+  {
+    header: 'Options',
+    optionList: optionDefinitions
+  },
+  {
+    banner: [
+      '[italic]{This app was tested by dragons in Wales.}',
+      '',
+      wales
+    ]
+  }
+]
 
-console.log(getUsage(optionDefinitions, options))
+console.log(getUsage(sections))

@@ -12,7 +12,6 @@ var os = require('os');
 var t = require('typical');
 var UsageOptions = require('./usage-options');
 var arrayify = require('array-back');
-var wrap = require('wordwrapjs');
 
 var Lines = function () {
   function Lines() {
@@ -36,6 +35,14 @@ var Lines = function () {
       this.list.push('');
     }
   }, {
+    key: 'header',
+    value: function header(text) {
+      if (text) {
+        this.add(ansi.format(text, ['underline', 'bold']));
+        this.emptyLine();
+      }
+    }
+  }, {
     key: 'toString',
     value: function toString() {
       return this.list.join(os.EOL);
@@ -45,85 +52,97 @@ var Lines = function () {
   return Lines;
 }();
 
-function getUsage(definitions) {
-  var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-  var sections = options.sections;
-  if (sections && sections.length) {
-    var _ret = function () {
-      var output = new Lines();
-      sections.forEach(function (s) {
-        output.add(renderSection(s.header, s.content));
-      });
-      return {
-        v: '\n' + output
-      };
-    }();
-
-    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+function getUsage(sections) {
+  if (arguments.length === 2) {
+    return legacyGetUsage.apply(null, arguments);
   } else {
-    options = new UsageOptions(options);
-    definitions = definitions || [];
-
-    var _output = new Lines();
-    _output.emptyLine();
-
-    if (options.hide && options.hide.length) {
-      definitions = definitions.filter(function (definition) {
-        return options.hide.indexOf(definition.name) === -1;
-      });
-    }
-
-    if (options.header) {
-      _output.add(renderSection('', options.header));
-    }
-
-    if (options.title || options.description) {
-      _output.add(renderSection(options.title, t.isString(options.description) ? wrap.lines(options.description, { width: 80 }) : options.description));
-    }
-
-    if (options.synopsis) {
-      _output.add(renderSection('Synopsis', options.synopsis));
-    }
-
-    if (definitions.length) {
-      if (options.groups) {
-        for (var group in options.groups) {
-          var val = options.groups[group];
-          var title = void 0;
-          var description = void 0;
-          if (t.isObject(val)) {
-            title = val.title;
-            description = val.description;
-          } else if (t.isString(val)) {
-            title = val;
-          } else {
-            throw new Error('Unexpected group config structure');
+    if (sections && sections.length) {
+      var _ret = function () {
+        var output = new Lines();
+        sections.forEach(function (section) {
+          if (section.optionList) {
+            output.header(section.header);
+            output.add(optionList(section.optionList, section.group));
+            output.emptyLine();
+          } else if (section.content) {
+            output.add(renderSection(section.header, section.content));
+          } else if (section.banner) {
+            output.header(section.header);
+            output.add(section.banner);
           }
+        });
+        return {
+          v: '\n' + output
+        };
+      }();
 
-          _output.add(renderSection(title, description));
-
-          var optionList = getUsage.optionList(definitions, group);
-          _output.add(renderSection(null, optionList, true));
-        }
-      } else {
-        _output.add(renderSection('Options', getUsage.optionList(definitions), true));
-      }
+      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
     }
-
-    if (options.examples) {
-      _output.add(renderSection('Examples', options.examples));
-    }
-
-    if (options.footer) {
-      _output.add(renderSection('', options.footer));
-    }
-
-    return '\n' + _output;
   }
 }
 
-getUsage.optionList = function (definitions, group) {
+function legacyGetUsage(definitions, options) {
+  options = new UsageOptions(options);
+  definitions = definitions || [];
+
+  var output = new Lines();
+  output.emptyLine();
+
+  if (options.hide && options.hide.length) {
+    definitions = definitions.filter(function (definition) {
+      return options.hide.indexOf(definition.name) === -1;
+    });
+  }
+
+  if (options.header) {
+    output.add(renderSection('', options.header));
+  }
+
+  if (options.title || options.description) {
+    output.add(renderSection(options.title, options.description));
+  }
+
+  if (options.synopsis) {
+    output.add(renderSection('Synopsis', options.synopsis));
+  }
+
+  if (definitions.length) {
+    if (options.groups) {
+      for (var group in options.groups) {
+        var val = options.groups[group];
+        var title = void 0;
+        var description = void 0;
+        if (t.isObject(val)) {
+          title = val.title;
+          description = val.description;
+        } else if (t.isString(val)) {
+          title = val;
+        } else {
+          throw new Error('Unexpected group config structure');
+        }
+
+        output.add(renderSection(title, description));
+
+        var _optionList = getUsage.optionList(definitions, group);
+        output.add(renderSection(null, _optionList, true));
+      }
+    } else {
+      output.add(renderSection('Options', getUsage.optionList(definitions), true));
+    }
+  }
+
+  if (options.examples) {
+    output.add(renderSection('Examples', options.examples));
+  }
+
+  if (options.footer) {
+    output.add(renderSection('', options.footer));
+  }
+
+  return '\n' + output;
+}
+
+function optionList(definitions, group) {
   if (!definitions || definitions && !definitions.length) {
     throw new Error('you must pass option definitions to getUsage.optionList()');
   }
@@ -150,7 +169,7 @@ getUsage.optionList = function (definitions, group) {
     padding: { left: '  ', right: ' ' },
     columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
   });
-};
+}
 
 function getOptionNames(definition, optionNameStyles) {
   var names = [];
@@ -170,8 +189,7 @@ function renderSection(header, content, skipIndent) {
   var lines = new Lines();
 
   if (header) {
-    lines.add(ansi.format(header, ['underline', 'bold']));
-    lines.emptyLine();
+    lines.header(header);
   }
 
   if (!content) {

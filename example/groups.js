@@ -22,16 +22,21 @@ const optionDefinitions = [
   }
 ]
 
-const options = {
-  title: 'a typical app',
-  description: 'Generates something [italic]{very} important.',
-  groups: {
-    main: 'Main options',
-    _none: {
-      title: 'Misc',
-      description: 'Miscelaneous ungrouped options.'
-    }
+const sections = [
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
+  },
+  {
+    header: 'Main options',
+    optionList: optionDefinitions,
+    group: 'main'
+  },
+  {
+    header: 'Misc',
+    optionList: optionDefinitions,
+    group: '_none'
   }
-}
+]
 
-console.log(getUsage(optionDefinitions, options))
+console.log(getUsage(sections))

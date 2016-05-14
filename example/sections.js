@@ -1,4 +1,4 @@
-const Usage = require('../')
+const getUsage = require('../')
 
 const optionDefinitions = [
   {
@@ -15,18 +15,18 @@ const optionDefinitions = [
   }
 ]
 
-const usage = new Usage([
+const usage = getUsage([
   {
-    header: 'a typical app',
-    content: 'Generates something very important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
   },
   {
     header: 'Options',
-    content: Usage.optionList(optionDefinitions)
+    optionList: optionDefinitions
   },
   {
     content: 'Project home: [underline]{https://github.com/me/example}'
   }
 ])
 
-console.log(usage.toString())
+console.log(usage)
