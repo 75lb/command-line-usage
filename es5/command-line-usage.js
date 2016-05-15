@@ -61,6 +61,11 @@ function getUsage(sections) {
         var output = new Lines();
         sections.forEach(function (section) {
           if (section.optionList) {
+            if (section.hide && section.hide.length) {
+              section.optionList = section.optionList.filter(function (definition) {
+                return section.hide.indexOf(definition.name) === -1;
+              });
+            }
             output.header(section.header);
             output.add(optionList(section.optionList, section.group));
             output.emptyLine();

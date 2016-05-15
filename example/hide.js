@@ -22,7 +22,8 @@ const usage = getUsage([
   },
   {
     header: 'Options',
-    optionList: optionDefinitions
+    optionList: optionDefinitions,
+    hide: 'src'
   },
   {
     content: 'Project home: [underline]{https://github.com/me/example}'

@@ -54,12 +54,12 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
 # API Reference
 
 * [command-line-usage](#module_command-line-usage)
-    * [getUsage(definitions, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-        * [.optionList(definitions, [group])](#module_command-line-usage--getUsage.optionList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [getUsage(sections, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
+        * [~optionList(definitions, [group])](#module_command-line-usage--getUsage..optionList) ⇒ <code>Array.&lt;string&gt;</code>
 
 <a name="exp_module_command-line-usage--getUsage"></a>
 
-### getUsage(definitions, options) ⇒ <code>string</code> ⏏
+### getUsage(sections, options) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
 <table>
   <thead>
@@ -69,7 +69,7 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
   </thead>
   <tbody>
 <tr>
-    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>sections</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
@@ -81,12 +81,12 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage--getUsage.optionList"></a>
+<a name="module_command-line-usage--getUsage..optionList"></a>
 
-#### getUsage.optionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
+#### getUsage~optionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
 A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
 
-**Kind**: static method of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
+**Kind**: inner method of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
 <table>
   <thead>
     <tr>
@@ -188,7 +188,7 @@ Displayed at the foot of the usage output.
 <a name="module_usage-options--UsageOptions+hide"></a>
 
 ### options.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-If you want to hide certain options from the output, specify their names here. This is sometimes used to hide the `defaultOption`.
+If you want to hide certain options from the output, specify their names here. This is sometimes used to hide deprecated options or the `defaultOption`.
 
 **Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  

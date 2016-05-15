@@ -15,10 +15,18 @@ const optionDefinitions = [
   }
 ]
 
-const options = {
-  title: 'A typical app',
-  description: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ',
-  footer: 'Project home: [underline]{https://github.com/me/example}'
-}
+const usage = getUsage([
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
+  },
+  {
+    header: 'Options',
+    optionList: optionDefinitions
+  },
+  {
+    content: 'Project home: [underline]{https://github.com/me/example}'
+  }
+])
 
-console.log(getUsage(optionDefinitions, options))
+console.log(usage)
