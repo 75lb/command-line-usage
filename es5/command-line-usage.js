@@ -13,6 +13,8 @@ var t = require('typical');
 var UsageOptions = require('./usage-options');
 var arrayify = require('array-back');
 
+module.exports = getUsage;
+
 var Lines = function () {
   function Lines() {
     _classCallCheck(this, Lines);
@@ -53,36 +55,32 @@ var Lines = function () {
 }();
 
 function getUsage(sections) {
-  if (arguments.length === 2) {
-    return legacyGetUsage.apply(null, arguments);
-  } else {
-    if (sections && sections.length) {
-      var _ret = function () {
-        var output = new Lines();
-        sections.forEach(function (section) {
-          if (section.optionList) {
-            if (section.hide && section.hide.length) {
-              section.optionList = section.optionList.filter(function (definition) {
-                return section.hide.indexOf(definition.name) === -1;
-              });
-            }
-            output.header(section.header);
-            output.add(optionList(section.optionList, section.group));
-            output.emptyLine();
-          } else if (section.content) {
-            output.add(renderSection(section.header, section.content));
-          } else if (section.banner) {
-            output.header(section.header);
-            output.add(section.banner);
+  if (sections && sections.length) {
+    var _ret = function () {
+      var output = new Lines();
+      sections.forEach(function (section) {
+        if (section.optionList) {
+          if (section.hide && section.hide.length) {
+            section.optionList = section.optionList.filter(function (definition) {
+              return section.hide.indexOf(definition.name) === -1;
+            });
           }
-        });
-        return {
-          v: '\n' + output
-        };
-      }();
+          output.header(section.header);
+          output.add(optionList(section.optionList, section.group));
+          output.emptyLine();
+        } else if (section.content) {
+          output.add(renderSection(section.header, section.content));
+        } else if (section.banner) {
+          output.header(section.header);
+          output.add(section.banner);
+        }
+      });
+      return {
+        v: '\n' + output
+      };
+    }();
 
-      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-    }
+    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
   }
 }
 
@@ -189,5 +187,3 @@ function ansiFormatRow(row) {
   }
   return row;
 }
-
-module.exports = getUsage;
