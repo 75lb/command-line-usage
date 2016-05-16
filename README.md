@@ -37,7 +37,7 @@ The footer is displayed at the end of the template. [Code](https://github.com/75
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
 
 ### Examples (column layout)
-A list of `examples` is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [column-layout](https://github.com/75lb/column-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
+A list of `examples` is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [table-layout](https://github.com/75lb/table-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
@@ -216,7 +216,7 @@ A text block can be a string:
   ]
 }
 ```
-.. or an array of objects. In which case, it will be formatted by [column-layout](https://github.com/75lb/column-layout):
+.. or an array of objects. In which case, it will be formatted by [table-layout](https://github.com/75lb/table-layout):
 ```js
 {
   description: {
@@ -225,7 +225,7 @@ A text block can be a string:
   }
 }
 ```
-If you want set specific column-layout options, pass an object with two properties: `options` and `data`.
+If you want set specific table-layout options, pass an object with two properties: `options` and `data`.
 ```js
 {
   description: {

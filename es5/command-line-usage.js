@@ -6,7 +6,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var columnLayout = require('column-layout');
+var tableLayout = require('table-layout');
 var ansi = require('ansi-escape-sequences');
 var os = require('os');
 var t = require('typical');
@@ -86,67 +86,6 @@ function getUsage(sections) {
   }
 }
 
-function legacyGetUsage(definitions, options) {
-  options = new UsageOptions(options);
-  definitions = definitions || [];
-
-  var output = new Lines();
-  output.emptyLine();
-
-  if (options.hide && options.hide.length) {
-    definitions = definitions.filter(function (definition) {
-      return options.hide.indexOf(definition.name) === -1;
-    });
-  }
-
-  if (options.header) {
-    output.add(renderSection('', options.header));
-  }
-
-  if (options.title || options.description) {
-    output.add(renderSection(options.title, options.description));
-  }
-
-  if (options.synopsis) {
-    output.add(renderSection('Synopsis', options.synopsis));
-  }
-
-  if (definitions.length) {
-    if (options.groups) {
-      for (var group in options.groups) {
-        var val = options.groups[group];
-        var title = void 0;
-        var description = void 0;
-        if (t.isObject(val)) {
-          title = val.title;
-          description = val.description;
-        } else if (t.isString(val)) {
-          title = val;
-        } else {
-          throw new Error('Unexpected group config structure');
-        }
-
-        output.add(renderSection(title, description));
-
-        var _optionList = getUsage.optionList(definitions, group);
-        output.add(renderSection(null, _optionList, true));
-      }
-    } else {
-      output.add(renderSection('Options', getUsage.optionList(definitions), true));
-    }
-  }
-
-  if (options.examples) {
-    output.add(renderSection('Examples', options.examples));
-  }
-
-  if (options.footer) {
-    output.add(renderSection('', options.footer));
-  }
-
-  return '\n' + output;
-}
-
 function optionList(definitions, group) {
   if (!definitions || definitions && !definitions.length) {
     throw new Error('you must pass option definitions to getUsage.optionList()');
@@ -170,7 +109,7 @@ function optionList(definitions, group) {
     });
   });
 
-  return columnLayout.lines(columns, {
+  return tableLayout.lines(columns, {
     padding: { left: '  ', right: ' ' },
     columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
   });
@@ -190,7 +129,7 @@ function getOptionNames(definition, optionNameStyles) {
   return names.join(', ');
 }
 
-function renderSection(header, content, skipIndent) {
+function renderSection(header, content) {
   var lines = new Lines();
 
   if (header) {
@@ -200,41 +139,50 @@ function renderSection(header, content, skipIndent) {
   if (!content) {
     return lines.list;
   } else {
-    if (t.isString(content)) {
-      lines.add(columnLayout.lines({ column: content }, {
-        padding: { left: '  ', right: ' ' },
-        viewWidth: 80
-      }));
-    } else if (Array.isArray(content) && content.every(t.isString)) {
-        lines.add(skipIndent ? content : indentArray(content));
-      } else if (Array.isArray(content) && content.every(t.isPlainObject)) {
-          lines.add(columnLayout.lines(content, {
-            padding: { left: '  ', right: ' ' }
-          }));
-        } else if (t.isPlainObject(content)) {
-            if (!content.options || !content.data) {
-              throw new Error('must have an "options" or "data" property\n' + JSON.stringify(content));
-            }
-            Object.assign({ padding: { left: '  ', right: ' ' } }, content.options);
-            lines.add(columnLayout.lines(content.data.map(function (row) {
-              return ansiFormatRow(row);
-            }), content.options));
-          } else {
-            var message = 'invalid input - \'content\' must be a string, array of strings, or array of plain objects:\n\n' + JSON.stringify(content);
-            throw new Error(message);
-          }
+    var _ret2 = function () {
 
-    lines.emptyLine();
-    return lines.list;
+      var defaultPadding = { left: '  ', right: ' ' };
+
+      if (t.isString(content)) {
+        lines.add(tableLayout.lines({ column: content }, {
+          padding: defaultPadding,
+          maxWidth: 80
+        }));
+      } else if (Array.isArray(content) && content.every(t.isString)) {
+          content.forEach(function (row) {
+            lines.add(tableLayout.lines({ column: row }, {
+              padding: defaultPadding,
+              maxWidth: 80
+            }));
+          });
+          lines.add();
+        } else if (Array.isArray(content) && content.every(t.isPlainObject)) {
+            lines.add(tableLayout.lines(content, {
+              padding: defaultPadding
+            }));
+          } else if (t.isPlainObject(content)) {
+              if (!content.options || !content.data) {
+                throw new Error('must have an "options" or "data" property\n' + JSON.stringify(content));
+              }
+              Object.assign({ padding: defaultPadding }, content.options);
+              lines.add(tableLayout.lines(content.data.map(function (row) {
+                return ansiFormatRow(row);
+              }), content.options));
+            } else {
+              var message = 'invalid input - \'content\' must be a string, array of strings, or array of plain objects:\n\n' + JSON.stringify(content);
+              throw new Error(message);
+            }
+
+      lines.emptyLine();
+      return {
+        v: lines.list
+      };
+    }();
+
+    if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
   }
 }
 
-function indentString(string) {
-  return '  ' + string;
-}
-function indentArray(array) {
-  return array.map(indentString);
-}
 function ansiFormatRow(row) {
   for (var key in row) {
     row[key] = ansi.format(row[key]);
