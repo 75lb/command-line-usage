@@ -1,7 +1,7 @@
 var test = require('tape')
 var getUsage = require('../')
 
-test('getUsage(definitions, options)', function (t) {
+test('getUsage(sections)', function (t) {
   var definitions = [
     {
       name: 'help', description: 'Display this usage guide.',
@@ -17,36 +17,20 @@ test('getUsage(definitions, options)', function (t) {
     }
   ]
 
-  var options = {
-    title: 'a typical app',
-    description: 'Generates something very important.'
-  }
+  var sections = [
+    {
+      header: 'a typical app',
+      content: 'Generates something very important.'
+    },
+    {
+      header: 'Option list',
+      optionList: definitions
+    }
+  ]
 
-  var result = getUsage(definitions, options)
+  var result = getUsage(sections)
   t.ok(/a typical app/.test(result))
   t.ok(/Generates something very important/.test(result))
   t.ok(/Display this usage guide/.test(result))
-  t.end()
-})
-
-test('getUsage.optionList()', function (t) {
-  var definitions = [
-    { name: 'one', description: 'one', group: 'one' },
-    { name: 'two', description: 'two', group: 'one' },
-    { name: 'three', description: 'three' }
-  ]
-
-  t.deepEqual(getUsage.optionList(definitions), [
-    '  \x1b[1m--one\x1b[0m      one   ',
-    '  \x1b[1m--two\x1b[0m      two   ',
-    '  \x1b[1m--three\x1b[0m    three '
-  ])
-  t.deepEqual(getUsage.optionList(definitions, 'one'), [
-    '  \x1b[1m--one\x1b[0m    one ',
-    '  \x1b[1m--two\x1b[0m    two '
-  ])
-  t.deepEqual(getUsage.optionList(definitions, '_none'), [
-    '  \x1b[1m--three\x1b[0m    three '
-  ])
   t.end()
 })
