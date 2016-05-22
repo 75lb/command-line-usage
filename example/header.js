@@ -1,7 +1,6 @@
 const getUsage = require('../')
 const header = require('./assets/ansi-header')
 const ansi = require('ansi-escape-sequences')
-const optionDefinitions = require('./assets/example-options')
 
 const sections = [
   {
