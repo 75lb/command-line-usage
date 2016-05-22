@@ -9,7 +9,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Section = require('./section');
 var tableLayout = require('table-layout');
 var ansi = require('ansi-escape-sequences');
-var os = require('os');
 var t = require('typical');
 var arrayify = require('array-back');
 

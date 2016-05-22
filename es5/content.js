@@ -8,9 +8,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var tableLayout = require('table-layout');
 var ansi = require('ansi-escape-sequences');
-var os = require('os');
 var t = require('typical');
-var arrayify = require('array-back');
 var Section = require('./section');
 
 var Content = function (_Section) {

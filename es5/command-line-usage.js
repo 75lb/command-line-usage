@@ -1,10 +1,5 @@
 'use strict';
 
-var tableLayout = require('table-layout');
-var ansi = require('ansi-escape-sequences');
-var os = require('os');
-var t = require('typical');
-var arrayify = require('array-back');
 var OptionList = require('./option-list');
 var Content = require('./content');
 var Banner = require('./banner');

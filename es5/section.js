@@ -8,10 +8,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var tableLayout = require('table-layout');
 var ansi = require('ansi-escape-sequences');
 var os = require('os');
-var t = require('typical');
 var arrayify = require('array-back');
 
 var Lines = function () {
@@ -59,7 +57,7 @@ var Section = function (_Lines) {
   function Section() {
     _classCallCheck(this, Section);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Section).call(this));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Section).apply(this, arguments));
   }
 
   return Section;
