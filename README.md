@@ -63,7 +63,7 @@ Demonstrates usage of custom column layout in the description. In this case the 
 # API Reference
 <a name="exp_module_command-line-usage--getUsage"></a>
 
-### getUsage(sections, options) ⇒ <code>string</code> ⏏
+### getUsage(sections) ⇒ <code>string</code> ⏏
 **Kind**: Exported function  
 <table>
   <thead>
@@ -73,20 +73,51 @@ Demonstrates usage of custom column layout in the description. In this case the 
   </thead>
   <tbody>
 <tr>
-    <td>sections</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>sections</td><td><code>Array.&lt;Section&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
 </ul>
 </td>
-    </tr><tr>
-    <td>options</td><td><code>module:usage-options</code></td><td><p>see <a href="#exp_module_usage-options--UsageOptions">UsageOptions</a>.</p>
-</td>
     </tr>  </tbody>
 </table>
 
 
-ERROR, Cannot find class.
+<a name="exp_module_content--Content"></a>
+
+## Content ⏏
+A Content section comprises a header and one or more lines of text.
+
+**Kind**: Exported class  
+<a name="new_module_content--Content_new"></a>
+
+### new Content(section)
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>section</td><td><code>object</code></td><td></td>
+    </tr><tr>
+    <td>[section.header]</td><td><code>string</code></td><td><p>The section header.</p>
+</td>
+    </tr><tr>
+    <td>section.content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. Pass a recordset array for tabulated content.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+{
+  header: 'A typical app',
+  content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
+}
+```
+
 
 * * *
 
