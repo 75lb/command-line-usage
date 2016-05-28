@@ -4,7 +4,7 @@ const optionDefinitions = require('./assets/example-options')
 
 const sections = [
   {
-    header: 'Brezhnev',
+    header: 'Soviet Union',
     content: {
       options: {
         columns: [
@@ -14,7 +14,7 @@ const sections = [
       },
       data: [
         {
-          one: 'On his 70th birthday he was awarded the rank of Marshal of the Soviet Union – the highest military honour in the Soviet Union. After being awarded the medal, he attended an 18th Army Veterans meeting, dressed in a long coat and saying; "Attention, Marshal\'s coming!" He also conferred upon himself the rare [bold]{Order of Victory} in 1978 — the only time the decoration was ever awarded outside of World War II. (This medal was posthumously revoked in 1989 for not meeting the criteria for citation.) \n\nBrezhnev\'s weakness for undeserved medals was proven by his poorly written memoirs recalling his military service during World War II, which treated the little-known and minor Battle of Novorossiysk as the decisive military theatre.',
+          one: "At the beginning of World War II, Stalin signed a non-aggression pact with Hitler's Germany; the treaty delayed confrontation between the two countries.\n\nIn June 1941 the Germans invaded, opening the largest and bloodiest theater of war in history. Soviet war casualties accounted for the highest proportion of the conflict in the cost of acquiring the upper hand over Axis forces at intense battles such as Stalingrad. Soviet forces eventually captured Berlin in 1945.\n\nThe territory overtaken by the Red Army became satellite states of the Eastern Bloc. The Cold War emerged in 1947 as the Soviet bloc confronted the Western states that united in the North Atlantic Treaty Organization in 1949.",
           two: ussr
         }
       ]
