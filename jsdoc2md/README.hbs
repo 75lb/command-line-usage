@@ -56,7 +56,7 @@ Demonstrates breaking the option list up into groups. [Code](https://github.com/
 #### Header
 Demonstrates a banner at the top. This example also adds a `synopsis` section. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/header.png)
 
 #### Footer
 The footer is displayed at the end of the template. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
