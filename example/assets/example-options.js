@@ -8,7 +8,7 @@ module.exports = [
     type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
   },
   {
-    name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
+    name: 'timeout', description: 'Timeout value in ms.',
     alias: 't', type: Number, typeLabel: '[underline]{ms}'
   }
 ]

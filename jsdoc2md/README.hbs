@@ -61,7 +61,7 @@ Demonstrates a banner at the top. This example also adds a `synopsis` section. [
 #### Footer
 The footer is displayed at the end of the template. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/footer.png)
 
 ### Examples section (table layout)
 An examples section is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [table-layout](https://github.com/75lb/table-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
