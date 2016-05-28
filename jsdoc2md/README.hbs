@@ -66,7 +66,7 @@ The footer is displayed at the end of the template. [Code](https://github.com/75
 ### Examples section (table layout)
 An examples section is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [table-layout](https://github.com/75lb/table-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/example-columns.png)
 
 ### Description section (table layout)
 Demonstrates usage of custom table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
