@@ -12,6 +12,8 @@ A usage guide is built from an arbitrary number of sections, e.g. a description 
 
 The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content` or `optionList`.
 
+Inline ansi formatting can be used anywhere within the usage template using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+
 ```js
 const getUsage = require('command-line-usage')
 
@@ -37,7 +39,7 @@ const usage = getUsage(sections)
 console.log(usage)
 ```
 
-Inline ansi formatting can be used anywhere within the usage template using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/simple.png)
 
 ## Examples
 
