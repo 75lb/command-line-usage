@@ -8,11 +8,9 @@
 A simple module for creating a usage guide.
 
 ## Synopis
-A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc.
+A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
 
-The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content`, `banner` or `optionList`.
-
-The `header` is always bold and underlined. A `content` string is indented and wrapped to 80 columns.
+The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content` or `optionList`.
 
 ```js
 const getUsage = require('command-line-usage')
@@ -43,8 +41,8 @@ Inline ansi formatting can be used anywhere within the usage template using the 
 
 ## Examples
 
-### Typical
-A typical, three sections guide. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
+### Simple
+A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
