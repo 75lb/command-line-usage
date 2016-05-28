@@ -80,7 +80,8 @@ Demonstrates usage of custom table layout in the description. In this case the s
 
 * [command-line-usage](#module_command-line-usage)
     * [getUsage(sections)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-        * [~ContentSection](#module_command-line-usage--getUsage..ContentSection)
+        * [~Content](#module_command-line-usage--getUsage..Content)
+        * [~OptionList](#module_command-line-usage--getUsage..OptionList)
 
 <a name="exp_module_command-line-usage--getUsage"></a>
 
@@ -99,9 +100,9 @@ Demonstrates usage of custom table layout in the description. In this case the s
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage--getUsage..ContentSection"></a>
+<a name="module_command-line-usage--getUsage..Content"></a>
 
-#### getUsage~ContentSection
+#### getUsage~Content
 A Content section comprises a header and one or more lines of text.
 
 **Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
@@ -125,7 +126,69 @@ A Content section comprises a header and one or more lines of text.
 ```js
 {
   header: 'A typical app',
-  content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
+  content: 'Generates something [italic]{very} important.'
+}
+```
+**Example**  
+```js
+{
+  header: 'A typical app',
+  content: [
+    'First line.',
+    'Second line.'
+  ]
+}
+```
+**Example**  
+```js
+{
+  header: 'A typical app',
+  content: [
+    { colA: 'First row, first column.', colB: 'First row, second column.'},
+    { colA: 'Second row, first column.', colB: 'Second row, second column.'}
+  ]
+}
+```
+<a name="module_command-line-usage--getUsage..OptionList"></a>
+
+#### getUsage~OptionList
+A OptionList section adds a table displaying details of the available options.
+
+**Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>header</td><td><code>string</code></td><td>The section header.</td>
+    </tr><tr>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td>an array of [option definition](https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition) objects. In addition to the regular definition properties, command-line-usage will look for: - `description` - a string describing the option. - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+```js
+{
+  header: 'Options',
+  optionList: [
+    {
+      name: 'help', description: 'Display this usage guide.',
+      alias: 'h', type: Boolean
+    },
+    {
+      name: 'src', description: 'The input files to process',
+      type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+    },
+    {
+      name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
+      alias: 't', type: Number, typeLabel: '[underline]{ms}'
+    }
+  ]
 }
 ```
 <a name="OptionList"></a>
