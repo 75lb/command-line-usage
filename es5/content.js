@@ -14,14 +14,14 @@ var Section = require('./section');
 var Content = function (_Section) {
   _inherits(Content, _Section);
 
-  function Content(data) {
+  function Content(section) {
     _classCallCheck(this, Content);
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Content).call(this));
 
     var defaultPadding = { left: '  ', right: ' ' };
-    _this.header(data.header);
-    var content = data.content;
+    _this.header(section.header);
+    var content = section.content;
 
     if (t.isString(content)) {
       _this.add(tableLayout.lines({ column: ansi.format(content) }, {

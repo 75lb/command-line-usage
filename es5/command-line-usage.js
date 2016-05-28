@@ -3,11 +3,13 @@
 var OptionList = require('./option-list');
 var Content = require('./content');
 var Banner = require('./banner');
+var arrayify = require('array-back');
 
 module.exports = getUsage;
 
 function getUsage(sections) {
-  if (sections && sections.length) {
+  sections = arrayify(sections);
+  if (sections.length) {
     var output = sections.map(function (section) {
       if (section.optionList) {
         return new OptionList(section);
