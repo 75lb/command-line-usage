@@ -8,6 +8,8 @@
 A simple module for creating a usage guide.
 
 ## Synopis
+A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc.
+
 The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content`, `banner` or `optionList`.
 
 The `header` is always bold and underlined. A `content` string is indented and wrapped to 80 columns.
@@ -15,12 +17,20 @@ The `header` is always bold and underlined. A `content` string is indented and w
 ```js
 const getUsage = require('command-line-usage');
 
-const descriptionSection = {
-  header: 'A typical app',
-  content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
-}
-const usage = getUsage(descriptionSection)
-
+const sections = [
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
+  },
+  {
+    header: 'Synopsis',
+    content: [
+      '$ typical <options> <files>',
+      '$ cat <files> | typical <options>'
+    ]
+  }
+]
+const usage = getUsage(sections)
 console.log(usage)
 ```
 
@@ -80,8 +90,8 @@ Demonstrates usage of custom table layout in the description. In this case the s
 
 * [command-line-usage](#module_command-line-usage)
     * [getUsage(sections)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-        * [~Content](#module_command-line-usage--getUsage..Content)
-        * [~OptionList](#module_command-line-usage--getUsage..OptionList)
+        * [~content](#module_command-line-usage--getUsage..content)
+        * [~optionList](#module_command-line-usage--getUsage..optionList)
 
 <a name="exp_module_command-line-usage--getUsage"></a>
 
@@ -100,9 +110,9 @@ Demonstrates usage of custom table layout in the description. In this case the s
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage--getUsage..Content"></a>
+<a name="module_command-line-usage--getUsage..content"></a>
 
-#### getUsage~Content
+#### getUsage~content
 A Content section comprises a header and one or more lines of text.
 
 **Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
@@ -149,9 +159,9 @@ A Content section comprises a header and one or more lines of text.
   ]
 }
 ```
-<a name="module_command-line-usage--getUsage..OptionList"></a>
+<a name="module_command-line-usage--getUsage..optionList"></a>
 
-#### getUsage~OptionList
+#### getUsage~optionList
 A OptionList section adds a table displaying details of the available options.
 
 **Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
