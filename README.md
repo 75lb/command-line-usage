@@ -23,10 +23,15 @@ const sections = [
     content: 'Generates something [italic]{very} important.'
   },
   {
-    header: 'Synopsis',
-    content: [
-      '$ typical <options> <files>',
-      '$ cat <files> | typical <options>'
+    header: 'Options',
+    optionList: [
+      {
+        name: 'input', typeLabel: '[underline]{file}',
+        description: 'The input to process.'
+      },
+      {
+        name: 'help', description: 'Print this usage guide.'
+      }
     ]
   }
 ]
@@ -117,6 +122,9 @@ A Content section comprises a header and one or more lines of text.
     </tr><tr>
     <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. Pass a recordset array for tabulated content.</p>
 </td>
+    </tr><tr>
+    <td>raw</td><td><code>boolean</code></td><td><p>Set to true to avoid indentation and wrapping.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -172,6 +180,12 @@ A OptionList section adds a table displaying details of the available options.
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
 </ul>
 </td>
+    </tr><tr>
+    <td>group</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>If specified, only options from this particular group will be printed.</p>
+</td>
+    </tr><tr>
+    <td>hide</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>The names of one of more option definitions to hide from the option list.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -186,11 +200,11 @@ A OptionList section adds a table displaying details of the available options.
     },
     {
       name: 'src', description: 'The input files to process',
-      type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+      multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
     },
     {
       name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
-      alias: 't', type: Number, typeLabel: '[underline]{ms}'
+      alias: 't', typeLabel: '[underline]{ms}'
     }
   ]
 }

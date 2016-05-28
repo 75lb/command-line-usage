@@ -23,10 +23,15 @@ const sections = [
     content: 'Generates something [italic]{very} important.'
   },
   {
-    header: 'Synopsis',
-    content: [
-      '$ typical <options> <files>',
-      '$ cat <files> | typical <options>'
+    header: 'Options',
+    optionList: [
+      {
+        name: 'input', typeLabel: '[underline]{file}',
+        description: 'The input to process.'
+      },
+      {
+        name: 'help', description: 'Print this usage guide.'
+      }
     ]
   }
 ]

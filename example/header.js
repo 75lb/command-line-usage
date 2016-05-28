@@ -4,7 +4,8 @@ const ansi = require('ansi-escape-sequences')
 
 const sections = [
   {
-    banner: ansi.format(header, 'red')
+    content: ansi.format(header, 'red'),
+    raw: true
   },
   {
     header: 'Synopsis',

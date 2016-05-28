@@ -19,11 +19,12 @@ const sections = [
     optionList: optionDefinitions
   },
   {
-    banner: [
+    content: [
       '[italic]{This app was tested by dragons in Wales.}',
       '',
       wales
-    ]
+    ],
+    raw: true
   }
 ]
 

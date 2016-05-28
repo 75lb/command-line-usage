@@ -20,13 +20,42 @@ var OptionList = function (_Section) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(OptionList).call(this));
 
-    if (data.hide && data.hide.length) {
-      data.optionList = data.optionList.filter(function (definition) {
-        return data.hide.indexOf(definition.name) === -1;
+    var definitions = arrayify(data.optionList);
+    var hide = arrayify(data.hide);
+    var groups = arrayify(data.group);
+
+    if (!definitions.length) {
+      throw new Error('you must pass some option definitions to optionList');
+    }
+
+    if (hide.length) {
+      definitions = definitions.filter(function (definition) {
+        return hide.indexOf(definition.name) === -1;
       });
     }
-    _this.header(data.header);
-    _this.add(optionList(data.optionList, data.group));
+
+    if (data.header) _this.header(data.header);
+
+    if (groups.length) {
+      definitions = definitions.filter(function (def) {
+        var noGroupMatch = groups.indexOf('_none') > -1 && !t.isDefined(def.group);
+        var groupMatch = intersect(arrayify(def.group), groups);
+        if (noGroupMatch || groupMatch) return def;
+      });
+    }
+
+    var columns = definitions.map(function (def) {
+      return {
+        option: getOptionNames(def, 'bold'),
+        description: ansi.format(def.description)
+      };
+    });
+
+    _this.add(tableLayout.lines(columns, {
+      padding: { left: '  ', right: ' ' },
+      columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
+    }));
+
     _this.emptyLine();
     return _this;
   }
@@ -34,40 +63,13 @@ var OptionList = function (_Section) {
   return OptionList;
 }(Section);
 
-function optionList(definitions, group) {
-  if (!definitions || definitions && !definitions.length) {
-    throw new Error('you must pass option definitions to getUsage.optionList()');
-  }
-  var columns = [];
-
-  if (group === '_none') {
-    definitions = definitions.filter(function (def) {
-      return !t.isDefined(def.group);
-    });
-  } else if (group) {
-    definitions = definitions.filter(function (def) {
-      return arrayify(def.group).indexOf(group) > -1;
-    });
-  }
-
-  definitions.forEach(function (def) {
-    columns.push({
-      option: getOptionNames(def, 'bold'),
-      description: ansi.format(def.description)
-    });
-  });
-
-  return tableLayout.lines(columns, {
-    padding: { left: '  ', right: ' ' },
-    columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
-  });
-}
-
 function getOptionNames(definition, optionNameStyles) {
   var names = [];
   var type = definition.type ? definition.type.name.toLowerCase() : '';
   var multiple = definition.multiple ? '[]' : '';
-  if (type) type = type === 'boolean' ? '' : '[underline]{' + type + multiple + '}';
+  if (type) {
+    type = type === 'boolean' ? '' : '[underline]{' + type + multiple + '}';
+  }
   type = ansi.format(definition.typeLabel || type);
 
   if (definition.alias) {
@@ -75,6 +77,14 @@ function getOptionNames(definition, optionNameStyles) {
   }
   names.push(ansi.format('--' + definition.name, optionNameStyles) + ' ' + type);
   return names.join(', ');
+}
+
+function intersect(arr1, arr2) {
+  return arr1.some(function (item1) {
+    return arr2.some(function (item2) {
+      return item1 === item2;
+    });
+  });
 }
 
 module.exports = OptionList;

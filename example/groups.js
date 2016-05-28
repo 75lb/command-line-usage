@@ -8,17 +8,16 @@ const optionDefinitions = [
   },
   {
     name: 'src', description: 'The input files to process',
-    type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...',
-    group: 'main'
+    multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...',
+    group: 'input'
   },
   {
     name: 'timeout', description: 'Timeout value in ms',
-    alias: 't', type: Number, typeLabel: '[underline]{ms}',
+    alias: 't', typeLabel: '[underline]{ms}',
     group: 'main'
   },
   {
-    name: 'plugin', description: 'A plugin path',
-    type: String
+    name: 'plugin', description: 'A plugin path', type: String
   }
 ]
 
@@ -30,7 +29,7 @@ const sections = [
   {
     header: 'Main options',
     optionList: optionDefinitions,
-    group: 'main'
+    group: [ 'main', 'input' ]
   },
   {
     header: 'Misc',
