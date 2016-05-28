@@ -42,14 +42,14 @@ Inline ansi formatting can be used anywhere within the usage template using the 
 ## Examples
 
 ### Simple
-A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/next/example/simple.js).
+A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/simple.png)
 
 ### Option List groups
-Demonstrates breaking the option list up into groups. This example also sets a `typeLabel` on each option definition (e.g. a `typeLabel` value of `files` is more meaningful than the default `string[]`). [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
+Demonstrates breaking the option list up into groups. [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/groups.png)
 
 ### Banners
 
