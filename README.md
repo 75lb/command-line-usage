@@ -39,7 +39,7 @@ const usage = getUsage(sections)
 console.log(usage)
 ```
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/simple.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/synopsis.png)
 
 ## Examples
 
