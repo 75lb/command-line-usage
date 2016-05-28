@@ -15,7 +15,7 @@ The `commandLineUsage()` function takes one or more `section` objects as input. 
 The `header` is always bold and underlined. A `content` string is indented and wrapped to 80 columns.
 
 ```js
-const getUsage = require('command-line-usage');
+const getUsage = require('command-line-usage')
 
 const sections = [
   {
@@ -70,20 +70,6 @@ Demonstrates usage of custom table layout in the description. In this case the s
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
-## Modules
-
-<dl>
-<dt><a href="#module_command-line-usage">command-line-usage</a></dt>
-<dd></dd>
-</dl>
-
-## Classes
-
-<dl>
-<dt><a href="#OptionList">OptionList</a></dt>
-<dd></dd>
-</dl>
-
 <a name="module_command-line-usage"></a>
 
 ## command-line-usage
@@ -126,9 +112,11 @@ A Content section comprises a header and one or more lines of text.
   </thead>
   <tbody>
 <tr>
-    <td>header</td><td><code>string</code></td><td>The section header.</td>
+    <td>header</td><td><code>string</code></td><td><p>The section header.</p>
+</td>
     </tr><tr>
-    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td>One or more lines of text. Pass a recordset array for tabulated content.</td>
+    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. Pass a recordset array for tabulated content.</p>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -175,9 +163,15 @@ A OptionList section adds a table displaying details of the available options.
   </thead>
   <tbody>
 <tr>
-    <td>header</td><td><code>string</code></td><td>The section header.</td>
+    <td>header</td><td><code>string</code></td><td><p>The section header.</p>
+</td>
     </tr><tr>
-    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td>an array of [option definition](https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition) objects. In addition to the regular definition properties, command-line-usage will look for: - `description` - a string describing the option. - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.</td>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+<ul>
+<li><code>description</code> - a string describing the option.</li>
+<li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
+</ul>
+</td>
     </tr>  </tbody>
 </table>
 
@@ -201,30 +195,6 @@ A OptionList section adds a table displaying details of the available options.
   ]
 }
 ```
-<a name="OptionList"></a>
-
-## OptionList
-**Kind**: global class  
-<a name="new_OptionList_new"></a>
-
-### new OptionList(data)
-<table>
-  <thead>
-    <tr>
-      <th>Param</th><th>Type</th><th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>data</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
-<ul>
-<li><code>description</code> - a string describing the option.</li>
-<li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
-</ul>
-</td>
-    </tr>  </tbody>
-</table>
-
 
 * * *
 

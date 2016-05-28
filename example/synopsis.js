@@ -1,4 +1,4 @@
-const getUsage = require('../');
+const getUsage = require('../')
 
 const sections = [
   {
