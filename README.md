@@ -88,13 +88,13 @@ Demonstrates use of table layout in the description. In this case the second col
 
 
 * [command-line-usage](#module_command-line-usage)
-    * [getUsage(sections)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-        * [~content](#module_command-line-usage--getUsage..content)
-        * [~optionList](#module_command-line-usage--getUsage..optionList)
+    * [commandLineUsage(sections)](#exp_module_command-line-usage--commandLineUsage) ⇒ <code>string</code> ⏏
+        * [~content](#module_command-line-usage--commandLineUsage..content)
+        * [~optionList](#module_command-line-usage--commandLineUsage..optionList)
 
-<a name="exp_module_command-line-usage--getUsage"></a>
+<a name="exp_module_command-line-usage--commandLineUsage"></a>
 
-### getUsage(sections) ⇒ <code>string</code> ⏏
+### commandLineUsage(sections) ⇒ <code>string</code> ⏏
 Generates a usage guide suitable for a command-line app.
 
 **Kind**: Exported function  
@@ -106,17 +106,17 @@ Generates a usage guide suitable for a command-line app.
   </thead>
   <tbody>
 <tr>
-    <td>sections</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>One of more section objects (<a href="#module_command-line-usage--getUsage..content">content</a> or <a href="#module_command-line-usage--getUsage..optionList">optionList</a>).</p>
+    <td>sections</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>One of more section objects (<a href="#module_command-line-usage--commandLineUsage..content">content</a> or <a href="#module_command-line-usage--commandLineUsage..optionList">optionList</a>).</p>
 </td>
     </tr>  </tbody>
 </table>
 
-<a name="module_command-line-usage--getUsage..content"></a>
+<a name="module_command-line-usage--commandLineUsage..content"></a>
 
-#### getUsage~content
-A Content section comprises a header and one or more lines of text.
+#### commandLineUsage~content
+A Content section comprises a header and one or more lines of content.
 
-**Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
+**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
 **Properties**
 
 <table>
@@ -168,12 +168,12 @@ An array of recordset-style objects are rendered in table layout.
   ]
 }
 ```
-<a name="module_command-line-usage--getUsage..optionList"></a>
+<a name="module_command-line-usage--commandLineUsage..optionList"></a>
 
-#### getUsage~optionList
+#### commandLineUsage~optionList
 A OptionList section adds a table displaying details of the available options.
 
-**Kind**: inner typedef of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
+**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
 **Properties**
 
 <table>
@@ -187,7 +187,7 @@ A OptionList section adds a table displaying details of the available options.
     <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
-    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#optiondefinition-">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
@@ -208,8 +208,7 @@ A OptionList section adds a table displaying details of the available options.
   header: 'Options',
   optionList: [
     {
-      name: 'help', description: 'Display this usage guide.',
-      alias: 'h', type: Boolean
+      name: 'help', alias: 'h', description: 'Display this usage guide.'
     },
     {
       name: 'src', description: 'The input files to process',

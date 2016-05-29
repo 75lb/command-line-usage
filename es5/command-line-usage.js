@@ -4,9 +4,9 @@ var OptionList = require('./option-list');
 var Content = require('./content');
 var arrayify = require('array-back');
 
-module.exports = getUsage;
+module.exports = commandLineUsage;
 
-function getUsage(sections) {
+function commandLineUsage(sections) {
   sections = arrayify(sections);
   if (sections.length) {
     var output = sections.map(function (section) {
