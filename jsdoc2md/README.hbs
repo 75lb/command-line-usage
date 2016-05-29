@@ -10,7 +10,7 @@ A simple module for creating a usage guide.
 ## Synopis
 A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
 
-The <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>.
+The <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> function takes one or more `section` objects (<code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>) as input.
 
 Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
@@ -42,19 +42,19 @@ console.log(usage)
 
 Outputs this guide:
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/synopsis.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/synopsis.png)
 
 ## Examples
 
 ### Simple
 A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/simple.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
 
 ### Option List groups
 Demonstrates breaking the option list up into groups. [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/groups.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
 
 ### Banners
 A banner is created by adding the `raw: true` property to your `content`. This flag disables any formatting on the content, displaying it raw as supplied.
@@ -62,27 +62,27 @@ A banner is created by adding the `raw: true` property to your `content`. This f
 #### Header
 Demonstrates a banner at the top. This example also adds a `synopsis` section. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/header.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
 
 #### Footer
 Demonstrates a footer banner. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/footer.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
 
 ### Examples section (table layout)
 An examples section is added. To achieve this table layout, supply the `content` as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array. [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/example-columns.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Command list
 Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/command-list.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
 
 ### Description section (table layout)
 Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/description-columns.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
 ## API Reference
 
