@@ -2,7 +2,6 @@
 
 var OptionList = require('./option-list');
 var Content = require('./content');
-var Banner = require('./banner');
 var arrayify = require('array-back');
 
 module.exports = getUsage;
@@ -15,8 +14,6 @@ function getUsage(sections) {
         return new OptionList(section);
       } else if (section.content) {
         return new Content(section);
-      } else if (section.banner) {
-        return new Banner(section);
       }
     });
     return '\n' + output.join('\n');

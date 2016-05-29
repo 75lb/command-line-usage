@@ -12,8 +12,9 @@ A usage guide is built from an arbitrary number of sections, e.g. a description 
 
 The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content` or `optionList`.
 
-Inline ansi formatting can be used anywhere within the usage template using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
+This script:
 ```js
 const getUsage = require('command-line-usage')
 
@@ -39,6 +40,7 @@ const usage = getUsage(sections)
 console.log(usage)
 ```
 
+Outputs this guide:
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/synopsis.png)
 
 ## Examples
@@ -66,16 +68,26 @@ The footer is displayed at the end of the template. [Code](https://github.com/75
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/footer.png)
 
 ### Examples section (table layout)
-An examples section is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [table-layout](https://github.com/75lb/table-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
+An examples section is added. To achieve this table layout, supply the `content` as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array. [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/example-columns.png)
 
+### Command list
+Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
+
 ### Description section (table layout)
-Demonstrates usage of custom table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
+Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/description-columns.png)
 
-{{>main}}
+## API Reference
+
+{{#module name="command-line-usage"}}
+{{>body~}}
+{{>member-index~}}
+{{>separator~}}
+{{>members~}}
+{{/module}}
 
 * * *
 
