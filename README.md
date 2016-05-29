@@ -10,7 +10,7 @@ A simple module for creating a usage guide.
 ## Synopis
 A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
 
-The `<a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusagesections--string-">commandLineUsage()</a>` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `<a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusagecontent">content</a>` or `<a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusageoptionlist">optionList</a>`.
+The <code><a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusagesections--string-">commandLineUsage()</a></code> function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either <code><a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusagecontent">content</a></code> or <code><a href="https://github.com/75lb/command-line-usage/tree/master#commandlineusageoptionlist">optionList</a></code>.
 
 Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
