@@ -41,6 +41,7 @@ console.log(usage)
 ```
 
 Outputs this guide:
+
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/synopsis.png)
 
 ## Examples
@@ -56,6 +57,7 @@ Demonstrates breaking the option list up into groups. [Code](https://github.com/
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/groups.png)
 
 ### Banners
+A banner is created by adding the `raw: true` property to your `content`. This flag disables any formatting on the content, displaying it raw as supplied.
 
 #### Header
 Demonstrates a banner at the top. This example also adds a `synopsis` section. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
@@ -63,7 +65,7 @@ Demonstrates a banner at the top. This example also adds a `synopsis` section. [
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/header.png)
 
 #### Footer
-The footer is displayed at the end of the template. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
+Demonstrates a footer banner. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/footer.png)
 
@@ -74,6 +76,8 @@ An examples section is added. To achieve this table layout, supply the `content`
 
 ### Command list
 Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/command-list.png)
 
 ### Description section (table layout)
 Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
@@ -123,25 +127,27 @@ A Content section comprises a header and one or more lines of text.
   </thead>
   <tbody>
 <tr>
-    <td>header</td><td><code>string</code></td><td><p>The section header.</p>
+    <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
-    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. Pass a recordset array for tabulated content.</p>
+    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. For table layout, supply the content as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array.</p>
 </td>
     </tr><tr>
-    <td>raw</td><td><code>boolean</code></td><td><p>Set to true to avoid indentation and wrapping.</p>
+    <td>raw</td><td><code>boolean</code></td><td><p>Set to true to avoid indentation and wrapping. Useful for banners.</p>
 </td>
     </tr>  </tbody>
 </table>
 
 **Example**  
+Simple string of content. The syntax for ansi formatting is documented [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 ```js
 {
   header: 'A typical app',
   content: 'Generates something [italic]{very} important.'
 }
 ```
-**Example**  
+
+An array of strings is interpreted as lines, to be joined by the system newline character.
 ```js
 {
   header: 'A typical app',
@@ -151,7 +157,8 @@ A Content section comprises a header and one or more lines of text.
   ]
 }
 ```
-**Example**  
+
+An array of recordset-style objects are rendered in table layout.
 ```js
 {
   header: 'A typical app',
@@ -177,7 +184,7 @@ A OptionList section adds a table displaying details of the available options.
   </thead>
   <tbody>
 <tr>
-    <td>header</td><td><code>string</code></td><td><p>The section header.</p>
+    <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
     <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
