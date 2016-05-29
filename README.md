@@ -5,61 +5,98 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
-A simple template to create a usage guide. It was extracted from  [command-line-args](https://github.com/75lb/command-line-args) to facilitate arbitrary use.
+A simple module for creating a usage guide.
 
+## Synopis
+A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
+
+The `commandLineUsage()` function takes one or more `section` objects as input. Each section comprises an optional `header` property and one of either `content` or `optionList`.
+
+Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+
+This script:
 ```js
-var getUsage = require('command-line-usage');
-var usage = getUsage(definitions, options)
+const getUsage = require('command-line-usage')
+
+const sections = [
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
+  },
+  {
+    header: 'Options',
+    optionList: [
+      {
+        name: 'input', typeLabel: '[underline]{file}',
+        description: 'The input to process.'
+      },
+      {
+        name: 'help', description: 'Print this usage guide.'
+      }
+    ]
+  }
+]
+const usage = getUsage(sections)
+console.log(usage)
 ```
 
-Inline ansi formatting can be used anywhere within the usage template using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+Outputs this guide:
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/synopsis.png)
 
 ## Examples
 
 ### Simple
-A `description` field is added to each option definition. A `title`, `description` and simple `footer` are set in the getUsage options. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
+A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/simple.png)
 
-### Groups
-Demonstrates breaking the options up into groups. This example also sets a `typeLabel` on each option definition (e.g. a `typeLabel` value of `files` is more meaningful than the default `string[]`). [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
+### Option List groups
+Demonstrates breaking the option list up into groups. [Code](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/groups.png)
 
-### Header
-Here, the `title` is replaced with a `header` banner. This example also adds a `synopsis` list. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
+### Banners
+A banner is created by adding the `raw: true` property to your `content`. This flag disables any formatting on the content, displaying it raw as supplied.
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
+#### Header
+Demonstrates a banner at the top. This example also adds a `synopsis` section. [Code](https://github.com/75lb/command-line-usage/blob/master/example/header.js).
 
-### Footer
-The footer is displayed at the end of the template. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/header.png)
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
+#### Footer
+Demonstrates a footer banner. [Code](https://github.com/75lb/command-line-usage/blob/master/example/footer.js).
 
-### Examples (column layout)
-A list of `examples` is added. In this case the example list is defined as an array of objects (each with consistently named properties) so will be formatted by [column-layout](https://github.com/75lb/column-layout).   [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/footer.png)
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
+### Examples section (table layout)
+An examples section is added. To achieve this table layout, supply the `content` as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array. [Code](https://github.com/75lb/command-line-usage/blob/master/example/examples.js).
 
-### Description (column layout)
-Demonstrates usage of custom column layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/example-columns.png)
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
+### Command list
+Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
 
-### Custom
-Demonstrates a custom template. The `getUsage.optionList()` method exists for users that want the option list and nothing else. [Code](https://github.com/75lb/command-line-usage/blob/master/example/custom.js).
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/command-list.png)
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/custom.png)
+### Description section (table layout)
+Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
-# API Reference
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/next/example/screens/description-columns.png)
+
+## API Reference
+
 
 * [command-line-usage](#module_command-line-usage)
-    * [getUsage(definitions, options)](#exp_module_command-line-usage--getUsage) ⇒ <code>string</code> ⏏
-        * [.optionList(definitions, [group])](#module_command-line-usage--getUsage.optionList) ⇒ <code>Array.&lt;string&gt;</code>
+    * [commandLineUsage(sections)](#exp_module_command-line-usage--commandLineUsage) ⇒ <code>string</code> ⏏
+        * [~content](#module_command-line-usage--commandLineUsage..content)
+        * [~optionList](#module_command-line-usage--commandLineUsage..optionList)
 
-<a name="exp_module_command-line-usage--getUsage"></a>
+<a name="exp_module_command-line-usage--commandLineUsage"></a>
 
-### getUsage(definitions, options) ⇒ <code>string</code> ⏏
+### commandLineUsage(sections) ⇒ <code>string</code> ⏏
+Generates a usage guide suitable for a command-line app.
+
 **Kind**: Exported function  
 <table>
   <thead>
@@ -69,181 +106,121 @@ Demonstrates a custom template. The `getUsage.optionList()` method exists for us
   </thead>
   <tbody>
 <tr>
-    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#exp_module_definition--OptionDefinition">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>sections</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>One of more section objects (<a href="#module_command-line-usage--commandLineUsage..content">content</a> or <a href="#module_command-line-usage--commandLineUsage..optionList">optionList</a>).</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+<a name="module_command-line-usage--commandLineUsage..content"></a>
+
+#### commandLineUsage~content
+A Content section comprises a header and one or more lines of content.
+
+**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
+</td>
+    </tr><tr>
+    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. For table layout, supply the content as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array.</p>
+</td>
+    </tr><tr>
+    <td>raw</td><td><code>boolean</code></td><td><p>Set to true to avoid indentation and wrapping. Useful for banners.</p>
+</td>
+    </tr>  </tbody>
+</table>
+
+**Example**  
+Simple string of content. The syntax for ansi formatting is documented [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+```js
+{
+  header: 'A typical app',
+  content: 'Generates something [italic]{very} important.'
+}
+```
+
+An array of strings is interpreted as lines, to be joined by the system newline character.
+```js
+{
+  header: 'A typical app',
+  content: [
+    'First line.',
+    'Second line.'
+  ]
+}
+```
+
+An array of recordset-style objects are rendered in table layout.
+```js
+{
+  header: 'A typical app',
+  content: [
+    { colA: 'First row, first column.', colB: 'First row, second column.'},
+    { colA: 'Second row, first column.', colB: 'Second row, second column.'}
+  ]
+}
+```
+<a name="module_command-line-usage--commandLineUsage..optionList"></a>
+
+#### commandLineUsage~optionList
+A OptionList section adds a table displaying details of the available options.
+
+**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
+</td>
+    </tr><tr>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#optiondefinition-">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
 </ul>
 </td>
     </tr><tr>
-    <td>options</td><td><code><a href="#module_usage-options">usage-options</a></code></td><td><p>see <a href="#exp_module_usage-options--UsageOptions">UsageOptions</a>.</p>
-</td>
-    </tr>  </tbody>
-</table>
-
-<a name="module_command-line-usage--getUsage.optionList"></a>
-
-#### getUsage.optionList(definitions, [group]) ⇒ <code>Array.&lt;string&gt;</code>
-A helper for getting a column-format list of options and descriptions. Useful for inserting into a custom usage template.
-
-**Kind**: static method of <code>[getUsage](#exp_module_command-line-usage--getUsage)</code>  
-<table>
-  <thead>
-    <tr>
-      <th>Param</th><th>Type</th><th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>definitions</td><td><code>Array.&lt;optionDefinition&gt;</code></td><td><p>the definitions to Display</p>
+    <td>group</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>If specified, only options from this particular group will be printed.</p>
 </td>
     </tr><tr>
-    <td>[group]</td><td><code>string</code></td><td><p>if specified, will output the options in this group. The special group <code>&#39;_none&#39;</code> will return options without a group specified.</p>
+    <td>hide</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>The names of one of more option definitions to hide from the option list.</p>
 </td>
     </tr>  </tbody>
 </table>
 
-
-<a name="exp_module_usage-options--UsageOptions"></a>
-
-## UsageOptions ⏏
-The class describes all valid options for the `getUsage` function. Inline formatting can be used within any text string supplied using valid [ansi-escape-sequences formatting syntax](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
-
-**Kind**: Exported class  
-* [UsageOptions](#exp_module_usage-options--UsageOptions) ⏏
-    * _instance_
-        * [.header](#module_usage-options--UsageOptions+header) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-        * [.title](#module_usage-options--UsageOptions+title) : <code>string</code>
-        * [.description](#module_usage-options--UsageOptions+description) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-        * [.synopsis](#module_usage-options--UsageOptions+synopsis) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-        * [.groups](#module_usage-options--UsageOptions+groups) : <code>object</code>
-        * [.examples](#module_usage-options--UsageOptions+examples) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-        * [.footer](#module_usage-options--UsageOptions+footer) : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-        * [.hide](#module_usage-options--UsageOptions+hide) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-    * _inner_
-        * [~textBlock](#module_usage-options--UsageOptions..textBlock) : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
-
-<a name="module_usage-options--UsageOptions+header"></a>
-
-### options.header : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-Use this field to display a banner or header above the main body.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+title"></a>
-
-### options.title : <code>string</code>
-The title line at the top of the usage, typically the name of the app. By default it is underlined but this formatting can be overridden by passing a [module:usage-options~textObject](module:usage-options~textObject).
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Example**  
-```js
-{ title: "my-app" }
-```
-<a name="module_usage-options--UsageOptions+description"></a>
-
-### options.description : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-A description to go underneath the title. For example, some words about what the app is for.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+synopsis"></a>
-
-### options.synopsis : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-An array of strings highlighting the main usage forms of the app.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+groups"></a>
-
-### options.groups : <code>object</code>
-Specify which groups to display in the output by supplying an object of key/value pairs, where the key is the name of the group to include and the value is a string or textObject. If the value is a string it is used as the group title. Alternatively supply an object containing a `title` and `description` string.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
 **Example**  
 ```js
 {
-    main: {
-        title: "Main options",
-        description: "This group contains the most important options."
+  header: 'Options',
+  optionList: [
+    {
+      name: 'help', alias: 'h', description: 'Display this usage guide.'
     },
-    misc: "Miscellaneous"
-}
-```
-<a name="module_usage-options--UsageOptions+examples"></a>
-
-### options.examples : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-Examples
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-<a name="module_usage-options--UsageOptions+footer"></a>
-
-### options.footer : <code>[textBlock](#module_usage-options--UsageOptions..textBlock)</code>
-Displayed at the foot of the usage output.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Example**  
-```js
-{
-    footer: "Project home: [underline]{https://github.com/me/my-app}"
-}
-```
-<a name="module_usage-options--UsageOptions+hide"></a>
-
-### options.hide : <code>string</code> &#124; <code>Array.&lt;string&gt;</code>
-If you want to hide certain options from the output, specify their names here. This is sometimes used to hide the `defaultOption`.
-
-**Kind**: instance property of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-**Example**  
-```js
-{
-    hide: "files"
-}
-```
-<a name="module_usage-options--UsageOptions..textBlock"></a>
-
-### options~textBlock : <code>string</code> &#124; <code>Array.&lt;string&gt;</code> &#124; <code>Array.&lt;object&gt;</code> &#124; <code>Object</code>
-A text block can be a string:
-
-```js
-{
-  description: 'This is a single-line description.'
-}
-```
-.. or multiple strings:
-```js
-{
-  description: [
-    'This is a multi-line description.',
-    'A new string in the array represents a new line.'
+    {
+      name: 'src', description: 'The input files to process',
+      multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+    },
+    {
+      name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
+      alias: 't', typeLabel: '[underline]{ms}'
+    }
   ]
 }
 ```
-.. or an array of objects. In which case, it will be formatted by [column-layout](https://github.com/75lb/column-layout):
-```js
-{
-  description: {
-    column1: 'This will go in column 1.',
-    column2: 'Second column text.'
-  }
-}
-```
-If you want set specific column-layout options, pass an object with two properties: `options` and `data`.
-```js
-{
-  description: {
-    options: {
-      columns: [
-        { name: 'two', width: 40, nowrap: true }
-      ]
-    },
-    data: {
-      column1: 'This will go in column 1.',
-      column2: 'Second column text.'
-    }
-  }
-}
-```
-
-**Kind**: inner typedef of <code>[UsageOptions](#exp_module_usage-options--UsageOptions)</code>  
-
 
 * * *
 

@@ -1,32 +1,31 @@
 const getUsage = require('../')
-const wales = require('./assets/ansi-wales').split('\n')
+const wales = require('./assets/ansi-wales')
+const optionDefinitions = require('./assets/example-options')
 
-const optionDefinitions = [
+const sections = [
   {
-    name: 'help', description: 'Display this usage guide.',
-    alias: 'h', type: Boolean
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
   },
   {
-    name: 'src', description: 'The input files to process',
-    type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+    header: 'Synopsis',
+    content: [
+      '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
+      '$ example [bold]{--help}'
+    ]
   },
   {
-    name: 'timeout', description: 'Timeout value in ms',
-    alias: 't', type: Number, typeLabel: '[underline]{ms}'
+    header: 'Options',
+    optionList: optionDefinitions
+  },
+  {
+    content: [
+      '[italic]{This app was tested by dragons in Wales.}',
+      '',
+      wales
+    ],
+    raw: true
   }
 ]
 
-const options = {
-  title: 'a typical app',
-  description: 'Generates something very important.',
-  synopsis: [
-    '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
-    '$ example [bold]{--help}'
-  ],
-  footer: [
-    '[italic]{This app was tested by dragons in Wales.}',
-    ''
-  ].concat(wales)
-}
-
-console.log(getUsage(optionDefinitions, options))
+console.log(getUsage(sections))

@@ -8,30 +8,34 @@ const optionDefinitions = [
   },
   {
     name: 'src', description: 'The input files to process',
-    type: String, multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...',
-    group: 'main'
+    multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...',
+    group: 'input'
   },
   {
     name: 'timeout', description: 'Timeout value in ms',
-    alias: 't', type: Number, typeLabel: '[underline]{ms}',
+    alias: 't', typeLabel: '[underline]{ms}',
     group: 'main'
   },
   {
-    name: 'plugin', description: 'A plugin path',
-    type: String
+    name: 'plugin', description: 'A plugin path', type: String
   }
 ]
 
-const options = {
-  title: 'a typical app',
-  description: 'Generates something [italic]{very} important.',
-  groups: {
-    main: 'Main options',
-    _none: {
-      title: 'Misc',
-      description: 'Miscelaneous ungrouped options.'
-    }
+const sections = [
+  {
+    header: 'A typical app',
+    content: 'Generates something [italic]{very} important.'
+  },
+  {
+    header: 'Main options',
+    optionList: optionDefinitions,
+    group: [ 'main', 'input' ]
+  },
+  {
+    header: 'Misc',
+    optionList: optionDefinitions,
+    group: '_none'
   }
-}
+]
 
-console.log(getUsage(optionDefinitions, options))
+console.log(getUsage(sections))
