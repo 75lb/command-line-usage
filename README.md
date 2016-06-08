@@ -26,6 +26,7 @@ const sections = [
   },
   {
     header: 'Options',
+    name: 'options',
     optionList: [
       {
         name: 'input', typeLabel: '[underline]{file}',
