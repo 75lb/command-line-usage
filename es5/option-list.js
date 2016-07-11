@@ -24,10 +24,6 @@ var OptionList = function (_Section) {
     var hide = arrayify(data.hide);
     var groups = arrayify(data.group);
 
-    if (!definitions.length) {
-      throw new Error('you must pass some option definitions to optionList');
-    }
-
     if (hide.length) {
       definitions = definitions.filter(function (definition) {
         return hide.indexOf(definition.name) === -1;
