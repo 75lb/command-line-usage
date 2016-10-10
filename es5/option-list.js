@@ -18,7 +18,7 @@ var OptionList = function (_Section) {
   function OptionList(data) {
     _classCallCheck(this, OptionList);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(OptionList).call(this));
+    var _this = _possibleConstructorReturn(this, (OptionList.__proto__ || Object.getPrototypeOf(OptionList)).call(this));
 
     var definitions = arrayify(data.optionList);
     var hide = arrayify(data.hide);

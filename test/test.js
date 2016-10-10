@@ -1,7 +1,11 @@
-var test = require('tape')
+'use strict'
+var TestRunner = require('test-runner')
 var getUsage = require('../')
+var a = require('core-assert')
 
-test('getUsage(sections)', function (t) {
+var runner = new TestRunner()
+
+runner.test('getUsage(sections)', function () {
   var definitions = [
     {
       name: 'help', description: 'Display this usage guide.',
@@ -29,8 +33,7 @@ test('getUsage(sections)', function (t) {
   ]
 
   var result = getUsage(sections)
-  t.ok(/a typical app/.test(result))
-  t.ok(/Generates something very important/.test(result))
-  t.ok(/Display this usage guide/.test(result))
-  t.end()
+  a.ok(/a typical app/.test(result))
+  a.ok(/Generates something very important/.test(result))
+  a.ok(/Display this usage guide/.test(result))
 })
