@@ -48,7 +48,7 @@ runner.test('commandLineUsage(sections)', function () {
 })
 
 runner.test('header only, no content', function () {
-  const usage = commandLineUsage([
+  var usage = commandLineUsage([
     { header: 'header' }
   ])
   a.ok(/header/.test(usage))
