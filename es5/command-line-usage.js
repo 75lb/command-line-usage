@@ -12,7 +12,7 @@ function commandLineUsage(sections) {
     var output = sections.map(function (section) {
       if (section.optionList) {
         return new OptionList(section);
-      } else if (section.content) {
+      } else {
         return new Content(section);
       }
     });
