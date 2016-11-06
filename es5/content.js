@@ -49,10 +49,10 @@ var Content = function (_Section) {
         if (!content.options || !content.data) {
           throw new Error('must have an "options" or "data" property\n' + JSON.stringify(content));
         }
-        Object.assign({ padding: defaultPadding }, content.options);
+        var options = Object.assign({ padding: defaultPadding }, content.options);
         _this.add(tableLayout.lines(content.data.map(function (row) {
           return ansiFormatRow(row);
-        }), content.options));
+        }), options));
       } else {
         var message = 'invalid input - \'content\' must be a string, array of strings, or array of plain objects:\n\n' + JSON.stringify(content);
         throw new Error(message);
