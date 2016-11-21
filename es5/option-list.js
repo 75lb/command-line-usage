@@ -49,7 +49,7 @@ var OptionList = function (_Section) {
 
     _this.add(tableLayout.lines(columns, {
       padding: { left: '  ', right: ' ' },
-      columns: [{ name: 'option', nowrap: true }, { name: 'description', maxWidth: 80 }]
+      columns: [{ name: 'option', noWrap: true }, { name: 'description', maxWidth: 80 }]
     }));
 
     _this.emptyLine();

@@ -1,7 +1,7 @@
 'use strict';
 
 var OptionList = require('./option-list');
-var Content = require('./content');
+var ContentSection = require('./content-section');
 var arrayify = require('array-back');
 
 module.exports = commandLineUsage;
@@ -13,7 +13,7 @@ function commandLineUsage(sections) {
       if (section.optionList) {
         return new OptionList(section);
       } else {
-        return new Content(section);
+        return new ContentSection(section);
       }
     });
     return '\n' + output.join('\n');

@@ -5,7 +5,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
-A simple module for creating a usage guide.
+A simple, data-driven module for creating a usage guide.
 
 ## Synopis
 A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
@@ -82,7 +82,7 @@ Useful if your app is [command-driven](https://github.com/75lb/command-line-comm
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
 
 ### Description section (table layout)
-Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `nowrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
+Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `noWrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 

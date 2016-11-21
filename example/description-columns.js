@@ -9,7 +9,7 @@ const sections = [
       options: {
         columns: [
           { name: 'one', maxWidth: 40 },
-          { name: 'two', width: 40, nowrap: true }
+          { name: 'two', width: 40, noWrap: true }
         ]
       },
       data: [

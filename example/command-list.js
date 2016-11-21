@@ -4,7 +4,7 @@ const commandLineUsage = require('../')
 const sections = [
   {
     header: 'Example App',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
   },
   {
     header: 'Synopsis',
