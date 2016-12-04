@@ -2,10 +2,10 @@
 const commandLineUsage = require('../')
 let sections, usage
 
-/* Using default options - whitespace is trimmed */
+/* When using default options, the whitespace before the bullets is trimmed */
 sections = [
   {
-    header: 'Using default options - whitespace is trimmed',
+    header: 'Example app',
     content: [
       'Generates something [italic]{very} important. This description is:',
       '',
@@ -20,10 +20,10 @@ sections = [
 usage = commandLineUsage(sections)
 console.log(usage)
 
-/* Using `raw` option and supplying your own whitespace */
+/* Solution 1: Use `raw` option and supply your own whitespace */
 sections = [
   {
-    header: 'Using `raw` option and supplying your own whitespace',
+    header: 'Example app',
     content: [
       '  Generates something [italic]{very} important. This description is:',
       '  ',
@@ -40,30 +40,10 @@ sections = [
 usage = commandLineUsage(sections)
 console.log(usage)
 
-/* Using `raw` option and supplying your own whitespace (single multiline string) */
+/* Section 2: use separate sections with the `noTrim` option on the bullets */
 sections = [
   {
-    header: 'Using `raw` option and supplying your own whitespace (single multiline string)',
-    content: [
-      '  Generates something [italic]{very} important. This description is:',
-      '  ',
-      '    • rather long',
-      '    • inconsequential',
-      '    • demonstrative',
-      '  ',
-      '  And the text continues underneath as this [cyan]{might} be required in cases where',
-      '  text is required underneath.'
-    ].join('\n'),
-    raw: true
-  }
-]
-usage = commandLineUsage(sections)
-console.log(usage)
-
-/* using separate sections, and the `noTrim` option on the bullets */
-sections = [
-  {
-    header: 'using separate sections, and the `noTrim` option on the bullets',
+    header: 'Example app',
     content: [
       'Generates something [italic]{very} important. This description is:',
     ]
