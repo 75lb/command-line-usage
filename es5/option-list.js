@@ -7,7 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Section = require('./section');
-var tableLayout = require('table-layout');
+var Table = require('table-layout');
 var ansi = require('ansi-escape-sequences');
 var t = require('typical');
 var arrayify = require('array-back');
@@ -47,10 +47,11 @@ var OptionList = function (_Section) {
       };
     });
 
-    _this.add(tableLayout.lines(columns, {
+    var table = new Table(columns, {
       padding: { left: '  ', right: ' ' },
       columns: [{ name: 'option', noWrap: true }, { name: 'description', maxWidth: 80 }]
-    }));
+    });
+    _this.add(table.renderLines());
 
     _this.emptyLine();
     return _this;
