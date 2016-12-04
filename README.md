@@ -86,6 +86,11 @@ Demonstrates supplying specific [table layout](https://github.com/75lb/table-lay
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
+### Whitespace
+By default, whitespace from the beginning of each line is trimmed to ensure wrapped text always aligns neatly to the left edge of the column. This can be undesirable when whitespace is intentional like the indented bullet points shown in this example. The two ways to disable whitespace trimming are shown in [this example code](https://github.com/75lb/command-line-usage/blob/master/example/whitespace.js).
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/whitespace.png)
+
 ## API Reference
 
 
