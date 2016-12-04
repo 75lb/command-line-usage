@@ -8,13 +8,13 @@
 A simple, data-driven module for creating a usage guide.
 
 ## Synopis
-A usage guide is built from an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has a bold, underlined header and some content (a paragraph, table, option list, banner etc.)
+A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header and some content. Each section must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>.
 
-The <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> function takes one or more `section` objects (<code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>) as input.
+This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which renders the usage guide.
 
 Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
 
-This script:
+For example, this script:
 ```js
 const getUsage = require('command-line-usage')
 
@@ -46,7 +46,7 @@ Outputs this guide:
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/synopsis.png)
 
-## Examples
+## More examples
 
 ### Simple
 A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/blob/master/example/simple.js).
@@ -82,7 +82,7 @@ Useful if your app is [command-driven](https://github.com/75lb/command-line-comm
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
 
 ### Description section (table layout)
-Demonstrates use of table layout in the description. In this case the second column (containing the hammer and sickle) has `noWrap` enabled, as the input is already formatted as desired. [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
+Demonstrates supplying specific [table layout](https://github.com/75lb/table-layout) options to achieve more advanced layout. In this case the second column (containing the hammer and sickle) has a fixed `width` of 40 and `noWrap` enabled (as the input is already formatted as desired). [Code](https://github.com/75lb/command-line-usage/blob/master/example/description-columns.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
 
@@ -132,7 +132,13 @@ A Content section comprises a header and one or more lines of content.
     <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
-    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>One or more lines of text. For table layout, supply the content as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array.</p>
+    <td>content</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Array.&lt;object&gt;</code></td><td><p>Overloaded property, accepting data in one of four formats:</p>
+<ol>
+<li>A single string (one line of text)</li>
+<li>An array of strings (multiple lines of text)</li>
+<li>An array of objects (recordset-style data). In this case, the data will be rendered in table format. The property names of each object are not important, so long as they are consistent throughout the array.</li>
+<li>An object with two properties - <code>data</code> and <code>options</code>. In this case, the data and options will be passed directly to the underlying <a href="https://github.com/75lb/table-layout">table layout</a> module for rendering.</li>
+</ol>
 </td>
     </tr><tr>
     <td>raw</td><td><code>boolean</code></td><td><p>Set to true to avoid indentation and wrapping. Useful for banners.</p>
@@ -168,6 +174,22 @@ An array of recordset-style objects are rendered in table layout.
     { colA: 'First row, first column.', colB: 'First row, second column.'},
     { colA: 'Second row, first column.', colB: 'Second row, second column.'}
   ]
+}
+```
+
+An object with `data` and `options` properties will be passed directly to the underlying [table layout](https://github.com/75lb/table-layout) module for rendering.
+```js
+{
+  header: 'A typical app',
+  content: {
+    data: [
+     { colA: 'First row, first column.', colB: 'First row, second column.'},
+     { colA: 'Second row, first column.', colB: 'Second row, second column.'}
+    ],
+    options: {
+      maxWidth: 60
+    }
+  }
 }
 ```
 <a name="module_command-line-usage--commandLineUsage..optionList"></a>

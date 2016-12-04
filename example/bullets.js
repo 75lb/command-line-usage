@@ -2,10 +2,10 @@
 const commandLineUsage = require('../')
 let sections, usage
 
-/* Using default options  */
+/* Using default options - whitespace is trimmed */
 sections = [
   {
-    header: 'Example App',
+    header: 'Using default options - whitespace is trimmed',
     content: [
       'Generates something [italic]{very} important. This description is:',
       '',
@@ -17,15 +17,13 @@ sections = [
     ]
   }
 ]
-
-/* Using `raw` option and supplying your own whitespace */
-
 usage = commandLineUsage(sections)
 console.log(usage)
 
+/* Using `raw` option and supplying your own whitespace */
 sections = [
   {
-    header: 'Example App',
+    header: 'Using `raw` option and supplying your own whitespace',
     content: [
       '  Generates something [italic]{very} important. This description is:',
       '  ',
@@ -39,15 +37,33 @@ sections = [
     raw: true
   }
 ]
-
 usage = commandLineUsage(sections)
 console.log(usage)
 
-/* using separate sections, and the `noTrim` option were appropriate */
-
+/* Using `raw` option and supplying your own whitespace (single multiline string) */
 sections = [
   {
-    header: 'Example App',
+    header: 'Using `raw` option and supplying your own whitespace (single multiline string)',
+    content: [
+      '  Generates something [italic]{very} important. This description is:',
+      '  ',
+      '    • rather long',
+      '    • inconsequential',
+      '    • demonstrative',
+      '  ',
+      '  And the text continues underneath as this [cyan]{might} be required in cases where',
+      '  text is required underneath.'
+    ].join('\n'),
+    raw: true
+  }
+]
+usage = commandLineUsage(sections)
+console.log(usage)
+
+/* using separate sections, and the `noTrim` option on the bullets */
+sections = [
+  {
+    header: 'using separate sections, and the `noTrim` option on the bullets',
     content: [
       'Generates something [italic]{very} important. This description is:',
     ]
