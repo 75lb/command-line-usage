@@ -1,12 +1,12 @@
 'use strict'
-var TestRunner = require('test-runner')
-var commandLineUsage = require('../')
-var a = require('core-assert')
+const TestRunner = require('test-runner')
+const commandLineUsage = require('../')
+const a = require('assert')
 
-var runner = new TestRunner()
+const runner = new TestRunner()
 
 runner.test('commandLineUsage(sections)', function () {
-  var definitions = [
+  const definitions = [
     {
       name: 'help',
       description: 'Display this usage guide.',
@@ -30,7 +30,7 @@ runner.test('commandLineUsage(sections)', function () {
     }
   ]
 
-  var sections = [
+  const sections = [
     {
       header: 'a typical app',
       content: 'Generates something very important.'
@@ -41,14 +41,14 @@ runner.test('commandLineUsage(sections)', function () {
     }
   ]
 
-  var result = commandLineUsage(sections)
+  const result = commandLineUsage(sections)
   a.ok(/a typical app/.test(result))
   a.ok(/Generates something very important/.test(result))
   a.ok(/Display this usage guide/.test(result))
 })
 
 runner.test('header only, no content', function () {
-  var usage = commandLineUsage([
+  const usage = commandLineUsage([
     { header: 'header' }
   ])
   a.ok(/header/.test(usage))
