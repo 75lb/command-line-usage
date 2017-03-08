@@ -45,7 +45,7 @@ sections = [
   {
     header: 'Example app',
     content: [
-      'Generates something [italic]{very} important. This description is:',
+      'Generates something [italic]{very} important. This description is:'
     ]
   },
   {

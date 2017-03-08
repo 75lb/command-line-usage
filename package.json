@@ -29,7 +29,7 @@
     "typical": "^2.6.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^2.0.1",
+    "jsdoc-to-markdown": "^3.0.0",
     "test-runner": "^0.3.0"
   }
 }
