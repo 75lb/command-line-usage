@@ -20,11 +20,13 @@ const getUsage = require('command-line-usage')
 
 const sections = [
   {
+    name: 'Typical App',
     header: 'A typical app',
     content: 'Generates something [italic]{very} important.'
   },
   {
     header: 'Options',
+    name: 'options',
     optionList: [
       {
         name: 'input',
