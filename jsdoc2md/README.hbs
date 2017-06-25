@@ -7,7 +7,7 @@
 # command-line-usage
 A simple, data-driven module for creating a usage guide.
 
-## Synopis
+## Synopsis
 A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header and some content. Each section must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>.
 
 This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which renders the usage guide.

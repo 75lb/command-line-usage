@@ -123,7 +123,7 @@ Generates a usage guide suitable for a command-line app.
 #### commandLineUsage~content
 A Content section comprises a header and one or more lines of content.
 
-**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
+**Kind**: inner typedef of [<code>commandLineUsage</code>](#exp_module_command-line-usage--commandLineUsage)  
 **Properties**
 
 <table>
@@ -202,7 +202,7 @@ An object with `data` and `options` properties will be passed directly to the un
 #### commandLineUsage~optionList
 A OptionList section adds a table displaying details of the available options.
 
-**Kind**: inner typedef of <code>[commandLineUsage](#exp_module_command-line-usage--commandLineUsage)</code>  
+**Kind**: inner typedef of [<code>commandLineUsage</code>](#exp_module_command-line-usage--commandLineUsage)  
 **Properties**
 
 <table>
