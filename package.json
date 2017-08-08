@@ -23,9 +23,9 @@
     "test": "test-runner test/*.js"
   },
   "dependencies": {
-    "ansi-escape-sequences": "^3.0.0",
+    "ansi-escape-sequences": "^4.0.0",
     "array-back": "^2.0.0",
-    "table-layout": "^0.4.0",
+    "table-layout": "^0.4.1",
     "typical": "^2.6.1"
   },
   "devDependencies": {
