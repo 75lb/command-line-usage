@@ -91,6 +91,11 @@ By default, whitespace from the beginning of each line is trimmed to ensure wrap
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/whitespace.png)
 
+### Real-life
+The [polymer-cli](https://github.com/Polymer/polymer-cli/) usage guide is a good real-life example.
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/polymer.png)
+
 ## API Reference
 
 
@@ -253,4 +258,4 @@ A OptionList section adds a table displaying details of the available options.
 
 * * *
 
-&copy; 2015-17 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2015-18 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
