@@ -233,6 +233,9 @@ A OptionList section adds a table displaying details of the available options.
     </tr><tr>
     <td>hide</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>The names of one of more option definitions to hide from the option list. <a href="https://github.com/75lb/command-line-usage/blob/master/example/hide.js">Example</a>.</p>
 </td>
+    </tr><tr>
+    <td>reverseNameOrder</td><td><code>boolean</code></td><td><p>If true, the option alias will be displayed after the name, i.e. <code>--verbose, -v</code> instead of <code>-v, --verbose</code>).</p>
+</td>
     </tr>  </tbody>
 </table>
 
