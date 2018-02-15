@@ -10,6 +10,11 @@ const usage = commandLineUsage([
         { col: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ' }
       ]
     }
+  },
+  {
+    header: 'Options',
+    optionList: optionDefinitions,
+    options: { maxWidth: 40 }
   }
 ])
 
