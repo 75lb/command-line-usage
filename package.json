@@ -6,7 +6,7 @@
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
   "files": [
-    "lib"
+    "lib", "index.js"
   ],
   "keywords": [
     "terminal",
