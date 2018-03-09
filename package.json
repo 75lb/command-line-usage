@@ -1,12 +1,13 @@
 {
   "name": "command-line-usage",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Generates command-line usage information",
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
   "files": [
-    "lib", "index.js"
+    "lib",
+    "index.js"
   ],
   "keywords": [
     "terminal",
