@@ -8,9 +8,7 @@
 A simple, data-driven module for creating a usage guide.
 
 ## Synopsis
-A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header and some content. Each section must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>.
-
-This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which renders the usage guide.
+A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header, some content and must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>. This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which returns a usage guide.
 
 Inline ansi formatting can be used anywhere within section content using [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
 
@@ -77,7 +75,7 @@ An examples section is added. To achieve this table layout, supply the `content`
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Advanced optionList layout
-The `optionList` layout is fully configurable by setting the `tableOptions` property with an options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). [Code](https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js).
+The `optionList` layout is fully configurable by setting the `tableOptions` property with an options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). This example overrides the default column widths and adds flame padding. [Code](https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/option-list-options.png)
 
