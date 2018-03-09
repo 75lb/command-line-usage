@@ -13,14 +13,14 @@ const optionDefinitions = [
     description: 'The input files to process',
     multiple: true,
     defaultOption: true,
-    typeLabel: '[underline]{file} ...',
+    typeLabel: '{underline file} ...',
     group: 'input'
   },
   {
     name: 'timeout',
     description: 'Timeout value in ms',
     alias: 't',
-    typeLabel: '[underline]{ms}',
+    typeLabel: '{underline ms}',
     group: 'main'
   },
   {
@@ -33,7 +33,7 @@ const optionDefinitions = [
 const sections = [
   {
     header: 'A typical app',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something {italic very} important.'
   },
   {
     header: 'Main options',

@@ -1,8 +1,4 @@
 'use strict'
-const OptionList = require('./option-list')
-const ContentSection = require('./content-section')
-const arrayify = require('array-back')
-
 /**
  * @module command-line-usage
  */
@@ -15,8 +11,11 @@ module.exports = commandLineUsage
  * @alias module:command-line-usage
  */
 function commandLineUsage (sections) {
+  const arrayify = require('array-back')
   sections = arrayify(sections)
   if (sections.length) {
+    const OptionList = require('./lib/option-list')
+    const ContentSection = require('./lib/content-section')
     const output = sections.map(section => {
       if (section.optionList) {
         return new OptionList(section)
@@ -30,7 +29,7 @@ function commandLineUsage (sections) {
 
 /**
  * A Content section comprises a header and one or more lines of content.
- * @typedef content
+ * @typedef module:command-line-usage~content
  * @property header {string} - The section header, always bold and underlined.
  * @property content {string|string[]|object[]} - Overloaded property, accepting data in one of four formats:
  *
@@ -41,11 +40,11 @@ function commandLineUsage (sections) {
  *
  * @property raw {boolean} - Set to true to avoid indentation and wrapping. Useful for banners.
  * @example
- * Simple string of content. The syntax for ansi formatting is documented [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+ * Simple string of content. For ansi formatting, use [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
  * ```js
  * {
  *   header: 'A typical app',
- *   content: 'Generates something [italic]{very} important.'
+ *   content: 'Generates something {rgb(255,200,0).italic very {underline.bgRed important}}.'
  * }
  * ```
  *
@@ -90,9 +89,9 @@ function commandLineUsage (sections) {
 
  /**
   * A OptionList section adds a table displaying details of the available options.
-  * @typedef optionList
+  * @typedef module:command-line-usage~optionList
   * @property {string} [header] - The section header, always bold and underlined.
-  * @property optionList {OptionDefinition[]} - an array of [option definition](https://github.com/75lb/command-line-args#optiondefinition-) objects. In addition to the regular definition properties, command-line-usage will look for:
+  * @property optionList {OptionDefinition[]} - an array of [option definition](https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md) objects. In addition to the regular definition properties, command-line-usage will look for:
   *
   * - `description` - a string describing the option.
   * - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.
@@ -109,11 +108,11 @@ function commandLineUsage (sections) {
   *     },
   *     {
   *       name: 'src', description: 'The input files to process',
-  *       multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+  *       multiple: true, defaultOption: true, typeLabel: '{underline file} ...'
   *     },
   *     {
   *       name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
-  *       alias: 't', typeLabel: '[underline]{ms}'
+  *       alias: 't', typeLabel: '{underline ms}'
   *     }
   *   ]
   * }

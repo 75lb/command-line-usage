@@ -7,17 +7,17 @@ module.exports = [
   },
   {
     name: 'src',
-    description: 'The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
+    description: 'The {magenta input files} to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
     type: String,
     multiple: true,
     defaultOption: true,
-    typeLabel: '[underline]{file} ...'
+    typeLabel: '{underline file} ...'
   },
   {
     name: 'timeout',
     description: 'Timeout value in ms.',
     alias: 't',
     type: Number,
-    typeLabel: '[underline]{ms}'
+    typeLabel: '{underline ms}'
   }
 ]

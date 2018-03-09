@@ -7,7 +7,7 @@ const usage = commandLineUsage([
     content: {
       options: { maxWidth: 40 },
       data: [
-        { col: 'Generates something [italic]{very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ' }
+        { col: 'Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ' }
       ]
     }
   }

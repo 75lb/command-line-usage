@@ -12,7 +12,7 @@ A usage guide is created by first defining an arbitrary number of sections, e.g.
 
 This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which renders the usage guide.
 
-Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+Inline ansi formatting can be used anywhere within section content using [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
 
 For example, this script:
 ```js
@@ -21,14 +21,14 @@ const getUsage = require('command-line-usage')
 const sections = [
   {
     header: 'A typical app',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something {italic very} important.'
   },
   {
     header: 'Options',
     optionList: [
       {
         name: 'input',
-        typeLabel: '[underline]{file}',
+        typeLabel: '{underline file}',
         description: 'The input to process.'
       },
       {
@@ -77,7 +77,7 @@ An examples section is added. To achieve this table layout, supply the `content`
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Command list
-Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
+Useful if your app is command-driven, like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
 
@@ -157,11 +157,11 @@ A Content section comprises a header and one or more lines of content.
 </table>
 
 **Example**  
-Simple string of content. The syntax for ansi formatting is documented [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+Simple string of content. For ansi formatting, use [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
 ```js
 {
   header: 'A typical app',
-  content: 'Generates something [italic]{very} important.'
+  content: 'Generates something {rgb(255,200,0).italic very {underline.bgRed important}}.'
 }
 ```
 
@@ -218,23 +218,23 @@ A OptionList section adds a table displaying details of the available options.
   </thead>
   <tbody>
 <tr>
-    <td>header</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
+    <td>[header]</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
-    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args#optiondefinition-">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
 </ul>
 </td>
     </tr><tr>
-    <td>group</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>If specified, only options from this particular group will be printed. <a href="https://github.com/75lb/command-line-usage/blob/master/example/groups.js">Example</a>.</p>
+    <td>[group]</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>If specified, only options from this particular group will be printed. <a href="https://github.com/75lb/command-line-usage/blob/master/example/groups.js">Example</a>.</p>
 </td>
     </tr><tr>
-    <td>hide</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>The names of one of more option definitions to hide from the option list. <a href="https://github.com/75lb/command-line-usage/blob/master/example/hide.js">Example</a>.</p>
+    <td>[hide]</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td><td><p>The names of one of more option definitions to hide from the option list. <a href="https://github.com/75lb/command-line-usage/blob/master/example/hide.js">Example</a>.</p>
 </td>
     </tr><tr>
-    <td>reverseNameOrder</td><td><code>boolean</code></td><td><p>If true, the option alias will be displayed after the name, i.e. <code>--verbose, -v</code> instead of <code>-v, --verbose</code>).</p>
+    <td>[reverseNameOrder]</td><td><code>boolean</code></td><td><p>If true, the option alias will be displayed after the name, i.e. <code>--verbose, -v</code> instead of <code>-v, --verbose</code>).</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -249,11 +249,11 @@ A OptionList section adds a table displaying details of the available options.
     },
     {
       name: 'src', description: 'The input files to process',
-      multiple: true, defaultOption: true, typeLabel: '[underline]{file} ...'
+      multiple: true, defaultOption: true, typeLabel: '{underline file} ...'
     },
     {
       name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
-      alias: 't', typeLabel: '[underline]{ms}'
+      alias: 't', typeLabel: '{underline ms}'
     }
   ]
 }

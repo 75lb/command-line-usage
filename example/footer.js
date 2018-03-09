@@ -5,13 +5,13 @@ const optionDefinitions = require('./assets/example-options')
 const sections = [
   {
     header: 'A typical app',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something {italic very} important.'
   },
   {
     header: 'Synopsis',
     content: [
-      '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
-      '$ example [bold]{--help}'
+      '$ example [{bold --timeout} {underline ms}] {bold --src} {underline file} ...',
+      '$ example {bold --help}'
     ]
   },
   {
@@ -20,7 +20,7 @@ const sections = [
   },
   {
     content: [
-      '[italic]{This app was tested by dragons in Wales.}',
+      '{italic This app was tested by dragons in Wales.}',
       '',
       wales
     ],

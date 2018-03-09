@@ -45,6 +45,27 @@ runner.test('commandLineUsage(sections)', function () {
   a.ok(/a typical app/.test(result))
   a.ok(/Generates something very important/.test(result))
   a.ok(/Display this usage guide/.test(result))
+  a.ok(/\u001b\[1m-t\u001b\[22m, \u001b\[1m--timeout\u001b\[22m/.test(result))
+})
+
+runner.test('commandLineUsage(sections): reverseNameOrder', function () {
+  const sections = [
+    {
+      header: 'Option list',
+      optionList: [
+        {
+          name: 'timeout',
+          description: 'Timeout value in ms',
+          alias: 't',
+          type: Number
+        }
+      ],
+      reverseNameOrder: true
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/\u001b\[1m--timeout\u001b\[22m, \u001b\[1m-t\u001b\[22m/.test(result))
 })
 
 runner.test('header only, no content', function () {

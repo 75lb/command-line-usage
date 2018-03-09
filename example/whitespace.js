@@ -7,13 +7,13 @@ sections = [
   {
     header: 'Example app',
     content: [
-      'Generates something [italic]{very} important. This description is:',
+      'Generates something {italic very} important. This description is:',
       '',
       '  • rather long',
       '  • inconsequential',
       '  • demonstrative',
       '',
-      'And the text continues underneath as this [cyan]{might} be required in cases where text is required underneath.'
+      'And the text continues underneath as this {cyan might} be required in cases where text is required underneath.'
     ]
   }
 ]
@@ -25,13 +25,13 @@ sections = [
   {
     header: 'Example app',
     content: [
-      '  Generates something [italic]{very} important. This description is:',
+      '  Generates something {italic very} important. This description is:',
       '  ',
       '    • rather long',
       '    • inconsequential',
       '    • demonstrative',
       '  ',
-      '  And the text continues underneath as this [cyan]{might} be required in cases where',
+      '  And the text continues underneath as this {cyan might} be required in cases where',
       '  text is required underneath.'
     ],
     raw: true
@@ -45,7 +45,7 @@ sections = [
   {
     header: 'Example app',
     content: [
-      'Generates something [italic]{very} important. This description is:'
+      'Generates something {italic very} important. This description is:'
     ]
   },
   {
@@ -62,7 +62,7 @@ sections = [
   },
   {
     content: [
-      'And the text continues underneath as this [cyan]{might} be required in cases where text is required underneath.'
+      'And the text continues underneath as this {cyan might} be required in cases where text is required underneath.'
     ]
   }
 ]

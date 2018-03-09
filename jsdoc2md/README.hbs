@@ -12,7 +12,7 @@ A usage guide is created by first defining an arbitrary number of sections, e.g.
 
 This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which renders the usage guide.
 
-Inline ansi formatting can be used anywhere within section content using the formatting syntax described [here](https://github.com/75lb/ansi-escape-sequences#module_ansi-escape-sequences.format).
+Inline ansi formatting can be used anywhere within section content using [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
 
 For example, this script:
 ```js
@@ -21,14 +21,14 @@ const getUsage = require('command-line-usage')
 const sections = [
   {
     header: 'A typical app',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something {italic very} important.'
   },
   {
     header: 'Options',
     optionList: [
       {
         name: 'input',
-        typeLabel: '[underline]{file}',
+        typeLabel: '{underline file}',
         description: 'The input to process.'
       },
       {
@@ -77,7 +77,7 @@ An examples section is added. To achieve this table layout, supply the `content`
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
 ### Command list
-Useful if your app is [command-driven](https://github.com/75lb/command-line-commands), like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
+Useful if your app is command-driven, like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
 

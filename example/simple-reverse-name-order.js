@@ -9,7 +9,7 @@ const usage = getUsage([
   {
     header: 'Options',
     optionList: optionDefinitions,
-    hide: 'src'
+    reverseNameOrder: true
   },
   {
     content: 'Project home: {underline https://github.com/me/example}'

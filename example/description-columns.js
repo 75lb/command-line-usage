@@ -23,8 +23,8 @@ const sections = [
   {
     header: 'Synopsis',
     content: [
-      '$ example [[bold]{--timeout} [underline]{ms}] [bold]{--src} [underline]{file} ...',
-      '$ example [bold]{--help}'
+      '$ example [{bold --timeout} {underline ms}] {bold --src} {underline file} ...',
+      '$ example {bold --help}'
     ]
   },
   {

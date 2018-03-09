@@ -3,14 +3,14 @@ const getUsage = require('../')
 const sections = [
   {
     header: 'A typical app',
-    content: 'Generates something [italic]{very} important.'
+    content: 'Generates something {italic very} important.'
   },
   {
     header: 'Options',
     optionList: [
       {
         name: 'input',
-        typeLabel: '[underline]{file}',
+        typeLabel: '{underline file}',
         description: 'The input to process.'
       },
       {
