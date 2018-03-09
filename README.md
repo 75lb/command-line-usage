@@ -76,6 +76,11 @@ An examples section is added. To achieve this table layout, supply the `content`
 
 ![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
 
+### Advanced optionList layout
+The `optionList` layout is fully configurable by setting the `tableOptions` property with an options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). [Code](https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js).
+
+![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/option-list-options.png)
+
 ### Command list
 Useful if your app is command-driven, like git or npm. [Code](https://github.com/75lb/command-line-usage/blob/master/example/command-list.js).
 
@@ -235,6 +240,9 @@ A OptionList section adds a table displaying details of the available options.
 </td>
     </tr><tr>
     <td>[reverseNameOrder]</td><td><code>boolean</code></td><td><p>If true, the option alias will be displayed after the name, i.e. <code>--verbose, -v</code> instead of <code>-v, --verbose</code>).</p>
+</td>
+    </tr><tr>
+    <td>[tableOptions]</td><td><code>object</code></td><td><p>An options object suitable for passing into <a href="https://github.com/75lb/table-layout#table-">table-layout</a>. See <a href="https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js">here for an example</a>.</p>
 </td>
     </tr>  </tbody>
 </table>

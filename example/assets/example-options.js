@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     name: 'src',
-    description: 'The {magenta input files} to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
+    description: 'The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
     type: String,
     multiple: true,
     defaultOption: true,
