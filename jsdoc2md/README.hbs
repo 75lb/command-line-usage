@@ -14,7 +14,7 @@ Inline ansi formatting can be used anywhere within section content using [chalk 
 
 For example, this script:
 ```js
-const getUsage = require('command-line-usage')
+const commandLineUsage = require('command-line-usage')
 
 const sections = [
   {
@@ -36,7 +36,7 @@ const sections = [
     ]
   }
 ]
-const usage = getUsage(sections)
+const usage = commandLineUsage(sections)
 console.log(usage)
 ```
 
