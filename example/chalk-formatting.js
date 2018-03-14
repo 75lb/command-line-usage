@@ -1,5 +1,4 @@
 const getUsage = require('../')
-const optionDefinitions = require('./assets/example-options')
 
 const usage = getUsage([
   {
@@ -8,7 +7,9 @@ const usage = getUsage([
   },
   {
     header: 'Options',
-    optionList: optionDefinitions
+    optionList: [
+      { name: 'files', typeLabel: '{magenta {underline files}}', description: 'This is {red red}.'}
+    ]
   },
   {
     content: 'Project home: {underline https://github.com/me/example}'
