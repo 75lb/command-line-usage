@@ -3,7 +3,7 @@ const getUsage = require('../')
 const usage = getUsage([
   {
     header: 'A typical app',
-    content: 'Generates something \\{very important\\}.'
+    content: 'Generates something \\{very important\\}, also retaining `backticks`.'
   },
   {
     header: 'Options',
