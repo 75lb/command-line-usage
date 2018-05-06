@@ -74,3 +74,26 @@ runner.test('header only, no content', function () {
   ])
   a.ok(/header/.test(usage))
 })
+
+runner.test('optionList: optionDefinition with no description', function () {
+  const usage = commandLineUsage([
+    {
+      optionList: [
+        { name: 'one' }
+      ]
+    }
+  ])
+  a.ok(/one/.test(usage))
+})
+
+runner.test('optionList: optionDefinition with no name', function () {
+  a.throws(() => {
+    const usage = commandLineUsage([
+      {
+        optionList: [
+          { description: 'something' }
+        ]
+      }
+    ])
+  })
+})
