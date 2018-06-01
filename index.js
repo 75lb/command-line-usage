@@ -6,7 +6,7 @@ module.exports = commandLineUsage
 
 /**
  * Generates a usage guide suitable for a command-line app.
- * @param {Section|Section[]} - One of more section objects ({@link module:command-line-usage~content} or {@link module:command-line-usage~optionList}).
+ * @param {Section|Section[]} - One or more section objects ({@link module:command-line-usage~content} or {@link module:command-line-usage~optionList}).
  * @returns {string}
  * @alias module:command-line-usage
  */
@@ -88,10 +88,10 @@ function commandLineUsage (sections) {
  */
 
  /**
-  * A OptionList section adds a table displaying details of the available options.
+  * An OptionList section adds a table displaying the supplied option definitions.
   * @typedef module:command-line-usage~optionList
   * @property {string} [header] - The section header, always bold and underlined.
-  * @property optionList {OptionDefinition[]} - an array of [option definition](https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md) objects. In addition to the regular definition properties, command-line-usage will look for:
+  * @property optionList {OptionDefinition[]} - An array of [option definition](https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md) objects. In addition to the regular definition properties, command-line-usage will look for:
   *
   * - `description` - a string describing the option.
   * - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.
@@ -105,15 +105,22 @@ function commandLineUsage (sections) {
   *   header: 'Options',
   *   optionList: [
   *     {
-  *       name: 'help', alias: 'h', description: 'Display this usage guide.'
+  *       name: 'help',
+  *       alias: 'h',
+  *       description: 'Display this usage guide.'
   *     },
   *     {
-  *       name: 'src', description: 'The input files to process',
-  *       multiple: true, defaultOption: true, typeLabel: '{underline file} ...'
+  *       name: 'src',
+  *       description: 'The input files to process',
+  *       multiple: true,
+  *       defaultOption: true,
+  *       typeLabel: '{underline file} ...'
   *     },
   *     {
-  *       name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
-  *       alias: 't', typeLabel: '{underline ms}'
+  *       name: 'timeout',
+  *       description: 'Timeout value in ms.',
+  *       alias: 't',
+  *       typeLabel: '{underline ms}'
   *     }
   *   ]
   * }

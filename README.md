@@ -121,7 +121,7 @@ Generates a usage guide suitable for a command-line app.
   </thead>
   <tbody>
 <tr>
-    <td>sections</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>One of more section objects (<a href="#module_command-line-usage--commandLineUsage..content">content</a> or <a href="#module_command-line-usage--commandLineUsage..optionList">optionList</a>).</p>
+    <td>sections</td><td><code>Section</code> | <code>Array.&lt;Section&gt;</code></td><td><p>One or more section objects (<a href="#module_command-line-usage--commandLineUsage..content">content</a> or <a href="#module_command-line-usage--commandLineUsage..optionList">optionList</a>).</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -208,7 +208,7 @@ An object with `data` and `options` properties will be passed directly to the un
 <a name="module_command-line-usage--commandLineUsage..optionList"></a>
 
 #### commandLineUsage~optionList
-A OptionList section adds a table displaying details of the available options.
+An OptionList section adds a table displaying the supplied option definitions.
 
 **Kind**: inner typedef of [<code>commandLineUsage</code>](#exp_module_command-line-usage--commandLineUsage)  
 **Properties**
@@ -224,7 +224,7 @@ A OptionList section adds a table displaying details of the available options.
     <td>[header]</td><td><code>string</code></td><td><p>The section header, always bold and underlined.</p>
 </td>
     </tr><tr>
-    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>an array of <a href="https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
+    <td>optionList</td><td><code>Array.&lt;OptionDefinition&gt;</code></td><td><p>An array of <a href="https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md">option definition</a> objects. In addition to the regular definition properties, command-line-usage will look for:</p>
 <ul>
 <li><code>description</code> - a string describing the option.</li>
 <li><code>typeLabel</code> - a string to replace the default type string (e.g. <code>&lt;string&gt;</code>). It&#39;s often more useful to set a more descriptive type label, like <code>&lt;ms&gt;</code>, <code>&lt;files&gt;</code>, <code>&lt;command&gt;</code> etc.</li>
@@ -251,15 +251,22 @@ A OptionList section adds a table displaying details of the available options.
   header: 'Options',
   optionList: [
     {
-      name: 'help', alias: 'h', description: 'Display this usage guide.'
+      name: 'help',
+      alias: 'h',
+      description: 'Display this usage guide.'
     },
     {
-      name: 'src', description: 'The input files to process',
-      multiple: true, defaultOption: true, typeLabel: '{underline file} ...'
+      name: 'src',
+      description: 'The input files to process',
+      multiple: true,
+      defaultOption: true,
+      typeLabel: '{underline file} ...'
     },
     {
-      name: 'timeout', description: 'Timeout value in ms. This description is needlessly long unless you count testing of the description column maxWidth useful.',
-      alias: 't', typeLabel: '{underline ms}'
+      name: 'timeout',
+      description: 'Timeout value in ms.',
+      alias: 't',
+      typeLabel: '{underline ms}'
     }
   ]
 }
