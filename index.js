@@ -1,7 +1,6 @@
 /**
  * @module command-line-usage
  */
-module.exports = commandLineUsage
 
 /**
  * Generates a usage guide suitable for a command-line app.
@@ -124,3 +123,5 @@ function commandLineUsage (sections) {
   *   ]
   * }
   */
+
+module.exports = commandLineUsage
