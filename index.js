@@ -22,6 +22,8 @@ function commandLineUsage (sections) {
       }
     })
     return '\n' + output.join('\n')
+  } else {
+    return ''
   }
 }
 
