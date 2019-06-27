@@ -4,7 +4,7 @@ const a = require('assert')
 
 const tom = module.exports = new Tom('api')
 
-tom.test('commandLineUsage(sections)', function () {
+tom.test('commandLineUsage(sections): typical', function () {
   const definitions = [
     {
       name: 'help',
@@ -47,7 +47,14 @@ tom.test('commandLineUsage(sections)', function () {
   a.ok(/\u001b\[1m-t\u001b\[22m, \u001b\[1m--timeout\u001b\[22m/.test(result))
 })
 
-tom.test('commandLineUsage(sections): reverseNameOrder', function () {
+tom.test('header only, no content', function () {
+  const usage = commandLineUsage([
+    { header: 'header' }
+  ])
+  a.ok(/header/.test(usage))
+})
+
+tom.test('optionList: reverseNameOrder', function () {
   const sections = [
     {
       header: 'Option list',
@@ -65,13 +72,6 @@ tom.test('commandLineUsage(sections): reverseNameOrder', function () {
 
   const result = commandLineUsage(sections)
   a.ok(/\u001b\[1m--timeout\u001b\[22m, \u001b\[1m-t\u001b\[22m/.test(result))
-})
-
-tom.test('header only, no content', function () {
-  const usage = commandLineUsage([
-    { header: 'header' }
-  ])
-  a.ok(/header/.test(usage))
 })
 
 tom.test('optionList: optionDefinition with no description', function () {
@@ -95,4 +95,84 @@ tom.test('optionList: optionDefinition with no name', function () {
       }
     ])
   })
+})
+
+tom.test('optionList: omit String, correct typeLabel', function () {
+  const definitions = [
+    {
+      name: 'src',
+      description: 'The input files to process'
+    }
+  ]
+
+  const sections = [
+    {
+      header: 'Option list',
+      optionList: definitions
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/--src\u001b\[22m \u001b\[4mstring/.test(result))
+})
+
+tom.test('optionList: omit String, correct typeLabel, multiple', function () {
+  const definitions = [
+    {
+      name: 'src',
+      description: 'The input files to process',
+      multiple: true
+    }
+  ]
+
+  const sections = [
+    {
+      header: 'Option list',
+      optionList: definitions
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/--src\u001b\[22m \u001b\[4mstring\[\]/.test(result))
+})
+
+tom.test('optionList: omit String, correct typeLabel, lazyMultiple', function () {
+  const definitions = [
+    {
+      name: 'src',
+      description: 'The input files to process',
+      lazyMultiple: true
+    }
+  ]
+
+  const sections = [
+    {
+      header: 'Option list',
+      optionList: definitions
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/--src\u001b\[22m \u001b\[4mstring\[\]/.test(result))
+})
+
+tom.test('optionList: type Number, correct typeLabel, lazyMultiple', function () {
+  const definitions = [
+    {
+      name: 'src',
+      description: 'The input files to process',
+      type: Number,
+      lazyMultiple: true
+    }
+  ]
+
+  const sections = [
+    {
+      header: 'Option list',
+      optionList: definitions
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/--src\u001b\[22m \u001b\[4mnumber\[\]/.test(result))
 })

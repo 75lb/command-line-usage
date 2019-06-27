@@ -4,6 +4,8 @@
 [![Dependency Status](https://badgen.net/david/dep/75lb/command-line-usage)](https://david-dm.org/75lb/command-line-usage)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
+***Upgraders, please check the [release notes](https://github.com/75lb/command-line-usage/releases)***
+
 # command-line-usage
 
 A simple, data-driven module for creating a usage guide.
