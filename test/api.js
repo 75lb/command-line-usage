@@ -176,3 +176,14 @@ tom.test('optionList: type Number, correct typeLabel, lazyMultiple', function ()
   const result = commandLineUsage(sections)
   a.ok(/--src\u001b\[22m \u001b\[4mnumber\[\]/.test(result))
 })
+
+tom.test('standard: content array of strings', function () {
+  const sections = [
+    {
+      content: [ 'one', 'two' ]
+    }
+  ]
+
+  const result = commandLineUsage(sections)
+  a.ok(/one\s+\n\s+two/.test(result))
+})

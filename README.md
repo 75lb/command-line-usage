@@ -4,13 +4,15 @@
 [![Dependency Status](https://badgen.net/david/dep/75lb/command-line-usage)](https://david-dm.org/75lb/command-line-usage)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
-***Upgraders, please check the [release notes](https://github.com/75lb/command-line-usage/releases)***
+***Upgraders, please check the [release notes](https://github.com/75lb/command-line-usage/releases).***
 
 # command-line-usage
 
 A simple, data-driven module for creating a usage guide.
 
 ## Synopsis
+
+A usage guide is created by defining an array of sections. There are two types of section: Standard, OptionList.
 
 A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header, some content and must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>. This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which returns a usage guide.
 
