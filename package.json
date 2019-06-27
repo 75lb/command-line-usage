@@ -19,7 +19,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs --no-gfm index.js > README.md; echo",
+    "docs": "jsdoc2md --no-gfm index.js > doc/api.md; echo",
     "test": "test-runner test/*.js",
     "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
