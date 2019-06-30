@@ -1,4 +1,3 @@
-'use strict'
 const commandLineUsage = require('../')
 let sections, usage
 
