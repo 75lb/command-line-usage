@@ -2,6 +2,7 @@
 [![npm module downloads](http://img.shields.io/npm/dt/command-line-usage.svg)](https://www.npmjs.org/package/command-line-usage)
 [![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
 [![Dependency Status](https://badgen.net/david/dep/75lb/command-line-usage)](https://david-dm.org/75lb/command-line-usage)
+[![Coverage Status](https://coveralls.io/repos/github/75lb/command-line-usage/badge.svg?branch=next)](https://coveralls.io/github/75lb/command-line-usage?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 ***Upgraders, please check the [release notes](https://github.com/75lb/command-line-usage/releases).***
