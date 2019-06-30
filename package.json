@@ -19,7 +19,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "docs": "jsdoc2md --no-gfm index.js > doc/api.md; echo",
+    "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
     "test": "test-runner test/*.js",
     "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
@@ -34,5 +34,10 @@
     "jsdoc-to-markdown": "^5.0.0",
     "nyc": "^14.1.1",
     "test-runner": "^0.6.0"
+  },
+  "standard": {
+    "ignore": [
+      "example"
+    ]
   }
 }

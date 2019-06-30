@@ -80,7 +80,7 @@ tom.test('optionDefinition with no description', function () {
 
 tom.test('optionDefinition with no name', function () {
   a.throws(() => {
-    const usage = commandLineUsage([
+    commandLineUsage([
       {
         optionList: [
           { description: 'something' }
