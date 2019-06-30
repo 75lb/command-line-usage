@@ -1,11 +1,10 @@
-'use strict'
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const commandLineUsage = require('../')
 const a = require('assert')
 
-const runner = new TestRunner()
+const tom = module.exports = new Tom('api')
 
-runner.test('commandLineUsage(sections)', function () {
+tom.test('typical', function () {
   const definitions = [
     {
       name: 'help',
@@ -48,52 +47,8 @@ runner.test('commandLineUsage(sections)', function () {
   a.ok(/\u001b\[1m-t\u001b\[22m, \u001b\[1m--timeout\u001b\[22m/.test(result))
 })
 
-runner.test('commandLineUsage(sections): reverseNameOrder', function () {
-  const sections = [
-    {
-      header: 'Option list',
-      optionList: [
-        {
-          name: 'timeout',
-          description: 'Timeout value in ms',
-          alias: 't',
-          type: Number
-        }
-      ],
-      reverseNameOrder: true
-    }
-  ]
-
+tom.test('empty sections', function () {
+  const sections = []
   const result = commandLineUsage(sections)
-  a.ok(/\u001b\[1m--timeout\u001b\[22m, \u001b\[1m-t\u001b\[22m/.test(result))
-})
-
-runner.test('header only, no content', function () {
-  const usage = commandLineUsage([
-    { header: 'header' }
-  ])
-  a.ok(/header/.test(usage))
-})
-
-runner.test('optionList: optionDefinition with no description', function () {
-  const usage = commandLineUsage([
-    {
-      optionList: [
-        { name: 'one' }
-      ]
-    }
-  ])
-  a.ok(/one/.test(usage))
-})
-
-runner.test('optionList: optionDefinition with no name', function () {
-  a.throws(() => {
-    const usage = commandLineUsage([
-      {
-        optionList: [
-          { description: 'something' }
-        ]
-      }
-    ])
-  })
+  a.strictEqual(result, '')
 })

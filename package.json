@@ -1,12 +1,12 @@
 {
   "name": "command-line-usage",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "5.0.5",
+  "version": "6.0.0-1",
   "description": "Generates command-line usage information",
   "repository": "https://github.com/75lb/command-line-usage.git",
   "license": "MIT",
   "files": [
-    "lib",
+    "lib/*.js",
     "index.js"
   ],
   "keywords": [
@@ -16,20 +16,28 @@
     "generator"
   ],
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs --no-gfm index.js > README.md; echo",
-    "test": "test-runner test/*.js"
+    "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
+    "test": "test-runner test/*.js",
+    "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "array-back": "^2.0.0",
-    "chalk": "^2.4.1",
-    "table-layout": "^0.4.4",
-    "typical": "^2.6.1"
+    "array-back": "^3.1.0",
+    "chalk": "^2.4.2",
+    "table-layout": "^1.0.0",
+    "typical": "^5.1.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.1",
-    "test-runner": "^0.5.1"
+    "coveralls": "^3.0.4",
+    "jsdoc-to-markdown": "^5.0.0",
+    "nyc": "^14.1.1",
+    "test-runner": "^0.6.0"
+  },
+  "standard": {
+    "ignore": [
+      "example"
+    ]
   }
 }
