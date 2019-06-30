@@ -12,8 +12,8 @@ function commandLineUsage (sections) {
   const arrayify = require('array-back')
   sections = arrayify(sections)
   if (sections.length) {
-    const OptionList = require('./lib/option-list')
-    const ContentSection = require('./lib/content-section')
+    const OptionList = require('./lib/section/option-list')
+    const ContentSection = require('./lib/section/content')
     const output = sections.map(section => {
       if (section.optionList) {
         return new OptionList(section)
