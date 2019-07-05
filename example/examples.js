@@ -1,5 +1,27 @@
 const commandLineUsage = require('../')
-const optionDefinitions = require('./assets/example-options')
+const optionDefinitions = [
+  {
+    name: 'help',
+    description: 'Display this usage guide.',
+    alias: 'h',
+    type: Boolean
+  },
+  {
+    name: 'src',
+    description: 'The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
+    type: String,
+    multiple: true,
+    defaultOption: true,
+    typeLabel: '{underline file} ...'
+  },
+  {
+    name: 'timeout',
+    description: 'Timeout value in ms.',
+    alias: 't',
+    type: Number,
+    typeLabel: '{underline ms}'
+  }
+]
 
 const sections = [
   {
@@ -19,10 +41,7 @@ const sections = [
   },
   {
     header: 'Examples',
-    content: [
-      'A list of examples which demonstrate how to use the app.',
-      '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄'
-    ]
+    content: 'A list of examples which demonstrate how to use the app.'
   },
   {
     content: [
@@ -39,9 +58,6 @@ const sections = [
         example: '$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts'
       }
     ]
-  },
-  {
-    content: '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄'
   },
   {
     content: 'Project home: {underline https://github.com/me/example}'
