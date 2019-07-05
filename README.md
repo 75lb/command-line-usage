@@ -47,7 +47,7 @@ console.log(usage)
 
 Outputs this guide:
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/synopsis.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/synopsis.png" width="90%">
 
 ## More examples
 
@@ -55,13 +55,13 @@ Outputs this guide:
 
 A fairly typical usage guide with three sections - description, option list and footer. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-create-a-typical-usage-guide).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/simple.png" width="90%">
 
 ### Option List groups
 
 Demonstrates breaking the option list up into groups. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-break-the-option-list-up-into-groups).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/groups.png" width="90%">
 
 ### Banners
 
@@ -71,43 +71,43 @@ A banner is created by adding the `raw: true` property to your `content`. This f
 
 Demonstrates a banner at the top. This example also adds a `synopsis` section. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-add-a-banner-to-your-usage-guide#code).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/header.png" width="90%">
 
 #### Footer
 
 Demonstrates a footer banner. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-add-a-banner-to-your-usage-guide#code-1).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/footer.png" width="90%">
 
 ### Examples section (table layout)
 
 An examples section is added. To achieve this table layout, supply the `content` as an array of objects. The property names of each object are not important, so long as they are consistent throughout the array. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-add-an-examples-section-to-your-usage-guide).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/example-columns.png" width="90%">
 
 ### Advanced optionList layout
 
 The `optionList` layout is fully configurable by setting the `tableOptions` property with an options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). This example overrides the default column widths and adds flame padding. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-use-advanced-optionList-table-formatting).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/option-list-options.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/option-list-options.png" width="90%">
 
 ### Command list
 
 Useful if your app is command-driven, like git or npm. [Code](https://github.com/75lb/command-line-usage/wiki/How-to-add-a-command-list-to-your-usage-guide).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/command-list.png" width="90%">
 
 ### Description section (table layout)
 
 Demonstrates supplying specific [table layout](https://github.com/75lb/table-layout) options to achieve more advanced layout. In this case the second column (containing the hammer and sickle) has a fixed `width` of 40 and `noWrap` enabled (as the input is already formatted as desired). [Code](https://github.com/75lb/command-line-usage/wiki/How-to-add-a-description-section-to-your-usage-guide).
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/description-columns.png" width="90%">
 
 ### Real-life
 
 The [polymer-cli](https://github.com/Polymer/polymer-cli/) usage guide is a good real-life example.
 
-![usage](https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/polymer.png)
+<img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/polymer.png" width="90%">
 
 ## Documentation
 
