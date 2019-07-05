@@ -1,4 +1,4 @@
-const getUsage = require('../')
+const commandLineUsage = require('../')
 const wales = require('./assets/ansi-wales')
 const optionDefinitions = require('./assets/example-options')
 

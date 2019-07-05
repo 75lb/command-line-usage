@@ -1,4 +1,4 @@
-const getUsage = require('../')
+const commandLineUsage = require('../')
 
 const usage = getUsage([
   {
