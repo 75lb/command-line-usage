@@ -20,6 +20,12 @@ const sections = [
   {
     header: 'Examples',
     content: [
+      'A list of examples which demonstrate how to use the app.',
+      '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄'
+    ]
+  },
+  {
+    content: [
       {
         desc: '1. A concise example. ',
         example: '$ example -t 100 lib/*.js'
@@ -29,14 +35,17 @@ const sections = [
         example: '$ example --timeout 100 --src lib/*.js'
       },
       {
-        desc: '3. This example will scan space for unknown things. Take cure when scanning space, it could take some time. ',
+        desc: '3. This even longer example will scan space for unknown things. Take care when scanning space, it could take some time. ',
         example: '$ example --src galaxy1.facts galaxy1.facts galaxy2.facts galaxy3.facts galaxy4.facts galaxy5.facts'
       }
     ]
+  },
+  {
+    content: '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄'
   },
   {
     content: 'Project home: {underline https://github.com/me/example}'
   }
 ]
 
-console.log(getUsage(sections))
+console.log(commandLineUsage(sections))

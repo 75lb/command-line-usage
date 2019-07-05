@@ -1,6 +1,6 @@
 const commandLineUsage = require('../')
 
-const usage = getUsage([
+const usage = commandLineUsage([
   {
     header: 'A typical app',
     content: 'Generates something \\{very important\\}, also retaining `backticks`.'

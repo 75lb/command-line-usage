@@ -20,6 +20,6 @@ const sections = [
     ]
   }
 ]
-const usage = getUsage(sections)
+const usage = commandLineUsage(sections)
 
 console.log(usage)

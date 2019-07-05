@@ -16,4 +16,4 @@ const sections = [
   }
 ]
 
-console.log(getUsage(sections))
+console.log(commandLineUsage(sections))
