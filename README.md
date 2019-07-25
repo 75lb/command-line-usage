@@ -49,7 +49,7 @@ Outputs this guide:
 
 <img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/synopsis.png" width="90%">
 
-## More examples
+## Some examples
 
 ### Typical
 
@@ -112,7 +112,7 @@ The [polymer-cli](https://github.com/Polymer/polymer-cli/) usage guide is a good
 ## Documentation
 
 * [API Reference](https://github.com/75lb/command-line-usage/blob/master/doc/api.md)
-* [Examples](https://github.com/75lb/command-line-usage/wiki)
+* [The full list of examples](https://github.com/75lb/command-line-usage/wiki)
 
 * * *
 
