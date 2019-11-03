@@ -79,7 +79,7 @@ tom.test('optionDefinition with no description', function () {
 })
 
 tom.test('optionDefinition with no name', function () {
-  a.throws(() => {
+  a.doesNotThrow(() => {
     commandLineUsage([
       {
         optionList: [
