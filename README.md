@@ -2,7 +2,7 @@
 [![npm module downloads](https://badgen.net/npm/dt/command-line-usage)](https://www.npmjs.org/package/command-line-usage)
 [![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/command-line-usage)](https://github.com/75lb/command-line-usage/network/dependents?dependent_type=REPOSITORY)
 [![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/command-line-usage)](https://github.com/75lb/command-line-usage/network/dependents?dependent_type=PACKAGE)
-[![Build Status](https://travis-ci.org/75lb/command-line-usage.svg?branch=master)](https://travis-ci.org/75lb/command-line-usage)
+[![Node.js CI](https://github.com/75lb/command-line-usage/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/command-line-usage/actions/workflows/node.js.yml)
 [![Coverage Status](https://coveralls.io/repos/github/75lb/command-line-usage/badge.svg)](https://coveralls.io/github/75lb/command-line-usage)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
@@ -117,4 +117,4 @@ The [polymer-cli](https://github.com/Polymer/polymer-cli/) usage guide is a good
 
 * * *
 
-&copy; 2015-21 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2015-22 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).

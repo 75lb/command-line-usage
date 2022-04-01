@@ -14,7 +14,7 @@ tom.test('header only, no content', function () {
 
 tom.test('content: array of strings', function () {
   const sections = [{
-    content: [ 'one', 'two' ]
+    content: ['one', 'two']
   }]
 
   const result = commandLineUsage(sections)
