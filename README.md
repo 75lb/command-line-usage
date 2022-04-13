@@ -14,13 +14,13 @@ A simple, data-driven module for creating a usage guide.
 
 ## Synopsis
 
-A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header, some content and must be of type <code><a href="#commandlineusagecontent">content</a></code> or <code><a href="#commandlineusageoptionlist">optionList</a></code>. This section data is passed to <code><a href="#commandlineusagesections--string-">commandLineUsage()</a></code> which returns a usage guide.
+A usage guide is created by first defining an arbitrary number of sections, e.g. a description section, synopsis, option list, examples, footer etc. Each section has an optional header, some content and must be of type [`content`](https://github.com/75lb/command-line-usage/blob/master/doc/api.md#module_command-line-usage--commandLineUsage..content) or [`optionList`](https://github.com/75lb/command-line-usage/blob/master/doc/api.md#module_command-line-usage--commandLineUsage..optionList). This section data is passed to [`commandLineUsage()`](https://github.com/75lb/command-line-usage/blob/master/doc/api.md#exp_module_command-line-usage--commandLineUsage) which returns a usage guide.
 
-Inline ansi formatting can be used anywhere within section content using [chalk template literal syntax](https://github.com/chalk/chalk#tagged-template-literal).
+Inline ansi formatting can be used anywhere within section content using [chalk template literal syntax](https://github.com/chalk/chalk/tree/v2.4.2#tagged-template-literal).
 
 For example, this script:
 ```js
-const commandLineUsage = require('command-line-usage')
+import commandLineUsage from 'command-line-usage'
 
 const sections = [
   {
@@ -106,7 +106,7 @@ Demonstrates supplying specific [table layout](https://github.com/75lb/table-lay
 
 ### Real-life
 
-The [polymer-cli](https://github.com/Polymer/polymer-cli/) usage guide is a good real-life example.
+The [polymer-cli](https://github.com/Polymer/tools/tree/master/packages/cli) usage guide is a good real-life example.
 
 <img src="https://raw.githubusercontent.com/75lb/command-line-usage/master/example/screens/polymer.png" width="90%">
 

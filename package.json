@@ -24,13 +24,13 @@
     "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "array-back": "^4.0.1",
+    "array-back": "^4.0.2",
     "chalk": "^2.4.2",
-    "table-layout": "^1.0.1",
+    "table-layout": "^1.0.2",
     "typical": "^5.2.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^6.0.1",
+    "jsdoc-to-markdown": "^7.1.1",
     "test-runner": "^0.6.3"
   },
   "standard": {
