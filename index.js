@@ -2,6 +2,8 @@
  * @module command-line-usage
  */
 
+const arrayify = require('array-back')
+
 /**
  * Generates a usage guide suitable for a command-line app.
  * @param {Section|Section[]} - One or more section objects ({@link module:command-line-usage~content} or {@link module:command-line-usage~optionList}).
@@ -12,7 +14,6 @@ function commandLineUsage (sections, options) {
   options = options || {
     useChalk: true
   }
-  const arrayify = require('array-back')
   sections = arrayify(sections)
   if (sections.length) {
     const OptionList = require('./lib/section/option-list')
