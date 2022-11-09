@@ -1,9 +1,10 @@
 {
-  "name": "command-line-usage",
+  "name": "@viglucci/command-line-usage",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "6.1.3",
+  "contributors": ["Kevin Viglucci <kviglucci@gmail.com>"],
+  "version": "6.2.0-alpha.0",
   "description": "Generates command-line usage information",
-  "repository": "https://github.com/75lb/command-line-usage",
+  "repository": "https://github.com/viglucci/command-line-usage",
   "license": "MIT",
   "files": [
     "lib/**/*.js",

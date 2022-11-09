@@ -1,6 +1,7 @@
 const Tom = require('test-runner').Tom
 const commandLineUsage = require('../')
 const a = require('assert')
+const EOL = require('os').EOL
 
 const tom = module.exports = new Tom('section-content')
 

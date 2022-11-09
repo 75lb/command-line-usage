@@ -8,7 +8,10 @@
  * @returns {string}
  * @alias module:command-line-usage
  */
-function commandLineUsage (sections) {
+function commandLineUsage (sections, options) {
+  options = options || {
+    useChalk: true
+  }
   const arrayify = require('array-back')
   sections = arrayify(sections)
   if (sections.length) {
@@ -16,9 +19,9 @@ function commandLineUsage (sections) {
     const ContentSection = require('./lib/section/content')
     const output = sections.map(section => {
       if (section.optionList) {
-        return new OptionList(section)
+        return new OptionList(section, options)
       } else {
-        return new ContentSection(section)
+        return new ContentSection(section, options)
       }
     })
     return '\n' + output.join('\n')
