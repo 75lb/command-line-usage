@@ -25,12 +25,12 @@
   },
   "dependencies": {
     "array-back": "^4.0.2",
-    "chalk": "^2.4.2",
-    "table-layout": "^1.0.2",
+    "chalk": "^3.0.0",
+    "table-layout": "^3.0.0",
     "typical": "^5.2.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^7.1.1",
+    "jsdoc-to-markdown": "^8.0.0",
     "test-runner": "^0.6.3"
   },
   "standard": {
