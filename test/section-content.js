@@ -1,8 +1,8 @@
-const Tom = require('test-runner').Tom
-const commandLineUsage = require('../')
-const a = require('assert')
+import TestRunner from 'test-runner'
+import { strict as a } from 'assert'
+import commandLineUsage from 'command-line-usage'
 
-const tom = module.exports = new Tom('section-content')
+const tom = new TestRunner.Tom()
 
 tom.test('header only, no content', function () {
   const sections = [
@@ -107,3 +107,5 @@ tom.test('content: invalid', function () {
     /invalid input/
   )
 })
+
+export default tom

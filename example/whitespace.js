@@ -1,4 +1,4 @@
-const commandLineUsage = require('../')
+import commandLineUsage from 'command-line-usage'
 let sections, usage
 
 /* When using default options, the whitespace before the bullets is trimmed */

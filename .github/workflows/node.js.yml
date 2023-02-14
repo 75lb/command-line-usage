@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8, 10, 12, 14, 16, 17]
+        node-version: [12, 14, 16, 18, 19]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,5 +24,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: FORCE_COLOR=3 npm test
+    - run: npm install
+    - run: FORCE_COLOR=3 npm test # FORCE_COLOR=3 enables full 16,777,216 colour support

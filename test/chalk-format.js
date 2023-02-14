@@ -1,8 +1,8 @@
-const Tom = require('test-runner').Tom
-const a = require('assert')
-const chalkFormat = require('../lib/chalk-format')
+import TestRunner from 'test-runner'
+import { strict as a } from 'assert'
+import chalkFormat from '../lib/chalk-format.js'
 
-const tom = module.exports = new Tom('chalk-format')
+const tom = new TestRunner.Tom()
 
 tom.test('chalk-format: simple', function () {
   const str = 'Something'
@@ -15,3 +15,7 @@ tom.test('chalk-format: template string in input', function () {
   const result = chalkFormat(str)
   a.strictEqual(result, str)
 })
+
+export default tom
+
+

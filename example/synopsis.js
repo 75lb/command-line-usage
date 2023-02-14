@@ -1,4 +1,4 @@
-const commandLineUsage = require('../')
+import commandLineUsage from 'command-line-usage'
 
 const sections = [
   {

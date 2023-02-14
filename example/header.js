@@ -1,4 +1,4 @@
-const commandLineUsage = require('../')
+import commandLineUsage from 'command-line-usage'
 const header = require('./assets/ansi-header')
 const chalk = require('chalk')
 

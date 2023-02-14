@@ -1,3 +1,7 @@
+import OptionList from './lib/section/option-list.js'
+import ContentSection from './lib/section/content.js'
+import arrayify from 'array-back'
+
 /**
  * @module command-line-usage
  */
@@ -9,11 +13,8 @@
  * @alias module:command-line-usage
  */
 function commandLineUsage (sections) {
-  const arrayify = require('array-back')
   sections = arrayify(sections)
   if (sections.length) {
-    const OptionList = require('./lib/section/option-list')
-    const ContentSection = require('./lib/section/content')
     const output = sections.map(section => {
       if (section.optionList) {
         return new OptionList(section)
@@ -27,4 +28,4 @@ function commandLineUsage (sections) {
   }
 }
 
-module.exports = commandLineUsage
+export default commandLineUsage

@@ -1,4 +1,4 @@
-const commandLineUsage = require('../')
+import commandLineUsage from 'command-line-usage'
 
 const usage = commandLineUsage([
   {
@@ -8,7 +8,7 @@ const usage = commandLineUsage([
   {
     header: 'Options',
     optionList: [
-      { name: 'files', typeLabel: '\\{something\\}', description: 'This is not \\{red red\\}.'}
+      { name: 'files', typeLabel: ' \\{something\\} ', description: ''}
     ]
   }
 ])

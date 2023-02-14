@@ -1,8 +1,8 @@
-const Tom = require('test-runner').Tom
-const commandLineUsage = require('../')
-const a = require('assert')
+import commandLineUsage from 'command-line-usage'
+import TestRunner from 'test-runner'
+import { strict as a } from 'assert'
 
-const tom = module.exports = new Tom('api')
+const tom = new TestRunner.Tom()
 
 tom.test('typical', function () {
   const definitions = [
@@ -52,3 +52,5 @@ tom.test('empty sections', function () {
   const result = commandLineUsage(sections)
   a.strictEqual(result, '')
 })
+
+export default tom

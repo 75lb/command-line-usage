@@ -1,8 +1,8 @@
-const Tom = require('test-runner').Tom
-const commandLineUsage = require('../')
-const a = require('assert')
+import TestRunner from 'test-runner'
+import { strict as a } from 'assert'
+import commandLineUsage from 'command-line-usage'
 
-const tom = module.exports = new Tom('section-optionList')
+const tom = new TestRunner.Tom()
 
 tom.test('commandLineUsage(sections): typical', function () {
   const definitions = [
@@ -169,3 +169,5 @@ tom.test('type Number, correct typeLabel, lazyMultiple', function () {
   const result = commandLineUsage(sections)
   a.ok(/--src\u001b\[22m \u001b\[4mnumber\[\]/.test(result))
 })
+
+export default tom

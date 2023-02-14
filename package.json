@@ -5,6 +5,11 @@
   "description": "Generates command-line usage information",
   "repository": "https://github.com/75lb/command-line-usage",
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    "import": "./index.js",
+    "require": "./dist/index.cjs"
+  },
   "files": [
     "lib/**/*.js",
     "index.js"
@@ -16,22 +21,21 @@
     "generator"
   ],
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.20.0"
   },
   "scripts": {
     "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
-    "test": "test-runner test/*.js",
-    "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "test": "test-runner test/*.js"
   },
   "dependencies": {
-    "array-back": "^4.0.2",
-    "chalk": "^2.4.2",
-    "table-layout": "^1.0.2",
-    "typical": "^5.2.0"
+    "array-back": "^6.2.2",
+    "chalk-template": "^0.5.0",
+    "table-layout": "^3.0.0",
+    "typical": "^7.1.1"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^7.1.1",
-    "test-runner": "^0.6.3"
+    "jsdoc-to-markdown": "^8.0.0",
+    "test-runner": "^0.10.1"
   },
   "standard": {
     "ignore": [
