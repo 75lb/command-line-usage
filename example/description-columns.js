@@ -1,6 +1,6 @@
 import commandLineUsage from 'command-line-usage'
-const ussr = require('./assets/ascii-ussr')
-const optionDefinitions = require('./assets/example-options')
+import ussr from './assets/ascii-ussr.js'
+import optionDefinitions from './assets/example-options.js'
 
 const sections = [
   {

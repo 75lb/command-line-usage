@@ -1,5 +1,5 @@
 import commandLineUsage from 'command-line-usage'
-const optionDefinitions = require('./assets/example-options')
+import optionDefinitions from './assets/example-options.js'
 
 const usage = commandLineUsage([
   {

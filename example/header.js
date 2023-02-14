@@ -1,6 +1,6 @@
 import commandLineUsage from 'command-line-usage'
-const header = require('./assets/ansi-header')
-const chalk = require('chalk')
+import header from './assets/ansi-header.js'
+import chalk from 'chalk'
 
 const sections = [
   {

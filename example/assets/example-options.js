@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     name: 'help',
     description: 'Display this usage guide.',

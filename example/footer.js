@@ -1,6 +1,6 @@
 import commandLineUsage from 'command-line-usage'
-const wales = require('./assets/ansi-wales')
-const optionDefinitions = require('./assets/example-options')
+import wales from './assets/ansi-wales.js'
+import optionDefinitions from './assets/example-options.js'
 
 const sections = [
   {

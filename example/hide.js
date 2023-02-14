@@ -21,7 +21,7 @@ const usage = commandLineUsage([
       },
       {
         name: 'src',
-        description: 'The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
+        description: 'THIS SHOULD BE HIDDEN.',
         type: String,
         multiple: true,
         defaultOption: true,

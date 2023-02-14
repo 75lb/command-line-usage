@@ -25,7 +25,8 @@
   },
   "scripts": {
     "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
-    "test": "test-runner test/*.js"
+    "test": "test-runner test/*.js",
+    "examples": "for FILE in example/*.js; do printf \"\n\n======== $FILE ========\n\n\"; node $FILE; done"
   },
   "dependencies": {
     "array-back": "^6.2.2",

@@ -1,10 +1,10 @@
 import commandLineUsage from 'command-line-usage'
-const optionDefinitions = require('./assets/example-options')
+import optionDefinitions from './assets/example-options.js'
 
 const usage = commandLineUsage([
   {
     header: 'A typical app',
-    content: 'Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. '
+    content: 'In the option list, --long-name options should be display before short options.'
   },
   {
     header: 'Options',

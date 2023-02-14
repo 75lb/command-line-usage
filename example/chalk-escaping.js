@@ -8,7 +8,7 @@ const usage = commandLineUsage([
   {
     header: 'Options',
     optionList: [
-      { name: 'files', typeLabel: ' \\{something\\} ', description: ''}
+      { name: 'files', typeLabel: '\\{something\\}', description: 'This is not \\{red red\\}.'}
     ]
   }
 ])
