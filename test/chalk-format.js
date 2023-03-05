@@ -17,5 +17,3 @@ tom.test('chalk-format: template string in input', function () {
 })
 
 export default tom
-
-
