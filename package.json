@@ -11,8 +11,9 @@
     "require": "./dist/index.cjs"
   },
   "files": [
-    "lib/**/*.js",
-    "index.js"
+    "lib",
+    "index.js",
+    "dist"
   ],
   "keywords": [
     "terminal",
@@ -25,17 +26,21 @@
   },
   "scripts": {
     "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
-    "test": "test-runner test/*.js",
-    "examples": "for FILE in example/*.js; do printf \"\n\n======== $FILE ========\n\n\"; node $FILE; done"
+    "test": "npm run dist && test-runner test/*.js test/*.cjs",
+    "examples": "for FILE in example/*.js; do printf \"\n\n======== $FILE ========\n\n\"; node $FILE; done",
+    "dist": "rollup -c"
   },
   "dependencies": {
     "array-back": "^6.2.2",
-    "chalk-template": "^0.5.0",
+    "chalk-template": "^0.4.0",
     "table-layout": "^3.0.0",
     "typical": "^7.1.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "jsdoc-to-markdown": "^8.0.0",
+    "rollup": "^3.18.0",
     "test-runner": "^0.10.1"
   },
   "standard": {
