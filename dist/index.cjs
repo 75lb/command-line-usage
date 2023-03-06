@@ -2,7 +2,6 @@
 
 var require$$0 = require('os');
 var require$$1 = require('tty');
-var os$1 = require('node:os');
 
 /**
  * Takes any input and guarantees an array back.
@@ -2173,7 +2172,7 @@ class Section {
   }
 
   toString () {
-    return this.lines.join(os$1.EOL)
+    return this.lines.join(require$$0.EOL)
   }
 
   header (text) {

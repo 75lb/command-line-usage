@@ -25,4 +25,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
-    - run: FORCE_COLOR=3 npm run ci:test # FORCE_COLOR=3 enables full 16,777,216 colour support
+    - run: FORCE_COLOR=3 npm run test:ci # FORCE_COLOR=3 enables full 16,777,216 colour support
