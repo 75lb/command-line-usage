@@ -26,7 +26,8 @@
   },
   "scripts": {
     "docs": "jsdoc2md --no-gfm index.js lib/**/*.js > doc/api.md; echo",
-    "test": "npm run dist && test-runner test/*.js test/*.cjs",
+    "test": "npm run dist && npm run ci:test",
+    "ci:test": "test-runner test/*.js test/*.cjs",
     "examples": "for FILE in example/*.js; do printf \"\n\n======== $FILE ========\n\n\"; node $FILE; done",
     "dist": "rollup -c"
   },
