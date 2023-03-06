@@ -1,17 +1,3 @@
-// const chalkTemplate = require('chalk-template')
-
-// function chalkFormat (str) {
-//   if (str) {
-//     str = str.replace(/`/g, '\\`')
-//     return chalkTemplate(Object.assign([], { raw: [str] }))
-//   } else {
-//     return ''
-//   }
-// }
-
-// console.log('YOOO', chalkFormat('HELLO'))
-// console.log('YOOO', chalkFormat('{bold hello}'))
-
 const commandLineUsage = require('command-line-usage')
 
 const usage = commandLineUsage([
