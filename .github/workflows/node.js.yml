@@ -1,4 +1,4 @@
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# See: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
 
@@ -15,14 +15,17 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12, 14, 16, 18, 19]
+        node-version: [12, 14, 16, 18, 20, 22]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
-    - run: FORCE_COLOR=3 npm run test:ci # FORCE_COLOR=3 enables full 16,777,216 colour support
+    - name: Run tests
+      run: npm run test:ci
+      env:
+        FORCE_COLOR: 3

@@ -34,14 +34,14 @@
   "dependencies": {
     "array-back": "^6.2.2",
     "chalk-template": "^0.4.0",
-    "table-layout": "^3.0.0",
+    "table-layout": "^3.0.2",
     "typical": "^7.1.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "jsdoc-to-markdown": "^8.0.0",
-    "rollup": "^3.18.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "jsdoc-to-markdown": "^8.0.1",
+    "rollup": "^4.18.0",
     "test-runner": "^0.10.1"
   },
   "standard": {
