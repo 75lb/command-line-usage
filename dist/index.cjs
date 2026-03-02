@@ -35,12 +35,12 @@ var require$$1 = require('tty');
  * [ 1, 2, 3 ]
  */
 
-function isObject$2 (input) {
+function isObject$1 (input) {
   return typeof input === 'object' && input !== null
 }
 
-function isArrayLike$2 (input) {
-  return isObject$2(input) && typeof input.length === 'number'
+function isArrayLike$1 (input) {
+  return isObject$1(input) && typeof input.length === 'number'
 }
 
 /**
@@ -53,7 +53,7 @@ function arrayify (input) {
     return input
   } else if (input === undefined) {
     return []
-  } else if (isArrayLike$2(input) || input instanceof Set) {
+  } else if (isArrayLike$1(input) || input instanceof Set) {
     return Array.from(input)
   } else {
     return [input]
@@ -64,7 +64,7 @@ function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-var ansiStyles$1 = {exports: {}};
+var ansiStyles = {exports: {}};
 
 var colorName;
 var hasRequiredColorName;
@@ -652,7 +652,7 @@ function requireConversions () {
 
 		r = (x * 3.2406) + (y * -1.5372) + (z * -0.4986);
 		g = (x * -0.9689) + (y * 1.8758) + (z * 0.0415);
-		b = (x * 0.0557) + (y * -0.2040) + (z * 1.0570);
+		b = (x * 0.0557) + (y * -0.204) + (z * 1.0570);
 
 		// Assume sRGB
 		r = r > 0.0031308
@@ -1270,354 +1270,385 @@ function requireColorConvert () {
 	return colorConvert;
 }
 
-ansiStyles$1.exports;
+ansiStyles.exports;
 
-(function (module) {
+var hasRequiredAnsiStyles;
 
-	const wrapAnsi16 = (fn, offset) => (...args) => {
-		const code = fn(...args);
-		return `\u001B[${code + offset}m`;
-	};
+function requireAnsiStyles () {
+	if (hasRequiredAnsiStyles) return ansiStyles.exports;
+	hasRequiredAnsiStyles = 1;
+	(function (module) {
 
-	const wrapAnsi256 = (fn, offset) => (...args) => {
-		const code = fn(...args);
-		return `\u001B[${38 + offset};5;${code}m`;
-	};
-
-	const wrapAnsi16m = (fn, offset) => (...args) => {
-		const rgb = fn(...args);
-		return `\u001B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
-	};
-
-	const ansi2ansi = n => n;
-	const rgb2rgb = (r, g, b) => [r, g, b];
-
-	const setLazyProperty = (object, property, get) => {
-		Object.defineProperty(object, property, {
-			get: () => {
-				const value = get();
-
-				Object.defineProperty(object, property, {
-					value,
-					enumerable: true,
-					configurable: true
-				});
-
-				return value;
-			},
-			enumerable: true,
-			configurable: true
-		});
-	};
-
-	/** @type {typeof import('color-convert')} */
-	let colorConvert;
-	const makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
-		if (colorConvert === undefined) {
-			colorConvert = requireColorConvert();
-		}
-
-		const offset = isBackground ? 10 : 0;
-		const styles = {};
-
-		for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
-			const name = sourceSpace === 'ansi16' ? 'ansi' : sourceSpace;
-			if (sourceSpace === targetSpace) {
-				styles[name] = wrap(identity, offset);
-			} else if (typeof suite === 'object') {
-				styles[name] = wrap(suite[targetSpace], offset);
-			}
-		}
-
-		return styles;
-	};
-
-	function assembleStyles() {
-		const codes = new Map();
-		const styles = {
-			modifier: {
-				reset: [0, 0],
-				// 21 isn't widely supported and 22 does the same thing
-				bold: [1, 22],
-				dim: [2, 22],
-				italic: [3, 23],
-				underline: [4, 24],
-				inverse: [7, 27],
-				hidden: [8, 28],
-				strikethrough: [9, 29]
-			},
-			color: {
-				black: [30, 39],
-				red: [31, 39],
-				green: [32, 39],
-				yellow: [33, 39],
-				blue: [34, 39],
-				magenta: [35, 39],
-				cyan: [36, 39],
-				white: [37, 39],
-
-				// Bright color
-				blackBright: [90, 39],
-				redBright: [91, 39],
-				greenBright: [92, 39],
-				yellowBright: [93, 39],
-				blueBright: [94, 39],
-				magentaBright: [95, 39],
-				cyanBright: [96, 39],
-				whiteBright: [97, 39]
-			},
-			bgColor: {
-				bgBlack: [40, 49],
-				bgRed: [41, 49],
-				bgGreen: [42, 49],
-				bgYellow: [43, 49],
-				bgBlue: [44, 49],
-				bgMagenta: [45, 49],
-				bgCyan: [46, 49],
-				bgWhite: [47, 49],
-
-				// Bright color
-				bgBlackBright: [100, 49],
-				bgRedBright: [101, 49],
-				bgGreenBright: [102, 49],
-				bgYellowBright: [103, 49],
-				bgBlueBright: [104, 49],
-				bgMagentaBright: [105, 49],
-				bgCyanBright: [106, 49],
-				bgWhiteBright: [107, 49]
-			}
+		const wrapAnsi16 = (fn, offset) => (...args) => {
+			const code = fn(...args);
+			return `\u001B[${code + offset}m`;
 		};
 
-		// Alias bright black as gray (and grey)
-		styles.color.gray = styles.color.blackBright;
-		styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
-		styles.color.grey = styles.color.blackBright;
-		styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
+		const wrapAnsi256 = (fn, offset) => (...args) => {
+			const code = fn(...args);
+			return `\u001B[${38 + offset};5;${code}m`;
+		};
 
-		for (const [groupName, group] of Object.entries(styles)) {
-			for (const [styleName, style] of Object.entries(group)) {
-				styles[styleName] = {
-					open: `\u001B[${style[0]}m`,
-					close: `\u001B[${style[1]}m`
-				};
+		const wrapAnsi16m = (fn, offset) => (...args) => {
+			const rgb = fn(...args);
+			return `\u001B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
+		};
 
-				group[styleName] = styles[styleName];
+		const ansi2ansi = n => n;
+		const rgb2rgb = (r, g, b) => [r, g, b];
 
-				codes.set(style[0], style[1]);
+		const setLazyProperty = (object, property, get) => {
+			Object.defineProperty(object, property, {
+				get: () => {
+					const value = get();
+
+					Object.defineProperty(object, property, {
+						value,
+						enumerable: true,
+						configurable: true
+					});
+
+					return value;
+				},
+				enumerable: true,
+				configurable: true
+			});
+		};
+
+		/** @type {typeof import('color-convert')} */
+		let colorConvert;
+		const makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
+			if (colorConvert === undefined) {
+				colorConvert = requireColorConvert();
 			}
 
-			Object.defineProperty(styles, groupName, {
-				value: group,
+			const offset = isBackground ? 10 : 0;
+			const styles = {};
+
+			for (const [sourceSpace, suite] of Object.entries(colorConvert)) {
+				const name = sourceSpace === 'ansi16' ? 'ansi' : sourceSpace;
+				if (sourceSpace === targetSpace) {
+					styles[name] = wrap(identity, offset);
+				} else if (typeof suite === 'object') {
+					styles[name] = wrap(suite[targetSpace], offset);
+				}
+			}
+
+			return styles;
+		};
+
+		function assembleStyles() {
+			const codes = new Map();
+			const styles = {
+				modifier: {
+					reset: [0, 0],
+					// 21 isn't widely supported and 22 does the same thing
+					bold: [1, 22],
+					dim: [2, 22],
+					italic: [3, 23],
+					underline: [4, 24],
+					inverse: [7, 27],
+					hidden: [8, 28],
+					strikethrough: [9, 29]
+				},
+				color: {
+					black: [30, 39],
+					red: [31, 39],
+					green: [32, 39],
+					yellow: [33, 39],
+					blue: [34, 39],
+					magenta: [35, 39],
+					cyan: [36, 39],
+					white: [37, 39],
+
+					// Bright color
+					blackBright: [90, 39],
+					redBright: [91, 39],
+					greenBright: [92, 39],
+					yellowBright: [93, 39],
+					blueBright: [94, 39],
+					magentaBright: [95, 39],
+					cyanBright: [96, 39],
+					whiteBright: [97, 39]
+				},
+				bgColor: {
+					bgBlack: [40, 49],
+					bgRed: [41, 49],
+					bgGreen: [42, 49],
+					bgYellow: [43, 49],
+					bgBlue: [44, 49],
+					bgMagenta: [45, 49],
+					bgCyan: [46, 49],
+					bgWhite: [47, 49],
+
+					// Bright color
+					bgBlackBright: [100, 49],
+					bgRedBright: [101, 49],
+					bgGreenBright: [102, 49],
+					bgYellowBright: [103, 49],
+					bgBlueBright: [104, 49],
+					bgMagentaBright: [105, 49],
+					bgCyanBright: [106, 49],
+					bgWhiteBright: [107, 49]
+				}
+			};
+
+			// Alias bright black as gray (and grey)
+			styles.color.gray = styles.color.blackBright;
+			styles.bgColor.bgGray = styles.bgColor.bgBlackBright;
+			styles.color.grey = styles.color.blackBright;
+			styles.bgColor.bgGrey = styles.bgColor.bgBlackBright;
+
+			for (const [groupName, group] of Object.entries(styles)) {
+				for (const [styleName, style] of Object.entries(group)) {
+					styles[styleName] = {
+						open: `\u001B[${style[0]}m`,
+						close: `\u001B[${style[1]}m`
+					};
+
+					group[styleName] = styles[styleName];
+
+					codes.set(style[0], style[1]);
+				}
+
+				Object.defineProperty(styles, groupName, {
+					value: group,
+					enumerable: false
+				});
+			}
+
+			Object.defineProperty(styles, 'codes', {
+				value: codes,
 				enumerable: false
 			});
+
+			styles.color.close = '\u001B[39m';
+			styles.bgColor.close = '\u001B[49m';
+
+			setLazyProperty(styles.color, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, false));
+			setLazyProperty(styles.color, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, false));
+			setLazyProperty(styles.color, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, false));
+			setLazyProperty(styles.bgColor, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, true));
+			setLazyProperty(styles.bgColor, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, true));
+			setLazyProperty(styles.bgColor, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, true));
+
+			return styles;
 		}
 
-		Object.defineProperty(styles, 'codes', {
-			value: codes,
-			enumerable: false
-		});
-
-		styles.color.close = '\u001B[39m';
-		styles.bgColor.close = '\u001B[49m';
-
-		setLazyProperty(styles.color, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, false));
-		setLazyProperty(styles.color, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, false));
-		setLazyProperty(styles.color, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, false));
-		setLazyProperty(styles.bgColor, 'ansi', () => makeDynamicStyles(wrapAnsi16, 'ansi16', ansi2ansi, true));
-		setLazyProperty(styles.bgColor, 'ansi256', () => makeDynamicStyles(wrapAnsi256, 'ansi256', ansi2ansi, true));
-		setLazyProperty(styles.bgColor, 'ansi16m', () => makeDynamicStyles(wrapAnsi16m, 'rgb', rgb2rgb, true));
-
-		return styles;
-	}
-
-	// Make the export immutable
-	Object.defineProperty(module, 'exports', {
-		enumerable: true,
-		get: assembleStyles
-	}); 
-} (ansiStyles$1));
-
-var ansiStylesExports = ansiStyles$1.exports;
-
-var hasFlag$1 = (flag, argv = process.argv) => {
-	const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
-	const position = argv.indexOf(prefix + flag);
-	const terminatorPosition = argv.indexOf('--');
-	return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
-};
-
-const os = require$$0;
-const tty = require$$1;
-const hasFlag = hasFlag$1;
-
-const {env} = process;
-
-let forceColor;
-if (hasFlag('no-color') ||
-	hasFlag('no-colors') ||
-	hasFlag('color=false') ||
-	hasFlag('color=never')) {
-	forceColor = 0;
-} else if (hasFlag('color') ||
-	hasFlag('colors') ||
-	hasFlag('color=true') ||
-	hasFlag('color=always')) {
-	forceColor = 1;
+		// Make the export immutable
+		Object.defineProperty(module, 'exports', {
+			enumerable: true,
+			get: assembleStyles
+		}); 
+	} (ansiStyles));
+	return ansiStyles.exports;
 }
 
-if ('FORCE_COLOR' in env) {
-	if (env.FORCE_COLOR === 'true') {
-		forceColor = 1;
-	} else if (env.FORCE_COLOR === 'false') {
-		forceColor = 0;
-	} else {
-		forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
-	}
-}
+var hasFlag;
+var hasRequiredHasFlag;
 
-function translateLevel(level) {
-	if (level === 0) {
-		return false;
-	}
+function requireHasFlag () {
+	if (hasRequiredHasFlag) return hasFlag;
+	hasRequiredHasFlag = 1;
 
-	return {
-		level,
-		hasBasic: true,
-		has256: level >= 2,
-		has16m: level >= 3
+	hasFlag = (flag, argv = process.argv) => {
+		const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
+		const position = argv.indexOf(prefix + flag);
+		const terminatorPosition = argv.indexOf('--');
+		return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
 	};
+	return hasFlag;
 }
 
-function supportsColor(haveStream, streamIsTTY) {
-	if (forceColor === 0) {
-		return 0;
+var supportsColor_1;
+var hasRequiredSupportsColor;
+
+function requireSupportsColor () {
+	if (hasRequiredSupportsColor) return supportsColor_1;
+	hasRequiredSupportsColor = 1;
+	const os = require$$0;
+	const tty = require$$1;
+	const hasFlag = requireHasFlag();
+
+	const {env} = process;
+
+	let forceColor;
+	if (hasFlag('no-color') ||
+		hasFlag('no-colors') ||
+		hasFlag('color=false') ||
+		hasFlag('color=never')) {
+		forceColor = 0;
+	} else if (hasFlag('color') ||
+		hasFlag('colors') ||
+		hasFlag('color=true') ||
+		hasFlag('color=always')) {
+		forceColor = 1;
 	}
 
-	if (hasFlag('color=16m') ||
-		hasFlag('color=full') ||
-		hasFlag('color=truecolor')) {
-		return 3;
+	if ('FORCE_COLOR' in env) {
+		if (env.FORCE_COLOR === 'true') {
+			forceColor = 1;
+		} else if (env.FORCE_COLOR === 'false') {
+			forceColor = 0;
+		} else {
+			forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
+		}
 	}
 
-	if (hasFlag('color=256')) {
-		return 2;
-	}
-
-	if (haveStream && !streamIsTTY && forceColor === undefined) {
-		return 0;
-	}
-
-	const min = forceColor || 0;
-
-	if (env.TERM === 'dumb') {
-		return min;
-	}
-
-	if (process.platform === 'win32') {
-		// Windows 10 build 10586 is the first Windows release that supports 256 colors.
-		// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
-		const osRelease = os.release().split('.');
-		if (
-			Number(osRelease[0]) >= 10 &&
-			Number(osRelease[2]) >= 10586
-		) {
-			return Number(osRelease[2]) >= 14931 ? 3 : 2;
+	function translateLevel(level) {
+		if (level === 0) {
+			return false;
 		}
 
-		return 1;
+		return {
+			level,
+			hasBasic: true,
+			has256: level >= 2,
+			has16m: level >= 3
+		};
 	}
 
-	if ('CI' in env) {
-		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
+	function supportsColor(haveStream, streamIsTTY) {
+		if (forceColor === 0) {
+			return 0;
+		}
+
+		if (hasFlag('color=16m') ||
+			hasFlag('color=full') ||
+			hasFlag('color=truecolor')) {
+			return 3;
+		}
+
+		if (hasFlag('color=256')) {
+			return 2;
+		}
+
+		if (haveStream && !streamIsTTY && forceColor === undefined) {
+			return 0;
+		}
+
+		const min = forceColor || 0;
+
+		if (env.TERM === 'dumb') {
+			return min;
+		}
+
+		if (process.platform === 'win32') {
+			// Windows 10 build 10586 is the first Windows release that supports 256 colors.
+			// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
+			const osRelease = os.release().split('.');
+			if (
+				Number(osRelease[0]) >= 10 &&
+				Number(osRelease[2]) >= 10586
+			) {
+				return Number(osRelease[2]) >= 14931 ? 3 : 2;
+			}
+
+			return 1;
+		}
+
+		if ('CI' in env) {
+			if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
+				return 1;
+			}
+
+			return min;
+		}
+
+		if ('TEAMCITY_VERSION' in env) {
+			return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+		}
+
+		if (env.COLORTERM === 'truecolor') {
+			return 3;
+		}
+
+		if ('TERM_PROGRAM' in env) {
+			const version = parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
+
+			switch (env.TERM_PROGRAM) {
+				case 'iTerm.app':
+					return version >= 3 ? 3 : 2;
+				case 'Apple_Terminal':
+					return 2;
+				// No default
+			}
+		}
+
+		if (/-256(color)?$/i.test(env.TERM)) {
+			return 2;
+		}
+
+		if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
+			return 1;
+		}
+
+		if ('COLORTERM' in env) {
 			return 1;
 		}
 
 		return min;
 	}
 
-	if ('TEAMCITY_VERSION' in env) {
-		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+	function getSupportLevel(stream) {
+		const level = supportsColor(stream, stream && stream.isTTY);
+		return translateLevel(level);
 	}
 
-	if (env.COLORTERM === 'truecolor') {
-		return 3;
-	}
+	supportsColor_1 = {
+		supportsColor: getSupportLevel,
+		stdout: translateLevel(supportsColor(true, tty.isatty(1))),
+		stderr: translateLevel(supportsColor(true, tty.isatty(2)))
+	};
+	return supportsColor_1;
+}
 
-	if ('TERM_PROGRAM' in env) {
-		const version = parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
+var util;
+var hasRequiredUtil;
 
-		switch (env.TERM_PROGRAM) {
-			case 'iTerm.app':
-				return version >= 3 ? 3 : 2;
-			case 'Apple_Terminal':
-				return 2;
-			// No default
+function requireUtil () {
+	if (hasRequiredUtil) return util;
+	hasRequiredUtil = 1;
+
+	const stringReplaceAll = (string, substring, replacer) => {
+		let index = string.indexOf(substring);
+		if (index === -1) {
+			return string;
 		}
-	}
 
-	if (/-256(color)?$/i.test(env.TERM)) {
-		return 2;
-	}
+		const substringLength = substring.length;
+		let endIndex = 0;
+		let returnValue = '';
+		do {
+			returnValue += string.substr(endIndex, index - endIndex) + substring + replacer;
+			endIndex = index + substringLength;
+			index = string.indexOf(substring, endIndex);
+		} while (index !== -1);
 
-	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-		return 1;
-	}
+		returnValue += string.substr(endIndex);
+		return returnValue;
+	};
 
-	if ('COLORTERM' in env) {
-		return 1;
-	}
+	const stringEncaseCRLFWithFirstIndex = (string, prefix, postfix, index) => {
+		let endIndex = 0;
+		let returnValue = '';
+		do {
+			const gotCR = string[index - 1] === '\r';
+			returnValue += string.substr(endIndex, (gotCR ? index - 1 : index) - endIndex) + prefix + (gotCR ? '\r\n' : '\n') + postfix;
+			endIndex = index + 1;
+			index = string.indexOf('\n', endIndex);
+		} while (index !== -1);
 
-	return min;
+		returnValue += string.substr(endIndex);
+		return returnValue;
+	};
+
+	util = {
+		stringReplaceAll,
+		stringEncaseCRLFWithFirstIndex
+	};
+	return util;
 }
-
-function getSupportLevel(stream) {
-	const level = supportsColor(stream, stream && stream.isTTY);
-	return translateLevel(level);
-}
-
-var supportsColor_1 = {
-	supportsColor: getSupportLevel,
-	stdout: translateLevel(supportsColor(true, tty.isatty(1))),
-	stderr: translateLevel(supportsColor(true, tty.isatty(2)))
-};
-
-const stringReplaceAll$1 = (string, substring, replacer) => {
-	let index = string.indexOf(substring);
-	if (index === -1) {
-		return string;
-	}
-
-	const substringLength = substring.length;
-	let endIndex = 0;
-	let returnValue = '';
-	do {
-		returnValue += string.substr(endIndex, index - endIndex) + substring + replacer;
-		endIndex = index + substringLength;
-		index = string.indexOf(substring, endIndex);
-	} while (index !== -1);
-
-	returnValue += string.substr(endIndex);
-	return returnValue;
-};
-
-const stringEncaseCRLFWithFirstIndex$1 = (string, prefix, postfix, index) => {
-	let endIndex = 0;
-	let returnValue = '';
-	do {
-		const gotCR = string[index - 1] === '\r';
-		returnValue += string.substr(endIndex, (gotCR ? index - 1 : index) - endIndex) + prefix + (gotCR ? '\r\n' : '\n') + postfix;
-		endIndex = index + 1;
-		index = string.indexOf('\n', endIndex);
-	} while (index !== -1);
-
-	returnValue += string.substr(endIndex);
-	return returnValue;
-};
-
-var util = {
-	stringReplaceAll: stringReplaceAll$1,
-	stringEncaseCRLFWithFirstIndex: stringEncaseCRLFWithFirstIndex$1
-};
 
 var templates;
 var hasRequiredTemplates;
@@ -1761,236 +1792,245 @@ function requireTemplates () {
 	return templates;
 }
 
-const ansiStyles = ansiStylesExports;
-const {stdout: stdoutColor, stderr: stderrColor} = supportsColor_1;
-const {
-	stringReplaceAll,
-	stringEncaseCRLFWithFirstIndex
-} = util;
+var source;
+var hasRequiredSource;
 
-const {isArray: isArray$1} = Array;
+function requireSource () {
+	if (hasRequiredSource) return source;
+	hasRequiredSource = 1;
+	const ansiStyles = requireAnsiStyles();
+	const {stdout: stdoutColor, stderr: stderrColor} = requireSupportsColor();
+	const {
+		stringReplaceAll,
+		stringEncaseCRLFWithFirstIndex
+	} = requireUtil();
 
-// `supportsColor.level` → `ansiStyles.color[name]` mapping
-const levelMapping = [
-	'ansi',
-	'ansi',
-	'ansi256',
-	'ansi16m'
-];
+	const {isArray} = Array;
 
-const styles = Object.create(null);
+	// `supportsColor.level` → `ansiStyles.color[name]` mapping
+	const levelMapping = [
+		'ansi',
+		'ansi',
+		'ansi256',
+		'ansi16m'
+	];
 
-const applyOptions = (object, options = {}) => {
-	if (options.level && !(Number.isInteger(options.level) && options.level >= 0 && options.level <= 3)) {
-		throw new Error('The `level` option should be an integer from 0 to 3');
-	}
+	const styles = Object.create(null);
 
-	// Detect level if not set manually
-	const colorLevel = stdoutColor ? stdoutColor.level : 0;
-	object.level = options.level === undefined ? colorLevel : options.level;
-};
+	const applyOptions = (object, options = {}) => {
+		if (options.level && !(Number.isInteger(options.level) && options.level >= 0 && options.level <= 3)) {
+			throw new Error('The `level` option should be an integer from 0 to 3');
+		}
 
-class ChalkClass {
-	constructor(options) {
-		// eslint-disable-next-line no-constructor-return
-		return chalkFactory(options);
-	}
-}
-
-const chalkFactory = options => {
-	const chalk = {};
-	applyOptions(chalk, options);
-
-	chalk.template = (...arguments_) => chalkTag(chalk.template, ...arguments_);
-
-	Object.setPrototypeOf(chalk, Chalk.prototype);
-	Object.setPrototypeOf(chalk.template, chalk);
-
-	chalk.template.constructor = () => {
-		throw new Error('`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.');
+		// Detect level if not set manually
+		const colorLevel = stdoutColor ? stdoutColor.level : 0;
+		object.level = options.level === undefined ? colorLevel : options.level;
 	};
 
-	chalk.template.Instance = ChalkClass;
+	class ChalkClass {
+		constructor(options) {
+			// eslint-disable-next-line no-constructor-return
+			return chalkFactory(options);
+		}
+	}
 
-	return chalk.template;
-};
+	const chalkFactory = options => {
+		const chalk = {};
+		applyOptions(chalk, options);
 
-function Chalk(options) {
-	return chalkFactory(options);
-}
+		chalk.template = (...arguments_) => chalkTag(chalk.template, ...arguments_);
 
-for (const [styleName, style] of Object.entries(ansiStyles)) {
-	styles[styleName] = {
+		Object.setPrototypeOf(chalk, Chalk.prototype);
+		Object.setPrototypeOf(chalk.template, chalk);
+
+		chalk.template.constructor = () => {
+			throw new Error('`chalk.constructor()` is deprecated. Use `new chalk.Instance()` instead.');
+		};
+
+		chalk.template.Instance = ChalkClass;
+
+		return chalk.template;
+	};
+
+	function Chalk(options) {
+		return chalkFactory(options);
+	}
+
+	for (const [styleName, style] of Object.entries(ansiStyles)) {
+		styles[styleName] = {
+			get() {
+				const builder = createBuilder(this, createStyler(style.open, style.close, this._styler), this._isEmpty);
+				Object.defineProperty(this, styleName, {value: builder});
+				return builder;
+			}
+		};
+	}
+
+	styles.visible = {
 		get() {
-			const builder = createBuilder(this, createStyler(style.open, style.close, this._styler), this._isEmpty);
-			Object.defineProperty(this, styleName, {value: builder});
+			const builder = createBuilder(this, this._styler, true);
+			Object.defineProperty(this, 'visible', {value: builder});
 			return builder;
 		}
 	};
-}
 
-styles.visible = {
-	get() {
-		const builder = createBuilder(this, this._styler, true);
-		Object.defineProperty(this, 'visible', {value: builder});
+	const usedModels = ['rgb', 'hex', 'keyword', 'hsl', 'hsv', 'hwb', 'ansi', 'ansi256'];
+
+	for (const model of usedModels) {
+		styles[model] = {
+			get() {
+				const {level} = this;
+				return function (...arguments_) {
+					const styler = createStyler(ansiStyles.color[levelMapping[level]][model](...arguments_), ansiStyles.color.close, this._styler);
+					return createBuilder(this, styler, this._isEmpty);
+				};
+			}
+		};
+	}
+
+	for (const model of usedModels) {
+		const bgModel = 'bg' + model[0].toUpperCase() + model.slice(1);
+		styles[bgModel] = {
+			get() {
+				const {level} = this;
+				return function (...arguments_) {
+					const styler = createStyler(ansiStyles.bgColor[levelMapping[level]][model](...arguments_), ansiStyles.bgColor.close, this._styler);
+					return createBuilder(this, styler, this._isEmpty);
+				};
+			}
+		};
+	}
+
+	const proto = Object.defineProperties(() => {}, {
+		...styles,
+		level: {
+			enumerable: true,
+			get() {
+				return this._generator.level;
+			},
+			set(level) {
+				this._generator.level = level;
+			}
+		}
+	});
+
+	const createStyler = (open, close, parent) => {
+		let openAll;
+		let closeAll;
+		if (parent === undefined) {
+			openAll = open;
+			closeAll = close;
+		} else {
+			openAll = parent.openAll + open;
+			closeAll = close + parent.closeAll;
+		}
+
+		return {
+			open,
+			close,
+			openAll,
+			closeAll,
+			parent
+		};
+	};
+
+	const createBuilder = (self, _styler, _isEmpty) => {
+		const builder = (...arguments_) => {
+			if (isArray(arguments_[0]) && isArray(arguments_[0].raw)) {
+				// Called as a template literal, for example: chalk.red`2 + 3 = {bold ${2+3}}`
+				return applyStyle(builder, chalkTag(builder, ...arguments_));
+			}
+
+			// Single argument is hot path, implicit coercion is faster than anything
+			// eslint-disable-next-line no-implicit-coercion
+			return applyStyle(builder, (arguments_.length === 1) ? ('' + arguments_[0]) : arguments_.join(' '));
+		};
+
+		// We alter the prototype because we must return a function, but there is
+		// no way to create a function with a different prototype
+		Object.setPrototypeOf(builder, proto);
+
+		builder._generator = self;
+		builder._styler = _styler;
+		builder._isEmpty = _isEmpty;
+
 		return builder;
-	}
-};
-
-const usedModels = ['rgb', 'hex', 'keyword', 'hsl', 'hsv', 'hwb', 'ansi', 'ansi256'];
-
-for (const model of usedModels) {
-	styles[model] = {
-		get() {
-			const {level} = this;
-			return function (...arguments_) {
-				const styler = createStyler(ansiStyles.color[levelMapping[level]][model](...arguments_), ansiStyles.color.close, this._styler);
-				return createBuilder(this, styler, this._isEmpty);
-			};
-		}
 	};
+
+	const applyStyle = (self, string) => {
+		if (self.level <= 0 || !string) {
+			return self._isEmpty ? '' : string;
+		}
+
+		let styler = self._styler;
+
+		if (styler === undefined) {
+			return string;
+		}
+
+		const {openAll, closeAll} = styler;
+		if (string.indexOf('\u001B') !== -1) {
+			while (styler !== undefined) {
+				// Replace any instances already present with a re-opening code
+				// otherwise only the part of the string until said closing code
+				// will be colored, and the rest will simply be 'plain'.
+				string = stringReplaceAll(string, styler.close, styler.open);
+
+				styler = styler.parent;
+			}
+		}
+
+		// We can move both next actions out of loop, because remaining actions in loop won't have
+		// any/visible effect on parts we add here. Close the styling before a linebreak and reopen
+		// after next line to fix a bleed issue on macOS: https://github.com/chalk/chalk/pull/92
+		const lfIndex = string.indexOf('\n');
+		if (lfIndex !== -1) {
+			string = stringEncaseCRLFWithFirstIndex(string, closeAll, openAll, lfIndex);
+		}
+
+		return openAll + string + closeAll;
+	};
+
+	let template;
+	const chalkTag = (chalk, ...strings) => {
+		const [firstString] = strings;
+
+		if (!isArray(firstString) || !isArray(firstString.raw)) {
+			// If chalk() was called by itself or with a string,
+			// return the string itself as a string.
+			return strings.join(' ');
+		}
+
+		const arguments_ = strings.slice(1);
+		const parts = [firstString.raw[0]];
+
+		for (let i = 1; i < firstString.length; i++) {
+			parts.push(
+				String(arguments_[i - 1]).replace(/[{}\\]/g, '\\$&'),
+				String(firstString.raw[i])
+			);
+		}
+
+		if (template === undefined) {
+			template = requireTemplates();
+		}
+
+		return template(chalk, parts.join(''));
+	};
+
+	Object.defineProperties(Chalk.prototype, styles);
+
+	const chalk = Chalk(); // eslint-disable-line new-cap
+	chalk.supportsColor = stdoutColor;
+	chalk.stderr = Chalk({level: stderrColor ? stderrColor.level : 0}); // eslint-disable-line new-cap
+	chalk.stderr.supportsColor = stderrColor;
+
+	source = chalk;
+	return source;
 }
 
-for (const model of usedModels) {
-	const bgModel = 'bg' + model[0].toUpperCase() + model.slice(1);
-	styles[bgModel] = {
-		get() {
-			const {level} = this;
-			return function (...arguments_) {
-				const styler = createStyler(ansiStyles.bgColor[levelMapping[level]][model](...arguments_), ansiStyles.bgColor.close, this._styler);
-				return createBuilder(this, styler, this._isEmpty);
-			};
-		}
-	};
-}
-
-const proto = Object.defineProperties(() => {}, {
-	...styles,
-	level: {
-		enumerable: true,
-		get() {
-			return this._generator.level;
-		},
-		set(level) {
-			this._generator.level = level;
-		}
-	}
-});
-
-const createStyler = (open, close, parent) => {
-	let openAll;
-	let closeAll;
-	if (parent === undefined) {
-		openAll = open;
-		closeAll = close;
-	} else {
-		openAll = parent.openAll + open;
-		closeAll = close + parent.closeAll;
-	}
-
-	return {
-		open,
-		close,
-		openAll,
-		closeAll,
-		parent
-	};
-};
-
-const createBuilder = (self, _styler, _isEmpty) => {
-	const builder = (...arguments_) => {
-		if (isArray$1(arguments_[0]) && isArray$1(arguments_[0].raw)) {
-			// Called as a template literal, for example: chalk.red`2 + 3 = {bold ${2+3}}`
-			return applyStyle(builder, chalkTag(builder, ...arguments_));
-		}
-
-		// Single argument is hot path, implicit coercion is faster than anything
-		// eslint-disable-next-line no-implicit-coercion
-		return applyStyle(builder, (arguments_.length === 1) ? ('' + arguments_[0]) : arguments_.join(' '));
-	};
-
-	// We alter the prototype because we must return a function, but there is
-	// no way to create a function with a different prototype
-	Object.setPrototypeOf(builder, proto);
-
-	builder._generator = self;
-	builder._styler = _styler;
-	builder._isEmpty = _isEmpty;
-
-	return builder;
-};
-
-const applyStyle = (self, string) => {
-	if (self.level <= 0 || !string) {
-		return self._isEmpty ? '' : string;
-	}
-
-	let styler = self._styler;
-
-	if (styler === undefined) {
-		return string;
-	}
-
-	const {openAll, closeAll} = styler;
-	if (string.indexOf('\u001B') !== -1) {
-		while (styler !== undefined) {
-			// Replace any instances already present with a re-opening code
-			// otherwise only the part of the string until said closing code
-			// will be colored, and the rest will simply be 'plain'.
-			string = stringReplaceAll(string, styler.close, styler.open);
-
-			styler = styler.parent;
-		}
-	}
-
-	// We can move both next actions out of loop, because remaining actions in loop won't have
-	// any/visible effect on parts we add here. Close the styling before a linebreak and reopen
-	// after next line to fix a bleed issue on macOS: https://github.com/chalk/chalk/pull/92
-	const lfIndex = string.indexOf('\n');
-	if (lfIndex !== -1) {
-		string = stringEncaseCRLFWithFirstIndex(string, closeAll, openAll, lfIndex);
-	}
-
-	return openAll + string + closeAll;
-};
-
-let template$1;
-const chalkTag = (chalk, ...strings) => {
-	const [firstString] = strings;
-
-	if (!isArray$1(firstString) || !isArray$1(firstString.raw)) {
-		// If chalk() was called by itself or with a string,
-		// return the string itself as a string.
-		return strings.join(' ');
-	}
-
-	const arguments_ = strings.slice(1);
-	const parts = [firstString.raw[0]];
-
-	for (let i = 1; i < firstString.length; i++) {
-		parts.push(
-			String(arguments_[i - 1]).replace(/[{}\\]/g, '\\$&'),
-			String(firstString.raw[i])
-		);
-	}
-
-	if (template$1 === undefined) {
-		template$1 = requireTemplates();
-	}
-
-	return template$1(chalk, parts.join(''));
-};
-
-Object.defineProperties(Chalk.prototype, styles);
-
-const chalk = Chalk(); // eslint-disable-line new-cap
-chalk.supportsColor = stdoutColor;
-chalk.stderr = Chalk({level: stderrColor ? stderrColor.level : 0}); // eslint-disable-line new-cap
-chalk.stderr.supportsColor = stderrColor;
-
-var source = chalk;
-
-var chalk$1 = /*@__PURE__*/getDefaultExportFromCjs(source);
+var sourceExports = requireSource();
+var chalk = /*@__PURE__*/getDefaultExportFromCjs(sourceExports);
 
 // eslint-disable-next-line unicorn/better-regex
 const TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|{[a-f\d]{1,6}})|x[a-f\d]{2}|.))|(?:{(~)?(#?[\w:]+(?:\([^)]*\))?(?:\.#?[\w:]+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(})|((?:.|[\r\n\f])+?)/gi;
@@ -2093,7 +2133,7 @@ function buildStyle(styles) {
 		}
 	}
 
-	let current = chalk$1;
+	let current = chalk;
 	for (const [styleName, styles] of Object.entries(enabled)) {
 		if (!Array.isArray(styles)) {
 			continue;
@@ -2406,7 +2446,6 @@ class Columns {
 
     const width = {
       total: this.totalWidth(),
-      view: maxWidth,
       diff: this.totalWidth() - maxWidth,
       totalFixed: this.totalFixedWidth(),
       totalResizable: Math.max(maxWidth - this.totalFixedWidth(), 0)
@@ -2477,6 +2516,8 @@ const re = {
   ansiEscapeSequence: /\u001b.*?m/g
 };
 
+const EMPTY_LINE = Symbol('emptyLine');
+
 /**
  * @alias module:wordwrapjs
  * @typicalname wordwrap
@@ -2499,8 +2540,11 @@ class Wordwrap {
     /* trim each line of the supplied text */
     return this._lines.map(trimLine, this)
 
-      /* split each line into an array of chunks, else mark it empty */
-      .map(line => line.match(re.chunk) || ['~~empty~~'])
+      /* split each line into an array of chunks, else mark it empty with a symbol */
+      .map(line => {
+        const chunks = line.match(re.chunk);
+        return chunks && chunks.length ? chunks : [EMPTY_LINE]
+      })
 
       /* optionally, break each word on the line into pieces */
       .map(lineWords => this.options.break
@@ -2511,6 +2555,11 @@ class Wordwrap {
 
       /* transforming the line of words to one or more new lines wrapped to size */
       .map(lineWords => {
+        /* if the line is the EMPTY_LINE symbol, preserve it */
+        if (lineWords.length === 1 && lineWords[0] === EMPTY_LINE) {
+          return lineWords
+        }
+
         return lineWords
           .reduce((lines, word) => {
             const currentLine = lines[lines.length - 1];
@@ -2525,13 +2574,14 @@ class Wordwrap {
       .flat()
 
       /* trim the wrapped lines */
-      .map(trimLine, this)
+      .map(line => (line === EMPTY_LINE ? '' : trimLine.call(this, line)))
 
-      /* filter out empty lines */
-      .filter(line => line.trim())
-
-      /* restore the user's original empty lines */
-      .map(line => line.replace('~~empty~~', ''))
+      /* filter out empty lines except those that were originally empty */
+      .filter((line, idx) => {
+        return line !== ''
+          || this._lines[idx] === ''
+          || (typeof this._lines[idx] !== 'undefined' && this._lines[idx].match(/^\s*$/))
+      })
   }
 
   wrap () {
@@ -2595,6 +2645,10 @@ function replaceAnsi (string) {
  * @private
  */
 function breakWord (word) {
+  if (word === EMPTY_LINE) {
+    return word
+  }
+
   if (replaceAnsi(word).length > this.options.width) {
     const letters = word.split('');
     let piece;
@@ -2609,636 +2663,390 @@ function breakWord (word) {
 }
 
 /**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * @module ansi
  */
 
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
+const ansiEscapeSequence = /\u001b.*?m/g;
 
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]';
+function remove (input) {
+  return input.replace(ansiEscapeSequence, '')
+}
 
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-
-/**
- * A faster alternative to `Function#apply`, this function invokes `func`
- * with the `this` binding of `thisArg` and the arguments of `args`.
- *
- * @private
- * @param {Function} func The function to invoke.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {Array} args The arguments to invoke `func` with.
- * @returns {*} Returns the result of `func`.
- */
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0: return func.call(thisArg);
-    case 1: return func.call(thisArg, args[0]);
-    case 2: return func.call(thisArg, args[0], args[1]);
-    case 3: return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
+function has (input) {
+  return ansiEscapeSequence.test(input)
 }
 
 /**
- * The base implementation of `_.times` without support for iteratee shorthands
- * or max array length checks.
- *
+ * Array of arrays in.. Returns the length of the longest one
+ * @returns {number}
  * @private
- * @param {number} n The number of times to invoke `iteratee`.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the array of results.
  */
-function baseTimes(n, iteratee) {
-  var index = -1,
-      result = Array(n);
-
-  while (++index < n) {
-    result[index] = iteratee(index);
-  }
-  return result;
+function getLongestArray (arrays) {
+  const lengths = arrays.map(array => array.length);
+  return Math.max(...lengths)
 }
 
-/**
- * Creates a unary function that invokes `func` with its argument transformed.
- *
- * @private
- * @param {Function} func The function to wrap.
- * @param {Function} transform The argument transform.
- * @returns {Function} Returns the new function.
- */
-function overArg(func, transform) {
-  return function(arg) {
-    return func(transform(arg));
-  };
+function padCell (cellValue, padding, width) {
+  const ansiLength = cellValue.length - remove(cellValue).length;
+  cellValue = cellValue || '';
+  return (padding.left || '') +
+  cellValue.padEnd(width - padding.length() + ansiLength) + (padding.right || '')
 }
 
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeKeys = overArg(Object.keys, Object),
-    nativeMax = Math.max;
-
-/**
- * Creates an array of the enumerable property names of the array-like `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @param {boolean} inherited Specify returning inherited property names.
- * @returns {Array} Returns the array of property names.
- */
-function arrayLikeKeys(value, inherited) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  // Safari 9 makes `arguments.length` enumerable in strict mode.
-  var result = (isArray(value) || isArguments(value))
-    ? baseTimes(value.length, String)
-    : [];
-
-  var length = result.length,
-      skipIndexes = !!length;
-
-  for (var key in value) {
-    if ((hasOwnProperty.call(value, key)) &&
-        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
+function getLongestWord (line) {
+  const words = Wordwrap.getChunks(line);
+  return words.reduce((max, word) => Math.max(word.length, max), 0)
 }
 
-/**
- * Assigns `value` to `key` of `object` if the existing value is not equivalent
- * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * for equality comparisons.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function assignValue(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
-      (value === undefined && !(key in object))) {
-    object[key] = value;
-  }
-}
-
-/**
- * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty.call(object, key) && key != 'constructor') {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.rest` which doesn't validate or coerce arguments.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @returns {Function} Returns the new function.
- */
-function baseRest(func, start) {
-  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-  return function() {
-    var args = arguments,
-        index = -1,
-        length = nativeMax(args.length - start, 0),
-        array = Array(length);
-
-    while (++index < length) {
-      array[index] = args[start + index];
-    }
-    index = -1;
-    var otherArgs = Array(start + 1);
-    while (++index < start) {
-      otherArgs[index] = args[index];
-    }
-    otherArgs[start] = array;
-    return apply(func, this, otherArgs);
-  };
-}
-
-/**
- * Copies properties of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy properties from.
- * @param {Array} props The property identifiers to copy.
- * @param {Object} [object={}] The object to copy properties to.
- * @param {Function} [customizer] The function to customize copied values.
- * @returns {Object} Returns `object`.
- */
-function copyObject(source, props, object, customizer) {
-  object || (object = {});
-
-  var index = -1,
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-
-    var newValue = customizer
-      ? customizer(object[key], source[key], key, object, source)
-      : undefined;
-
-    assignValue(object, key, newValue === undefined ? source[key] : newValue);
-  }
-  return object;
-}
-
-/**
- * Creates a function like `_.assign`.
- *
- * @private
- * @param {Function} assigner The function to assign values.
- * @returns {Function} Returns the new assigner function.
- */
-function createAssigner(assigner) {
-  return baseRest(function(object, sources) {
-    var index = -1,
-        length = sources.length,
-        customizer = length > 1 ? sources[length - 1] : undefined,
-        guard = length > 2 ? sources[2] : undefined;
-
-    customizer = (assigner.length > 3 && typeof customizer == 'function')
-      ? (length--, customizer)
-      : undefined;
-
-    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-      customizer = length < 3 ? undefined : customizer;
-      length = 1;
-    }
-    object = Object(object);
-    while (++index < length) {
-      var source = sources[index];
-      if (source) {
-        assigner(object, source, index, customizer);
+function removeEmptyColumns (data) {
+  const distinctColumnNames = data.reduce((columnNames, row) => {
+    for (const key of Object.keys(row)) {
+      if (!columnNames.includes(key)) {
+        columnNames.push(key);
       }
     }
-    return object;
+    return columnNames
+  }, []);
+
+  const emptyColumns = distinctColumnNames.filter(columnName => {
+    const hasValue = data.some(row => {
+      const value = row[columnName];
+      return (value !== undefined && typeof value !== 'string') || (typeof value === 'string' && /\S+/.test(value))
+    });
+    return !hasValue
   });
+
+  return data.map(row => {
+    for (const emptyCol of emptyColumns) {
+      delete row[emptyCol];
+    }
+    return row
+  })
 }
 
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  length = length == null ? MAX_SAFE_INTEGER : length;
-  return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
-}
-
-/**
- * Checks if the given arguments are from an iteratee call.
- *
- * @private
- * @param {*} value The potential iteratee value argument.
- * @param {*} index The potential iteratee index or key argument.
- * @param {*} object The potential iteratee object argument.
- * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
- *  else `false`.
- */
-function isIterateeCall(value, index, object) {
-  if (!isObject$1(object)) {
-    return false;
+function applyDefaultValues (options = {}, defaults = {}) {
+  /* Take a shallow copy of the supplied options */
+  const result = Object.assign({}, options);
+  /* Apply default values as required */
+  if (typeof result.padding === 'object') {
+    if (result.padding.left === undefined) result.padding.left = defaults.padding.left;
+    if (result.padding.right === undefined) result.padding.right = defaults.padding.right;
+  } else {
+    result.padding = defaults.padding;
   }
-  var type = typeof index;
-  if (type == 'number'
-        ? (isArrayLike$1(object) && isIndex(index, object.length))
-        : (type == 'string' && index in object)
-      ) {
-    return eq(object[index], value);
+  if (result.maxWidth === undefined) result.maxWidth = defaults.maxWidth;
+  if (result.columns === undefined) result.columns = defaults.columns;
+  if (result.eol === undefined) result.eol = defaults.eol;
+  return result
+}
+
+/**
+ * @module table-layout
+ */
+
+/**
+ * Recordset data in (array of objects), text table out.
+ * @alias module:table-layout
+ */
+class Table {
+  /**
+   * @param {object[]} - input data
+   * @param [options] {object} - optional settings
+   * @param [options.maxWidth] {number} - maximum width of layout
+   * @param [options.noWrap] {boolean} - disable wrapping on all columns
+   * @param [options.noTrim] {boolean} - disable line-trimming
+   * @param [options.break] {boolean} - enable word-breaking on all columns
+   * @param [options.columns] {module:table-layout~columnOption} - array of column-specific options
+   * @param [options.ignoreEmptyColumns] {boolean} - If set, empty columns or columns containing only whitespace are not rendered.
+   * @param [options.padding] {object} - Padding values to set on each column. Per-column overrides can be set in the `options.columns` array.
+   * @param [options.padding.left] {string} - Defaults to a single space.
+   * @param [options.padding.right] {string} - Defaults to a single space.
+   * @param [options.eol] {string} - EOL character used. Defaults to `\n`.
+   * @alias module:table-layout
+   */
+  constructor (data, options = {}) {
+    const defaults = {
+      padding: {
+        left: ' ',
+        right: ' '
+      },
+      maxWidth: 80,
+      columns: [],
+      eol: '\n'
+    };
+    this.options = applyDefaultValues(options, defaults);
+    this.rows = null;
+    this.columns = null;
+    this.load(data);
   }
-  return false;
+
+  /**
+  * Set the input data to display. Must be an array of objects.
+  * @param data {object[]}
+  */
+  load (data) {
+    const options = this.options;
+
+    /* remove empty columns */
+    if (options.ignoreEmptyColumns) {
+      data = removeEmptyColumns(data);
+    }
+
+    /* Create columns.. also removes ansi characters and measures column content width */
+    this.columns = Columns.getColumns(data);
+
+    /* load default column properties from options */
+    this.columns.maxWidth = options.maxWidth;
+    for (const column of this.columns.list) {
+      column.padding = options.padding;
+      column.noWrap = options.noWrap;
+      column.break = options.break;
+      if (options.break) {
+        /* Force column to be wrappable */
+        column.contentWrappable = true;
+      }
+    }
+
+    /* load column properties from options.columns */
+    for (const optionColumn of options.columns) {
+      const column = this.columns.get(optionColumn.name);
+      if (column) {
+        if (optionColumn.padding) {
+          column.padding.left = optionColumn.padding.left;
+          column.padding.right = optionColumn.padding.right;
+        }
+        column.width = optionColumn.width;
+        column.maxWidth = optionColumn.maxWidth;
+        column.minWidth = optionColumn.minWidth;
+        column.noWrap = optionColumn.noWrap;
+        column.break = optionColumn.break;
+
+        if (optionColumn.break) {
+          /* Force column to be wrappable */
+          column.contentWrappable = true;
+        }
+
+        column.get = optionColumn.get;
+      }
+    }
+
+    for (const row of arrayify(data)) {
+      for (const columnName in row) {
+        const column = this.columns.get(columnName);
+
+        /* Remove ansi characters from cell value before calculating widths */
+        const cell = new Cell(row[columnName], column);
+        let cellValue = cell.value;
+        if (has(cellValue)) {
+          cellValue = remove(cellValue);
+        }
+
+        /* Update column content width if this if this cell is wider */
+        if (cellValue.length > column.contentWidth) {
+          column.contentWidth = cellValue.length;
+        }
+
+        /* Update column minContentWidth if this cell has a longer word */
+        const longestWord = getLongestWord(cellValue);
+        if (longestWord > column.minContentWidth) {
+          column.minContentWidth = longestWord;
+        }
+        if (!column.contentWrappable) {
+          column.contentWrappable = Wordwrap.isWrappable(cellValue);
+        }
+      }
+    }
+
+    this.columns.autoSize();
+    this.rows = new Rows(data, this.columns);
+    return this
+  }
+
+  getWrapped () {
+    this.columns.autoSize();
+    return this.rows.list.map(row => {
+      const line = [];
+      for (const [column, cell] of row.entries()) {
+        if (column.noWrap) {
+          line.push(cell.value.split(/\r\n?|\n/));
+        } else {
+          line.push(Wordwrap.lines(cell.value, {
+            width: column.wrappedContentWidth,
+            break: column.break,
+            noTrim: this.options.noTrim
+          }));
+        }
+      }
+      return line
+    })
+  }
+
+  getLines () {
+    const wrappedLines = this.getWrapped();
+    const lines = [];
+    wrappedLines.forEach(wrapped => {
+      const mostLines = getLongestArray(wrapped);
+      for (let i = 0; i < mostLines; i++) {
+        const line = [];
+        wrapped.forEach(cell => {
+          line.push(cell[i] || '');
+        });
+        lines.push(line);
+      }
+    });
+    return lines
+  }
+
+  /**
+   * Identical to `.toString()` with the exception that the result will be an array of lines, rather than a single, multi-line string.
+   * @returns {string[]}
+   */
+  renderLines () {
+    const lines = this.getLines();
+    return lines.map(line => {
+      return line.reduce((prev, cell, index) => {
+        const column = this.columns.list[index];
+        return prev + padCell(cell, column.padding, column.generatedWidth)
+      }, '')
+    })
+  }
+
+  /**
+   * Returns the input data as a text table.
+   * @returns {string}
+   */
+  toString () {
+    return this.renderLines().join(this.options.eol) + this.options.eol
+  }
+}
+
+class OptionList extends Section {
+  constructor (data) {
+    super();
+    let definitions = arrayify(data.optionList);
+    const hide = arrayify(data.hide);
+    const groups = arrayify(data.group);
+
+    /* filter out hidden definitions */
+    if (hide.length) {
+      definitions = definitions.filter(definition => {
+        return hide.indexOf(definition.name) === -1
+      });
+    }
+
+    if (data.header) this.header(data.header);
+
+    if (groups.length) {
+      definitions = definitions.filter(def => {
+        const noGroupMatch = groups.indexOf('_none') > -1 && def.group === undefined;
+        const groupMatch = intersect(arrayify(def.group), groups);
+        return (noGroupMatch || groupMatch) ? def : undefined
+      });
+    }
+
+    const rows = definitions.map(def => {
+      return {
+        option: getOptionNames(def, data.reverseNameOrder),
+        description: chalkFormat(def.description)
+      }
+    });
+
+    const tableOptions = data.tableOptions || {
+      padding: { left: '  ', right: ' ' },
+      columns: [
+        { name: 'option', noWrap: true },
+        { name: 'description', maxWidth: 80 }
+      ]
+    };
+    const table = new Table(rows, tableOptions);
+    this.add(table.renderLines());
+
+    this.add();
+  }
+}
+
+function getOptionNames (definition, reverseNameOrder) {
+  let type = definition.type ? definition.type.name.toLowerCase() : 'string';
+  const multiple = (definition.multiple || definition.lazyMultiple) ? '[]' : '';
+  if (type) {
+    type = type === 'boolean' ? '' : `{underline ${type}${multiple}}`;
+  }
+  type = chalkFormat(definition.typeLabel || type);
+
+  let result = '';
+  if (definition.alias) {
+    if (definition.name) {
+      if (reverseNameOrder) {
+        result = chalkFormat(`{bold --${definition.name}}, {bold -${definition.alias}} ${type}`);
+      } else {
+        result = chalkFormat(`{bold -${definition.alias}}, {bold --${definition.name}} ${type}`);
+      }
+    } else {
+      if (reverseNameOrder) {
+        result = chalkFormat(`{bold -${definition.alias}} ${type}`);
+      } else {
+        result = chalkFormat(`{bold -${definition.alias}} ${type}`);
+      }
+    }
+  } else {
+    result = chalkFormat(`{bold --${definition.name}} ${type}`);
+  }
+  return result
+}
+
+function intersect (arr1, arr2) {
+  return arr1.some(function (item1) {
+    return arr2.some(function (item2) {
+      return item1 === item2
+    })
+  })
 }
 
 /**
- * Checks if `value` is likely a prototype object.
+ * An OptionList section adds a table displaying the supplied option definitions.
+ * @typedef module:command-line-usage~optionList
+ * @property {string} [header] - The section header, always bold and underlined.
+ * @property optionList {OptionDefinition[]} - An array of [option definition](https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md) objects. In addition to the regular definition properties, command-line-usage will look for:
  *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
-
-  return value === proto;
-}
-
-/**
- * Performs a
- * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * comparison between two values to determine if they are equivalent.
+ * - `description` - a string describing the option.
+ * - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.
+ * @property {string|string[]} [group] - If specified, only options from this particular group will be printed. [Example](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
+ * @property {string|string[]} [hide] - The names of one of more option definitions to hide from the option list. [Example](https://github.com/75lb/command-line-usage/blob/master/example/hide.js).
+ * @property {boolean} [reverseNameOrder] - If true, the option alias will be displayed after the name, i.e. `--verbose, -v` instead of `-v, --verbose`).
+ * @property {object} [tableOptions] - An options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). See [here for an example](https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js).
  *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
  * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.eq(object, object);
- * // => true
- *
- * _.eq(object, other);
- * // => false
- *
- * _.eq('a', 'a');
- * // => true
- *
- * _.eq('a', Object('a'));
- * // => false
- *
- * _.eq(NaN, NaN);
- * // => true
- */
-function eq(value, other) {
-  return value === other || (value !== value && other !== other);
-}
-
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- *  else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-function isArguments(value) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
-    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
-}
-
-/**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(document.body.children);
- * // => false
- *
- * _.isArray('abc');
- * // => false
- *
- * _.isArray(_.noop);
- * // => false
- */
-var isArray = Array.isArray;
-
-/**
- * Checks if `value` is array-like. A value is considered array-like if it's
- * not a function and has a `value.length` that's an integer greater than or
- * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
- * @example
- *
- * _.isArrayLike([1, 2, 3]);
- * // => true
- *
- * _.isArrayLike(document.body.children);
- * // => true
- *
- * _.isArrayLike('abc');
- * // => true
- *
- * _.isArrayLike(_.noop);
- * // => false
- */
-function isArrayLike$1(value) {
-  return value != null && isLength(value.length) && !isFunction$1(value);
-}
-
-/**
- * This method is like `_.isArrayLike` except that it also checks if `value`
- * is an object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array-like object,
- *  else `false`.
- * @example
- *
- * _.isArrayLikeObject([1, 2, 3]);
- * // => true
- *
- * _.isArrayLikeObject(document.body.children);
- * // => true
- *
- * _.isArrayLikeObject('abc');
- * // => false
- *
- * _.isArrayLikeObject(_.noop);
- * // => false
- */
-function isArrayLikeObject(value) {
-  return isObjectLike(value) && isArrayLike$1(value);
-}
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction$1(value) {
-  // The use of `Object#toString` avoids issues with the `typeof` operator
-  // in Safari 8-9 which returns 'object' for typed array and other constructors.
-  var tag = isObject$1(value) ? objectToString.call(value) : '';
-  return tag == funcTag || tag == genTag;
-}
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- * @example
- *
- * _.isLength(3);
- * // => true
- *
- * _.isLength(Number.MIN_VALUE);
- * // => false
- *
- * _.isLength(Infinity);
- * // => false
- *
- * _.isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject$1(value) {
-  var type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-/**
- * This method is like `_.assign` except that it accepts `customizer`
- * which is invoked to produce the assigned values. If `customizer` returns
- * `undefined`, assignment is handled by the method instead. The `customizer`
- * is invoked with five arguments: (objValue, srcValue, key, object, source).
- *
- * **Note:** This method mutates `object`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The destination object.
- * @param {...Object} sources The source objects.
- * @param {Function} [customizer] The function to customize assigned values.
- * @returns {Object} Returns `object`.
- * @see _.assignInWith
- * @example
- *
- * function customizer(objValue, srcValue) {
- *   return _.isUndefined(objValue) ? srcValue : objValue;
+ * {
+ *   header: 'Options',
+ *   optionList: [
+ *     {
+ *       name: 'help',
+ *       alias: 'h',
+ *       description: 'Display this usage guide.'
+ *     },
+ *     {
+ *       name: 'src',
+ *       description: 'The input files to process',
+ *       multiple: true,
+ *       defaultOption: true,
+ *       typeLabel: '{underline file} ...'
+ *     },
+ *     {
+ *       name: 'timeout',
+ *       description: 'Timeout value in ms.',
+ *       alias: 't',
+ *       typeLabel: '{underline ms}'
+ *     }
+ *   ]
  * }
- *
- * var defaults = _.partialRight(_.assignWith, customizer);
- *
- * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
- * // => { 'a': 1, 'b': 2 }
  */
-var assignWith = createAssigner(function(object, source, srcIndex, customizer) {
-  copyObject(source, keys(source), object, customizer);
-});
-
-/**
- * Creates an array of the own enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects. See the
- * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * for more details.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keys(new Foo);
- * // => ['a', 'b'] (iteration order is not guaranteed)
- *
- * _.keys('hi');
- * // => ['0', '1']
- */
-function keys(object) {
-  return isArrayLike$1(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-
-var lodash_assignwith = assignWith;
-
-var assignWith$1 = /*@__PURE__*/getDefaultExportFromCjs(lodash_assignwith);
 
 /**
  * Isomorphic, functional type-checking for Javascript.
  * @module typical
  * @typicalname t
  * @example
- * import * as t from 'typical'
+ * import t from 'typical'
  * const allDefined = array.every(t.isDefined)
  */
 
@@ -3514,6 +3322,33 @@ function isFunction (input) {
   return typeof input === 'function'
 }
 
+/**
+ * Returns true if the input value is an async function or method.
+ * @param {*} input - The input to test
+ * @returns {boolean}
+ * @static
+ * @example
+ * > t.isAsyncFunction(function () {})
+ * false
+ * > t.isAsyncFunction(new Function())
+ * false
+ * > t.isAsyncFunction(() => {})
+ * false
+ * > t.isAsyncFunction(async function () {})
+ * true
+ * > const AsyncFunction = async function () {}.constructor
+ * > t.isAsyncFunction(new AsyncFunction())
+ * true
+ * > t.isAsyncFunction(async () => {})
+ * true
+ * > class Command { async execute () {} }
+ * > t.isAsyncFunction(new Command().execute)
+ * true
+ */
+function isAsyncFunction (input) {
+  return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')
+}
+
 var t = {
   isNumber,
   isFiniteNumber,
@@ -3529,390 +3364,9 @@ var t = {
   isPromise,
   isIterable,
   isString,
-  isFunction
+  isFunction,
+  isAsyncFunction
 };
-
-function customiser (previousValue, newValue, key, object, source) {
-  /* deep merge plain objects */
-  if (isPlainObject(previousValue) && isPlainObject(newValue)) {
-    return assignWith$1(previousValue, newValue, customiser)
-    /* overwrite arrays if the new array has items */
-  } else if (Array.isArray(previousValue) && Array.isArray(newValue) && newValue.length) {
-    return newValue
-    /* ignore incoming arrays if empty */
-  } else if (Array.isArray(newValue) && !newValue.length) {
-    return previousValue
-  } else if (!isDefined(previousValue) && Array.isArray(newValue)) {
-    return newValue
-  }
-}
-
-function deepMerge (...args) {
-  return assignWith$1(...args, customiser)
-}
-
-/**
- * @module ansi
- */
-
-const ansiEscapeSequence = /\u001b.*?m/g;
-
-function remove (input) {
-  return input.replace(ansiEscapeSequence, '')
-}
-
-function has (input) {
-  return ansiEscapeSequence.test(input)
-}
-
-/**
- * Array of arrays in.. Returns the length of the longest one
- * @returns {number}
- * @private
- */
-function getLongestArray (arrays) {
-  const lengths = arrays.map(array => array.length);
-  return Math.max(...lengths)
-}
-
-function padCell (cellValue, padding, width) {
-  const ansiLength = cellValue.length - remove(cellValue).length;
-  cellValue = cellValue || '';
-  return (padding.left || '') +
-  cellValue.padEnd(width - padding.length() + ansiLength) + (padding.right || '')
-}
-
-function getLongestWord (line) {
-  const words = Wordwrap.getChunks(line);
-  return words.reduce((max, word) => Math.max(word.length, max), 0)
-}
-
-function removeEmptyColumns (data) {
-  const distinctColumnNames = data.reduce((columnNames, row) => {
-    for (const key of Object.keys(row)) {
-      if (!columnNames.includes(key)) {
-        columnNames.push(key);
-      }
-    }
-    return columnNames
-  }, []);
-
-  const emptyColumns = distinctColumnNames.filter(columnName => {
-    const hasValue = data.some(row => {
-      const value = row[columnName];
-      return (value !== undefined && typeof value !== 'string') || (typeof value === 'string' && /\S+/.test(value))
-    });
-    return !hasValue
-  });
-
-  return data.map(row => {
-    for (const emptyCol of emptyColumns) {
-      delete row[emptyCol];
-    }
-    return row
-  })
-}
-
-/**
- * @module table-layout
- */
-
-/**
- * Recordset data in (array of objects), text table out.
- * @alias module:table-layout
- */
-class Table {
-  /**
-   * @param {object[]} - input data
-   * @param [options] {object} - optional settings
-   * @param [options.maxWidth] {number} - maximum width of layout
-   * @param [options.noWrap] {boolean} - disable wrapping on all columns
-   * @param [options.noTrim] {boolean} - disable line-trimming
-   * @param [options.break] {boolean} - enable word-breaking on all columns
-   * @param [options.columns] {module:table-layout~columnOption} - array of column-specific options
-   * @param [options.ignoreEmptyColumns] {boolean} - If set, empty columns or columns containing only whitespace are not rendered.
-   * @param [options.padding] {object} - Padding values to set on each column. Per-column overrides can be set in the `options.columns` array.
-   * @param [options.padding.left] {string} - Defaults to a single space.
-   * @param [options.padding.right] {string} - Defaults to a single space.
-   * @param [options.eol] {string} - EOL character used. Defaults to `\n`.
-   * @alias module:table-layout
-   */
-  constructor (data, options = {}) {
-    const defaults = {
-      padding: {
-        left: ' ',
-        right: ' '
-      },
-      maxWidth: 80,
-      columns: [],
-      eol: '\n'
-    };
-    this.options = deepMerge(defaults, options);
-    this.rows = null;
-    this.columns = null;
-    this.load(data);
-  }
-
-  /**
-  * Set the input data to display. Must be an array of objects.
-  * @param data {object[]}
-  */
-  load (data) {
-    const options = this.options;
-
-    /* remove empty columns */
-    if (options.ignoreEmptyColumns) {
-      data = removeEmptyColumns(data);
-    }
-
-    /* Create columns.. also removes ansi characters and measures column content width */
-    this.columns = Columns.getColumns(data);
-
-    /* load default column properties from options */
-    this.columns.maxWidth = options.maxWidth;
-    for (const column of this.columns.list) {
-      column.padding = options.padding;
-      column.noWrap = options.noWrap;
-      column.break = options.break;
-      if (options.break) {
-        /* Force column to be wrappable */
-        column.contentWrappable = true;
-      }
-    }
-
-    /* load column properties from options.columns */
-    for (const optionColumn of options.columns) {
-      const column = this.columns.get(optionColumn.name);
-      if (column) {
-        if (optionColumn.padding) {
-          column.padding.left = optionColumn.padding.left;
-          column.padding.right = optionColumn.padding.right;
-        }
-        column.width = optionColumn.width;
-        column.maxWidth = optionColumn.maxWidth;
-        column.minWidth = optionColumn.minWidth;
-        column.noWrap = optionColumn.noWrap;
-        column.break = optionColumn.break;
-
-        if (optionColumn.break) {
-          /* Force column to be wrappable */
-          column.contentWrappable = true;
-        }
-
-        column.get = optionColumn.get;
-      }
-    }
-
-    for (const row of arrayify(data)) {
-      for (const columnName in row) {
-        const column = this.columns.get(columnName);
-
-        /* Remove ansi characters from cell value before calculating widths */
-        const cell = new Cell(row[columnName], column);
-        let cellValue = cell.value;
-        if (has(cellValue)) {
-          cellValue = remove(cellValue);
-        }
-
-        /* Update column content width if this if this cell is wider */
-        if (cellValue.length > column.contentWidth) {
-          column.contentWidth = cellValue.length;
-        }
-
-        /* Update column minContentWidth if this cell has a longer word */
-        const longestWord = getLongestWord(cellValue);
-        if (longestWord > column.minContentWidth) {
-          column.minContentWidth = longestWord;
-        }
-        if (!column.contentWrappable) {
-          column.contentWrappable = Wordwrap.isWrappable(cellValue);
-        }
-      }
-    }
-
-    this.columns.autoSize();
-    this.rows = new Rows(data, this.columns);
-    return this
-  }
-
-  getWrapped () {
-    this.columns.autoSize();
-    return this.rows.list.map(row => {
-      const line = [];
-      for (const [column, cell] of row.entries()) {
-        if (column.noWrap) {
-          line.push(cell.value.split(/\r\n?|\n/));
-        } else {
-          line.push(Wordwrap.lines(cell.value, {
-            width: column.wrappedContentWidth,
-            break: column.break,
-            noTrim: this.options.noTrim
-          }));
-        }
-      }
-      return line
-    })
-  }
-
-  getLines () {
-    const wrappedLines = this.getWrapped();
-    const lines = [];
-    wrappedLines.forEach(wrapped => {
-      const mostLines = getLongestArray(wrapped);
-      for (let i = 0; i < mostLines; i++) {
-        const line = [];
-        wrapped.forEach(cell => {
-          line.push(cell[i] || '');
-        });
-        lines.push(line);
-      }
-    });
-    return lines
-  }
-
-  /**
-   * Identical to `.toString()` with the exception that the result will be an array of lines, rather than a single, multi-line string.
-   * @returns {string[]}
-   */
-  renderLines () {
-    const lines = this.getLines();
-    return lines.map(line => {
-      return line.reduce((prev, cell, index) => {
-        const column = this.columns.list[index];
-        return prev + padCell(cell, column.padding, column.generatedWidth)
-      }, '')
-    })
-  }
-
-  /**
-   * Returns the input data as a text table.
-   * @returns {string}
-   */
-  toString () {
-    return this.renderLines().join(this.options.eol) + this.options.eol
-  }
-}
-
-class OptionList extends Section {
-  constructor (data) {
-    super();
-    let definitions = arrayify(data.optionList);
-    const hide = arrayify(data.hide);
-    const groups = arrayify(data.group);
-
-    /* filter out hidden definitions */
-    if (hide.length) {
-      definitions = definitions.filter(definition => {
-        return hide.indexOf(definition.name) === -1
-      });
-    }
-
-    if (data.header) this.header(data.header);
-
-    if (groups.length) {
-      definitions = definitions.filter(def => {
-        const noGroupMatch = groups.indexOf('_none') > -1 && def.group === undefined;
-        const groupMatch = intersect(arrayify(def.group), groups);
-        return (noGroupMatch || groupMatch) ? def : undefined
-      });
-    }
-
-    const rows = definitions.map(def => {
-      return {
-        option: getOptionNames(def, data.reverseNameOrder),
-        description: chalkFormat(def.description)
-      }
-    });
-
-    const tableOptions = data.tableOptions || {
-      padding: { left: '  ', right: ' ' },
-      columns: [
-        { name: 'option', noWrap: true },
-        { name: 'description', maxWidth: 80 }
-      ]
-    };
-    const table = new Table(rows, tableOptions);
-    this.add(table.renderLines());
-
-    this.add();
-  }
-}
-
-function getOptionNames (definition, reverseNameOrder) {
-  let type = definition.type ? definition.type.name.toLowerCase() : 'string';
-  const multiple = (definition.multiple || definition.lazyMultiple) ? '[]' : '';
-  if (type) {
-    type = type === 'boolean' ? '' : `{underline ${type}${multiple}}`;
-  }
-  type = chalkFormat(definition.typeLabel || type);
-
-  let result = '';
-  if (definition.alias) {
-    if (definition.name) {
-      if (reverseNameOrder) {
-        result = chalkFormat(`{bold --${definition.name}}, {bold -${definition.alias}} ${type}`);
-      } else {
-        result = chalkFormat(`{bold -${definition.alias}}, {bold --${definition.name}} ${type}`);
-      }
-    } else {
-      if (reverseNameOrder) {
-        result = chalkFormat(`{bold -${definition.alias}} ${type}`);
-      } else {
-        result = chalkFormat(`{bold -${definition.alias}} ${type}`);
-      }
-    }
-  } else {
-    result = chalkFormat(`{bold --${definition.name}} ${type}`);
-  }
-  return result
-}
-
-function intersect (arr1, arr2) {
-  return arr1.some(function (item1) {
-    return arr2.some(function (item2) {
-      return item1 === item2
-    })
-  })
-}
-
-/**
- * An OptionList section adds a table displaying the supplied option definitions.
- * @typedef module:command-line-usage~optionList
- * @property {string} [header] - The section header, always bold and underlined.
- * @property optionList {OptionDefinition[]} - An array of [option definition](https://github.com/75lb/command-line-args/blob/master/doc/option-definition.md) objects. In addition to the regular definition properties, command-line-usage will look for:
- *
- * - `description` - a string describing the option.
- * - `typeLabel` - a string to replace the default type string (e.g. `<string>`). It's often more useful to set a more descriptive type label, like `<ms>`, `<files>`, `<command>` etc.
- * @property {string|string[]} [group] - If specified, only options from this particular group will be printed. [Example](https://github.com/75lb/command-line-usage/blob/master/example/groups.js).
- * @property {string|string[]} [hide] - The names of one of more option definitions to hide from the option list. [Example](https://github.com/75lb/command-line-usage/blob/master/example/hide.js).
- * @property {boolean} [reverseNameOrder] - If true, the option alias will be displayed after the name, i.e. `--verbose, -v` instead of `-v, --verbose`).
- * @property {object} [tableOptions] - An options object suitable for passing into [table-layout](https://github.com/75lb/table-layout#table-). See [here for an example](https://github.com/75lb/command-line-usage/blob/master/example/option-list-options.js).
- *
- * @example
- * {
- *   header: 'Options',
- *   optionList: [
- *     {
- *       name: 'help',
- *       alias: 'h',
- *       description: 'Display this usage guide.'
- *     },
- *     {
- *       name: 'src',
- *       description: 'The input files to process',
- *       multiple: true,
- *       defaultOption: true,
- *       typeLabel: '{underline file} ...'
- *     },
- *     {
- *       name: 'timeout',
- *       description: 'Timeout value in ms.',
- *       alias: 't',
- *       typeLabel: '{underline ms}'
- *     }
- *   ]
- * }
- */
 
 class ContentSection extends Section {
   constructor (section) {

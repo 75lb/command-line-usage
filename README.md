@@ -3,8 +3,6 @@
 [![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/command-line-usage)](https://github.com/75lb/command-line-usage/network/dependents?dependent_type=REPOSITORY)
 [![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/command-line-usage)](https://github.com/75lb/command-line-usage/network/dependents?dependent_type=PACKAGE)
 [![Node.js CI](https://github.com/75lb/command-line-usage/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/command-line-usage/actions/workflows/node.js.yml)
-[![Coverage Status](https://coveralls.io/repos/github/75lb/command-line-usage/badge.svg)](https://coveralls.io/github/75lb/command-line-usage)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 # command-line-usage
 
@@ -117,4 +115,4 @@ The [polymer-cli](https://github.com/Polymer/tools/tree/master/packages/cli) usa
 
 * * *
 
-&copy; 2015-24 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2015-26 Lloyd Brookes \<opensource@75lb.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
